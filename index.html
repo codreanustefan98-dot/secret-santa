@@ -1,0 +1,1219 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#0b1533">
+<title>Crăciun Fericit! 🎁</title>
+<style>
+  * { box-sizing: border-box; }
+  :root {
+    --gold: #ffd84d;
+    --red: #d8323a;
+    --green: #2fa84f;
+    --card: #fffbe7;
+  }
+  html, body { margin: 0; min-height: 100%; color-scheme: dark; }
+  body {
+    font-family: "Trebuchet MS", Arial, sans-serif;
+    color: #eaf1ff;
+    background: radial-gradient(circle at 50% 28%, #1c3170 0%, #0b1533 50%, #030611 100%) fixed;
+    overflow-x: hidden;
+    -webkit-tap-highlight-color: transparent;
+    user-select: none; -webkit-user-select: none;
+    touch-action: manipulation;
+  }
+  body.lock-scroll { overflow: hidden; }
+  button { font: inherit; color: inherit; cursor: pointer; border: 0; background: none; padding: 0; }
+
+  #snow, #confetti { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+  #snow { z-index: 0; }
+  #confetti { z-index: 300; }
+
+  /* ---------- HUB ---------- */
+  #hub {
+    position: relative; z-index: 1;
+    min-height: 100vh; min-height: 100dvh;
+    display: flex; flex-direction: column; align-items: center;
+    padding: max(5vh, env(safe-area-inset-top)) 14px 28px;
+    gap: 8px;
+    cursor: crosshair;
+  }
+
+  /* Deliberately cheesy PowerPoint-2007 title, Christmas edition */
+  #title {
+    margin: 0;
+    font-family: Impact, "Arial Black", sans-serif;
+    font-weight: normal;
+    font-size: clamp(34px, 10vw, 100px);
+    white-space: nowrap;
+    letter-spacing: 1px;
+    background: linear-gradient(#ffffff 8%, #fff0b8 32%, #ffbf2e 58%, #d8323a 100%);
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke: clamp(1px, .22vw, 2px) #fff;
+    filter: drop-shadow(0 3px 0 #7a1218) drop-shadow(0 0 14px rgba(255,216,77,.55));
+    animation: titleFloat 2.8s ease-in-out infinite;
+  }
+  @keyframes titleFloat {
+    0%,100% { transform: rotate(-1.5deg) scale(1); }
+    50% { transform: rotate(1.5deg) scale(1.03); }
+  }
+  #subtitle {
+    margin: 0; text-align: center; font-weight: bold;
+    color: #cbdcff; font-size: clamp(14px, 3.8vw, 19px);
+  }
+
+  /* Present */
+  .present {
+    position: relative;
+    width: clamp(150px, 44vw, 210px);
+    aspect-ratio: 1 / 1;
+    margin: 22px 0 0;
+    animation: wobble 3.2s ease-in-out infinite;
+  }
+  @keyframes wobble {
+    0%, 82%, 100% { transform: rotate(0); }
+    86% { transform: rotate(-4deg); }
+    90% { transform: rotate(4deg); }
+    94% { transform: rotate(-2deg); }
+  }
+  .present .box {
+    position: absolute; left: 7%; right: 7%; bottom: 0; height: 66%;
+    background: linear-gradient(135deg, #ef4a52, #a3161f);
+    border: 4px solid #5e0b12; border-radius: 6px;
+    box-shadow: 0 16px 26px rgba(0,0,0,.5);
+  }
+  .present .box::before, .present .lid::before {
+    content: ""; position: absolute; left: 50%; top: 0; bottom: 0; width: 16%;
+    transform: translateX(-50%);
+    background: linear-gradient(90deg, #d9a520, #ffe27a, #d9a520);
+  }
+  .present .lid {
+    position: absolute; left: 0; right: 0; top: 18%; height: 20%; z-index: 3;
+    background: linear-gradient(135deg, #ff5d65, #b81d27);
+    border: 4px solid #5e0b12; border-radius: 6px;
+    transition: transform .8s cubic-bezier(.3,1.6,.5,1);
+  }
+  .bow { position: absolute; left: 50%; bottom: 96%; width: 56%; height: 70%; transform: translateX(-50%); }
+  .bow::before, .bow::after {
+    content: ""; position: absolute; bottom: 0; width: 50%; height: 100%;
+    border: 6px solid var(--gold); border-radius: 50% 50% 12% 50%;
+  }
+  .bow::before { left: 0; transform: rotate(-18deg); }
+  .bow::after { right: 0; border-radius: 50% 50% 50% 12%; transform: rotate(18deg); }
+  .padlock {
+    position: absolute; left: 50%; top: 44%; z-index: 4;
+    width: 70%; transform: translateX(-50%);
+  }
+  .shackle {
+    width: 52%; height: clamp(26px, 8vw, 36px); margin: 0 auto -5px;
+    border: 7px solid #c3ccdd; border-bottom: 0; border-radius: 40px 40px 0 0;
+    transition: transform .5s;
+  }
+  .lock-body {
+    background: linear-gradient(#ffe27a, #d9a520);
+    border: 3px solid #7a5a00; border-radius: 10px;
+    padding: 8px 2px; text-align: center;
+    font: 900 clamp(15px, 4.8vw, 23px) "Courier New", monospace;
+    color: #3a2a00; letter-spacing: 0; white-space: nowrap;
+  }
+  .present.open { animation: none; }
+  .present.open .lid { transform: translateY(-85%) rotate(-20deg); }
+  .present.open .shackle { transform: translateY(-12px); }
+  #presentHint { margin: 4px 0 6px; font-size: 13px; color: #9fb6e8; text-align: center; }
+
+  .stations {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
+    width: min(100%, 520px); margin-top: 6px;
+  }
+  .station {
+    display: flex; flex-direction: column; align-items: center; gap: 3px;
+    padding: 12px 8px; border-radius: 16px;
+    background: rgba(20,35,80,.78);
+    border: 2px solid rgba(160,190,255,.25);
+    box-shadow: 0 6px 16px rgba(0,0,0,.3);
+    transition: transform .12s;
+  }
+  .station:active { transform: scale(.96); }
+  .st-ico { font-size: 34px; line-height: 1.1; }
+  .st-name { font-weight: bold; font-size: 14px; text-align: center; }
+  .st-status { font-size: 12px; color: #9fb6e8; text-align: center; }
+  .station.done { border-color: #5fd08a; background: rgba(22,78,52,.72); }
+  .station.done .st-status { color: #b9f5cf; }
+  .station.locked { opacity: .55; }
+  #foot { margin-top: 10px; font-size: 11px; color: #7f95c4; opacity: .8; }
+
+  .burst {
+    position: fixed; z-index: 250; pointer-events: none;
+    font-size: 18px; font-weight: bold; color: #fff;
+    text-shadow: 0 0 6px #fff, 0 0 12px #6aa9ff;
+    animation: burst .7s ease-out forwards;
+  }
+  @keyframes burst {
+    from { transform: translate(-50%,-50%) scale(.4); opacity: 1; }
+    to { transform: translate(calc(-50% + var(--bx)), calc(-50% + var(--by))) scale(1.5); opacity: 0; }
+  }
+  .floaty {
+    position: fixed; z-index: 250; pointer-events: none;
+    font: 900 22px "Comic Sans MS", "Trebuchet MS", sans-serif;
+    color: #fff; text-shadow: 0 2px 0 #000;
+    animation: floaty .8s ease-out forwards;
+  }
+  .floaty.bad { color: #ff8080; }
+  @keyframes floaty {
+    from { transform: translate(-50%, -50%); opacity: 1; }
+    to { transform: translate(-50%, -140%); opacity: 0; }
+  }
+
+  /* ---------- PANELS ---------- */
+  .panel {
+    position: fixed; inset: 0; z-index: 50;
+    display: none; flex-direction: column;
+    background: radial-gradient(circle at 50% 18%, #1c3170, #071028 72%);
+  }
+  .panel.open { display: flex; animation: panelIn .22s ease-out; }
+  @keyframes panelIn { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+  .ph {
+    display: flex; align-items: center; gap: 8px;
+    padding: 10px 12px; padding-top: max(10px, env(safe-area-inset-top));
+    background: rgba(0,0,0,.28);
+  }
+  .ph h2 { margin: 0; flex: 1; text-align: center; font-size: clamp(16px, 4.6vw, 22px); }
+  .back { padding: 8px 12px; border-radius: 10px; background: rgba(255,255,255,.13); font-weight: bold; font-size: 15px; }
+  .ph-extra { min-width: 64px; text-align: right; font-weight: bold; color: var(--gold); font-size: 16px; }
+  .pbody {
+    position: relative; flex: 1; overflow: auto;
+    padding: 14px 14px max(18px, env(safe-area-inset-bottom));
+    display: flex; flex-direction: column; align-items: center; gap: 14px;
+  }
+
+  .card {
+    background: var(--card); color: #1b1b1b;
+    border: 3px solid #333; border-radius: 6px;
+    box-shadow: 5px 6px 0 rgba(0,0,0,.35);
+    padding: 16px 18px; width: min(100%, 460px);
+    font-size: 16px; line-height: 1.45; text-align: center;
+  }
+  .card h3 { margin: 0 0 8px; font: 900 23px "Comic Sans MS", "Trebuchet MS", sans-serif; }
+  .card p { margin: 6px 0; }
+  .card .big-digit {
+    display: inline-block; margin: 6px 0; padding: 4px 18px;
+    font: 900 54px "Courier New", monospace; color: #3a2a00;
+    background: linear-gradient(#ffe27a, #d9a520); border: 3px solid #7a5a00; border-radius: 12px;
+  }
+  .btn {
+    display: inline-block; margin-top: 8px;
+    padding: 12px 22px; border-radius: 14px;
+    background: linear-gradient(#ff6a70, #c4202a); color: #fff;
+    font-weight: 900; font-size: 17px;
+    border: 3px solid #5e0b12; box-shadow: 0 4px 0 #5e0b12;
+  }
+  .btn:active { transform: translateY(3px); box-shadow: 0 1px 0 #5e0b12; }
+  .btn.green { background: linear-gradient(#4fd17a, #1f8a45); border-color: #0d4a24; box-shadow: 0 4px 0 #0d4a24; }
+  .btn.ghost { background: rgba(0,0,0,.08); color: #333; border-color: #333; box-shadow: 0 3px 0 #333; font-size: 15px; padding: 9px 16px; }
+  .panel > .pbody > .btn.ghost { background: rgba(255,255,255,.12); color: #eaf1ff; border-color: rgba(255,255,255,.4); box-shadow: none; }
+  input.big {
+    width: 100%; margin: 8px 0 4px; padding: 10px;
+    font-size: 26px; font-weight: bold; text-align: center;
+    border: 3px solid #333; border-radius: 10px; background: #fff; color: #111;
+    user-select: text; -webkit-user-select: text;
+  }
+  .msg { min-height: 22px; font-weight: bold; color: #c4202a; }
+  .shake { animation: shake .45s; }
+  @keyframes shake {
+    0%,100% { transform: translateX(0); }
+    20% { transform: translateX(-10px); } 40% { transform: translateX(10px); }
+    60% { transform: translateX(-7px); } 80% { transform: translateX(7px); }
+  }
+
+  .naughty {
+    margin: 10px auto 2px; padding: 10px 14px 12px; max-width: 280px;
+    background: #f3e4bf; border: 2px dashed #8a5a2a; border-radius: 4px;
+    font-family: "Comic Sans MS", "Trebuchet MS", sans-serif; color: #4a2a10; text-align: left;
+    transform: rotate(-1.5deg);
+  }
+  .naughty b { display: block; text-align: center; font-size: 17px; margin-bottom: 4px; }
+  .naughty ol { margin: 0; padding-left: 24px; }
+  .naughty li.you { color: #c4202a; font-weight: bold; }
+
+  /* ---------- ELVES ---------- */
+  .elf-top { text-align: center; }
+  .elf-start { font-size: 16px; color: #cbdcff; }
+  .elf-start b {
+    display: inline-block; margin-left: 6px; padding: 2px 14px;
+    font: 900 34px "Courier New", monospace; color: #3a2a00;
+    background: linear-gradient(#ffe27a, #d9a520); border: 3px solid #7a5a00; border-radius: 10px;
+  }
+  .elf-note { font-size: 13px; color: #9fb6e8; margin-top: 6px; }
+  .holes {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;
+    width: min(100%, 500px);
+  }
+  .hole { position: relative; aspect-ratio: 3 / 4; overflow: hidden; }
+  .hole::before {
+    content: ""; position: absolute; left: 12%; right: 12%; bottom: 13%; height: 13%;
+    background: #040a1c; border-radius: 50%; z-index: 1;
+    box-shadow: inset 0 4px 8px rgba(0,0,0,.8);
+  }
+  .hole::after {
+    content: ""; position: absolute; left: -4%; right: -4%; bottom: 0; height: 21%;
+    background: radial-gradient(ellipse at 50% 20%, #ffffff, #c9dbff);
+    border-radius: 50% 50% 8px 8px; z-index: 3;
+    box-shadow: 0 -2px 0 rgba(255,255,255,.6);
+  }
+  .elf {
+    position: absolute; left: 6%; right: 6%; bottom: 12%; height: 88%; z-index: 2;
+    transform: translateY(110%); transition: transform .13s ease-out;
+    cursor: pointer; touch-action: none;
+  }
+  .elf.up { transform: translateY(0); }
+  .elf .esign {
+    position: absolute; top: 0; left: -2%; right: -2%; height: 30%; z-index: 2;
+    display: flex; align-items: center; justify-content: center;
+    background: linear-gradient(#fff, #fffbe7); color: #111;
+    border: 3px solid #333; box-shadow: 3px 4px 0 rgba(0,0,0,.25);
+    font: 900 clamp(19px, 6.6vw, 34px) "Comic Sans MS", "Trebuchet MS", sans-serif;
+    transform: rotate(-4deg); white-space: nowrap;
+  }
+  .elf .esign::before, .elf .esign::after {
+    content: ""; position: absolute; bottom: -16%; width: 20%; aspect-ratio: 1;
+    background: #f6cfa8; border: 3px solid #7a4a2a; border-radius: 50%;
+  }
+  .elf .esign::before { left: 8%; }
+  .elf .esign::after { right: 8%; }
+  .elf svg { position: absolute; left: 0; bottom: 0; width: 100%; height: 74%; transition: transform .1s; transform-origin: 50% 100%; }
+  .elf.hit .esign { background: #c9f7c3; }
+  .elf.hit svg { transform: scaleY(.78) scaleX(1.08); }
+  .elf.miss .esign { background: #ffd6d6; font-size: clamp(15px, 4.8vw, 26px); }
+
+  /* ---------- SNOWMAN ---------- */
+  .snow-hud { display: flex; align-items: center; gap: 10px; width: min(100%, 460px); }
+  .bar { flex: 1; height: 16px; border-radius: 10px; background: rgba(255,255,255,.14); overflow: hidden; border: 2px solid rgba(255,255,255,.3); }
+  .bar .fill { height: 100%; width: 0; background: linear-gradient(90deg, #bfe3ff, #fff); transition: width .2s; }
+  #snowScore { font-weight: bold; min-width: 62px; text-align: right; }
+  .snow-area {
+    position: relative; flex: 1; width: min(100%, 520px); min-height: 380px;
+    overflow: hidden; border-radius: 18px;
+    background: linear-gradient(#0d1d48, #1e3c80);
+    border: 2px solid rgba(160,190,255,.25);
+  }
+  .snowman-wrap { position: absolute; left: 50%; bottom: 0; height: 52%; aspect-ratio: 200 / 250; transform: translateX(-50%); }
+  .snowman-wrap svg { width: 100%; height: 100%; overflow: visible; }
+  .sm-part { transform-box: fill-box; transform-origin: 50% 100%; transform: scale(0); transition: transform .25s cubic-bezier(.3,1.5,.5,1); }
+  .snowman-wrap.melt svg { animation: melt .5s; }
+  @keyframes melt { 0%,100% { filter: none; } 50% { filter: drop-shadow(0 0 16px #ff6a00) brightness(1.4) hue-rotate(-20deg); } }
+  .sm-sign {
+    position: absolute; left: 50%; bottom: 102%; transform: translateX(-50%) rotate(4deg) scale(0);
+    background: linear-gradient(#fff, #fffbe7); color: #111; border: 3px solid #333;
+    font: 900 26px "Comic Sans MS", "Trebuchet MS", sans-serif;
+    padding: 4px 14px; white-space: nowrap; box-shadow: 3px 4px 0 rgba(0,0,0,.25);
+    transition: transform .4s cubic-bezier(.3,1.6,.5,1);
+  }
+  .sm-sign.show { transform: translateX(-50%) rotate(4deg) scale(1); }
+  .flake {
+    position: absolute; top: 0; z-index: 5;
+    width: 46px; height: 46px; margin-left: -23px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 30px; line-height: 1; color: #fff;
+    text-shadow: 0 0 6px #fff, 0 0 14px #8fc4ff;
+    animation: fall linear forwards;
+    touch-action: none;
+  }
+  .flake.gold { color: var(--gold); font-size: 36px; text-shadow: 0 0 8px #fff3b0, 0 0 18px #ffb000; }
+  .flake.fire { font-size: 30px; text-shadow: 0 0 12px #ff5a00; }
+  @keyframes fall {
+    from { transform: translate(0, -60px) rotate(0deg); }
+    to { transform: translate(var(--sway), var(--fall)) rotate(300deg); }
+  }
+  .overlay-card { position: absolute; inset: 0; z-index: 10; display: flex; align-items: center; justify-content: center; padding: 14px; background: rgba(4,10,28,.55); }
+
+  /* ---------- TREE PUZZLE ---------- */
+  .puzzle {
+    position: relative; width: min(88vw, 380px); aspect-ratio: 1 / 1;
+    border: 4px solid #ffd84d; border-radius: 10px; overflow: hidden;
+    background: #071028; box-shadow: 0 0 0 4px #7a5a00, 0 14px 30px rgba(0,0,0,.5);
+  }
+  .tile {
+    position: absolute; background-repeat: no-repeat;
+    border: 1px solid rgba(255,255,255,.35);
+    transition: left .14s ease-out, top .14s ease-out;
+    cursor: pointer;
+  }
+  .tile.near { box-shadow: inset 0 0 0 2px rgba(255,216,77,.7); }
+  .puzzle .full { position: absolute; inset: 0; background-size: 100% 100%; opacity: 0; transition: opacity .8s; pointer-events: none; }
+  .puzzle.solved .full { opacity: 1; }
+  .puzzle.solved { animation: glow 1.4s ease-in-out 3; }
+  @keyframes glow { 50% { box-shadow: 0 0 0 4px #7a5a00, 0 0 40px 10px rgba(255,216,77,.8); } }
+  .puzzle.peek .full.peekimg { opacity: 1; }
+  .tree-tools { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; justify-content: center; }
+  .pill { padding: 9px 14px; border-radius: 12px; background: rgba(255,255,255,.13); font-weight: bold; font-size: 14px; }
+  .lead { margin: 0; text-align: center; color: #cbdcff; max-width: 460px; font-size: 15px; line-height: 1.4; }
+
+  /* ---------- LOCK ---------- */
+  .clues { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
+  .clue { padding: 6px 10px; border-radius: 10px; background: rgba(0,0,0,.08); border: 2px solid #333; font-weight: bold; font-size: 15px; }
+  .dials { display: flex; gap: 8px; justify-content: center; margin: 12px 0 4px; }
+  .dial {
+    display: flex; flex-direction: column; align-items: center; width: 62px;
+    background: linear-gradient(#ffe27a, #d9a520); border: 3px solid #7a5a00; border-radius: 12px; padding: 3px;
+  }
+  .dial button { width: 100%; font-size: 22px; padding: 6px 0; color: #3a2a00; }
+  .dial .dv {
+    width: 100%; text-align: center; border-radius: 6px;
+    font: 900 42px "Courier New", monospace; color: #2a1d00;
+    background: #fff8dc; border: 2px solid #7a5a00;
+  }
+
+  /* ---------- INVITE ---------- */
+  .invite { text-align: left; }
+  .invite .kicker { text-align: center; font-weight: bold; color: #8a5a2a; letter-spacing: 1px; text-transform: uppercase; font-size: 13px; }
+  .invite h3 { text-align: center; font-size: 27px; color: #b81d27; }
+  .invite .row { display: flex; gap: 10px; padding: 7px 0; border-bottom: 1px dashed #d6c79a; }
+  .invite .row:last-of-type { border-bottom: 0; }
+  .invite .row .ic { font-size: 22px; width: 30px; text-align: center; flex: none; }
+  .invite .row small { display: block; color: #6b5a3a; }
+  .invite a { color: #1f6fd1; font-weight: bold; }
+  .invite .note { text-align: center; font-style: italic; margin-top: 10px; }
+  .santa {
+    margin-top: 14px; padding: 14px; border-radius: 10px; text-align: center;
+    background: linear-gradient(135deg, #b81d27, #7a1218); color: #fff; border: 3px solid #4a0a10;
+  }
+  .santa h4 { margin: 0 0 6px; font: 900 21px "Comic Sans MS", "Trebuchet MS", sans-serif; }
+  .santa .who { font: 900 34px Impact, "Arial Black", sans-serif; color: var(--gold); letter-spacing: 1px; margin: 6px 0; animation: pop .5s cubic-bezier(.3,1.7,.5,1); }
+  @keyframes pop { from { transform: scale(.2); } to { transform: scale(1); } }
+  .santa .btn { background: linear-gradient(#ffe27a, #d9a520); color: #3a2a00; border-color: #7a5a00; box-shadow: 0 4px 0 #7a5a00; }
+
+  #dev {
+    position: fixed; right: 8px; bottom: 8px; z-index: 400; display: none;
+    flex-direction: column; gap: 4px; padding: 8px; border-radius: 10px;
+    background: rgba(0,0,0,.8); font-size: 12px;
+  }
+  #dev button { padding: 5px 8px; border-radius: 6px; background: #334; }
+</style>
+</head>
+<body>
+<canvas id="snow"></canvas>
+<canvas id="confetti"></canvas>
+
+<main id="hub">
+  <h1 id="title">CRĂCIUN FERICIT!</h1>
+  <p id="subtitle">🎁 Cadoul tău e încuiat. Găsește codul.</p>
+
+  <button id="present" class="present" aria-label="Lacătul">
+    <div class="lid"><div class="bow"></div></div>
+    <div class="box"></div>
+    <div class="padlock"><div class="shackle"></div><div class="lock-body" id="lockSlots">? ? ? ?</div></div>
+  </button>
+  <p id="presentHint">Atinge cadoul ca să introduci codul</p>
+
+  <section class="stations">
+    <button class="station" data-go="elf"><span class="st-ico">🧝</span><span class="st-name">Spiridușii Socotitori</span><span class="st-status" id="st-elf"></span></button>
+    <button class="station" data-go="snow"><span class="st-ico">⛄</span><span class="st-name">Omul de Zăpadă</span><span class="st-status" id="st-snow"></span></button>
+    <button class="station" data-go="tree"><span class="st-ico">🎄</span><span class="st-name">Bradul Încurcat</span><span class="st-status" id="st-tree"></span></button>
+    <button class="station" data-go="riddle"><span class="st-ico">📜</span><span class="st-name">Ghicitoarea</span><span class="st-status" id="st-riddle"></span></button>
+  </section>
+  <div id="foot">❄ atinge oriunde ❄</div>
+</main>
+
+<section class="panel" id="p-elf">
+  <header class="ph"><button class="back">← Înapoi</button><h2>🧝 Spiridușii Socotitori</h2><span class="ph-extra" id="elfCount"></span></header>
+  <div class="pbody" id="elfBody"></div>
+</section>
+
+<section class="panel" id="p-snow">
+  <header class="ph"><button class="back">← Înapoi</button><h2>⛄ Omul de Zăpadă</h2><span class="ph-extra"></span></header>
+  <div class="pbody" id="snowBody"></div>
+</section>
+
+<section class="panel" id="p-tree">
+  <header class="ph"><button class="back">← Înapoi</button><h2>🎄 Bradul Încurcat</h2><span class="ph-extra" id="treeMoves"></span></header>
+  <div class="pbody" id="treeBody"></div>
+</section>
+
+<section class="panel" id="p-riddle">
+  <header class="ph"><button class="back">← Înapoi</button><h2>📜 Ghicitoarea</h2><span class="ph-extra"></span></header>
+  <div class="pbody" id="riddleBody"></div>
+</section>
+
+<section class="panel" id="p-lock">
+  <header class="ph"><button class="back">← Înapoi</button><h2>🔐 Lacătul</h2><span class="ph-extra"></span></header>
+  <div class="pbody" id="lockBody"></div>
+</section>
+
+<section class="panel" id="p-invite">
+  <header class="ph"><button class="back">← Înapoi</button><h2>🎉 Invitația</h2><span class="ph-extra"></span></header>
+  <div class="pbody" id="inviteBody"></div>
+</section>
+
+<div id="dev"></div>
+
+<script>
+/* =====================================================================
+   ✏️  EVERYTHING YOU NEED TO EDIT IS IN THIS CONFIG BLOCK
+   ===================================================================== */
+const CONFIG = {
+  // The 4-digit code for the lock.
+  //   digit 1 = Elves, digit 2 = Snowman, digits 3+4 = the riddle's answer
+  code: "2512",
+
+  // Digits shown on the gifts under the solved tree: [red, green, gold]
+  giftDigits: [2, 7, 2],
+
+  // TODO: write your own riddle. Its answer must equal code digits 3+4.
+  riddle: {
+    text: "Moșul a uitat ultimele două cifre ale codului. Le găsești sub brad:<br><br><b>Înmulțește cadoul roșu cu cel verde, apoi scade-l pe cel auriu.</b>",
+    answers: ["12"],          // accepted answers (case/diacritics ignored)
+    hint: "Roșu × Verde − Auriu 😉",
+    hintAfterTries: 3
+  },
+
+  // TODO: party details
+  party: {
+    title: "Petrecerea de Crăciun 2026",
+    date: "Sâmbătă, 20 decembrie 2026",
+    time: "de la 19:00 până când se termină vinul fiert",
+    place: "[Locul petrecerii]",
+    address: "[Adresa]",
+    mapsUrl: "",              // e.g. a Google Maps link, or leave empty
+    dress: "Pulover urât de Crăciun — obligatoriu 🎄",
+    bring: "Cadoul pentru Secret Santa + chef de joacă",
+    rsvp: "Confirmă pe WhatsApp până pe 10 decembrie",
+    note: "Te așteptăm! 🎅"
+  },
+
+  // Shown if someone opens the invite WITHOUT a personal Secret Santa link.
+  // Leave empty to just show "you'll get your link from the organiser".
+  secretSantaFallbackUrl: "",
+
+  // Seed names already on the Naughty List (inside jokes go here 😈)
+  naughtySeed: ["Grinch", "Cel care a mâncat toți cozonacii"],
+
+  elf: {
+    minElves: 7, maxElves: 10,
+    visibleMs: 1500,          // how long each elf stays up
+    onlyHitsCount: true,      // true = missed elves don't count. false = every elf counts
+    missTaunts: ["hehe", "prea lent", "pa-pa!", "😜", "ratat!", "nu m-ai prins"]
+  },
+
+  snow: {
+    goal: 30,                 // snowflakes needed
+    spawnMs: 430,
+    goldChance: 0.09,         // gold flake = +3
+    fireChance: 0.13          // fire = −3
+  },
+
+  tree: { size: 3, shuffleMoves: 160 },
+
+  lockTaunts: ["Nu. 🙂", "Aproape... sau poate nu.", "Moșul râde de tine 🎅", "Mai caută!", "Încă o dată?", "HEHE"]
+};
+/* ===================================================================== */
+
+/* Secret Santa token — must match the key in santa.html */
+const SANTA_KEY = "mos-craciun-2026";
+function decodeToken(t) {
+  try {
+    t = t.replace(/-/g, "+").replace(/_/g, "/");
+    while (t.length % 4) t += "=";
+    const raw = atob(t);
+    const k = new TextEncoder().encode(SANTA_KEY);
+    const bytes = Uint8Array.from(raw, (c, i) => c.charCodeAt(0) ^ k[i % k.length]);
+    return JSON.parse(new TextDecoder().decode(bytes));
+  } catch (e) { return null; }
+}
+const hashParams = new URLSearchParams(location.hash.slice(1));
+const TOKEN = hashParams.get("t") ? decodeToken(hashParams.get("t")) : null;
+
+/* ---------- helpers ---------- */
+const $ = (s, r = document) => r.querySelector(s);
+const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+const rand = (a, b) => Math.random() * (b - a) + a;
+const randInt = (a, b) => Math.floor(rand(a, b + 1));
+const pick = arr => arr[randInt(0, arr.length - 1)];
+const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+const esc = s => String(s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const norm = s => String(s).trim().toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/\s+/g, " ");
+const CODE = CONFIG.code;
+
+/* ---------- saved progress ---------- */
+const STORE = "craciun2026";
+const defaultState = { elf: false, snow: false, tree: false, riddle: false, opened: false, elfFails: 0, naughty: [], riddleTries: 0, santaShown: false };
+let S = { ...defaultState };
+try {
+  const qs = new URLSearchParams(location.search);
+  if (qs.has("reset")) localStorage.removeItem(STORE);
+  Object.assign(S, JSON.parse(localStorage.getItem(STORE) || "{}"));
+} catch (e) {}
+function save() { try { localStorage.setItem(STORE, JSON.stringify(S)); } catch (e) {} }
+
+/* ---------- effects ---------- */
+function burst(x, y, text = "✨", n = 6) {
+  for (let i = 0; i < n; i++) {
+    const b = document.createElement("div");
+    b.className = "burst"; b.textContent = text;
+    b.style.left = x + "px"; b.style.top = y + "px";
+    b.style.setProperty("--bx", rand(-70, 70) + "px");
+    b.style.setProperty("--by", rand(-70, 70) + "px");
+    document.body.appendChild(b);
+    setTimeout(() => b.remove(), 750);
+  }
+}
+function floaty(x, y, text, bad = false) {
+  const f = document.createElement("div");
+  f.className = "floaty" + (bad ? " bad" : ""); f.textContent = text;
+  f.style.left = x + "px"; f.style.top = y + "px";
+  document.body.appendChild(f);
+  setTimeout(() => f.remove(), 850);
+}
+function shake(el) { el.classList.remove("shake"); void el.offsetWidth; el.classList.add("shake"); }
+
+/* Ambient snow */
+(() => {
+  const c = $("#snow"), ctx = c.getContext("2d");
+  let w, h, flakes = [];
+  function resize() {
+    const d = Math.min(2, devicePixelRatio || 1);
+    w = innerWidth; h = innerHeight;
+    c.width = w * d; c.height = h * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+  }
+  resize(); addEventListener("resize", resize);
+  for (let i = 0; i < 90; i++) flakes.push({ x: rand(0, w), y: rand(0, h), r: rand(.8, 2.8), s: rand(.3, 1.1), d: rand(0, 6.28) });
+  (function loop() {
+    ctx.clearRect(0, 0, w, h);
+    ctx.fillStyle = "rgba(255,255,255,.85)";
+    for (const f of flakes) {
+      f.y += f.s; f.d += .01; f.x += Math.sin(f.d) * .4;
+      if (f.y > h + 5) { f.y = -5; f.x = rand(0, w); }
+      ctx.beginPath(); ctx.arc(f.x, f.y, f.r, 0, 6.28); ctx.fill();
+    }
+    requestAnimationFrame(loop);
+  })();
+})();
+
+/* Confetti */
+const confetti = (() => {
+  const c = $("#confetti"), ctx = c.getContext("2d");
+  let parts = [], running = false, w, h;
+  const colors = ["#ffd84d", "#d8323a", "#2fa84f", "#ffffff", "#6aa9ff", "#ff8ad8"];
+  function resize() { const d = Math.min(2, devicePixelRatio || 1); w = innerWidth; h = innerHeight; c.width = w * d; c.height = h * d; ctx.setTransform(d, 0, 0, d, 0, 0); }
+  function loop() {
+    ctx.clearRect(0, 0, w, h);
+    parts = parts.filter(p => p.y < h + 30);
+    for (const p of parts) {
+      p.vy += .28; p.vx *= .99; p.x += p.vx; p.y += p.vy; p.rot += p.vr;
+      ctx.save(); ctx.translate(p.x, p.y); ctx.rotate(p.rot);
+      ctx.fillStyle = p.c; ctx.fillRect(-p.s / 2, -p.s / 4, p.s, p.s / 2);
+      ctx.restore();
+    }
+    if (parts.length) requestAnimationFrame(loop); else { running = false; ctx.clearRect(0, 0, w, h); }
+  }
+  return (n = 160) => {
+    resize();
+    for (let i = 0; i < n; i++) parts.push({ x: w / 2 + rand(-w * .25, w * .25), y: h * .4, vx: rand(-8, 8), vy: rand(-15, -5), s: rand(7, 13), c: pick(colors), rot: rand(0, 6), vr: rand(-.3, .3) });
+    if (!running) { running = true; requestAnimationFrame(loop); }
+  };
+})();
+
+/* ---------- panels + Android back button ---------- */
+const renders = {};
+const stoppers = {};
+let current = null;
+function openPanel(id, replace = false) {
+  if (current) hidePanel(current);
+  current = id;
+  $("#p-" + id).classList.add("open");
+  document.body.classList.add("lock-scroll");
+  if (replace) history.replaceState({ p: id }, "", location.href);
+  else history.pushState({ p: id }, "", location.href);
+  renders[id] && renders[id]();
+}
+function hidePanel(id) {
+  $("#p-" + id).classList.remove("open");
+  stoppers[id] && stoppers[id]();
+}
+function closePanel() {
+  if (!current) return;
+  hidePanel(current); current = null;
+  document.body.classList.remove("lock-scroll");
+  renderHub();
+}
+addEventListener("popstate", () => closePanel());
+$$(".back").forEach(b => b.addEventListener("click", () => history.back()));
+addEventListener("keydown", e => { if (e.key === "Escape" && current) history.back(); });
+
+/* ---------- HUB ---------- */
+function digitsKnown() {
+  return [S.elf ? CODE[0] : "?", S.snow ? CODE[1] : "?", S.riddle ? CODE[2] : "?", S.riddle ? CODE[3] : "?"];
+}
+function renderHub() {
+  const name = TOKEN && TOKEN.n ? `Salut, ${esc(TOKEN.n)}! ` : "";
+  $("#subtitle").innerHTML = S.opened
+    ? `🎉 ${name}Ai deschis cadoul!`
+    : `🎁 ${name}Cadoul tău e încuiat. Găsește codul.`;
+  $("#lockSlots").textContent = digitsKnown().join(" ");
+  $("#present").classList.toggle("open", S.opened);
+  $("#presentHint").textContent = S.opened ? "Atinge cadoul ca să vezi invitația" : "Atinge cadoul ca să introduci codul";
+
+  const set = (id, done, txt, locked = false) => {
+    const el = $("#st-" + id); el.textContent = txt;
+    el.parentElement.classList.toggle("done", done);
+    el.parentElement.classList.toggle("locked", locked);
+  };
+  set("elf", S.elf, S.elf ? `✅ cifra ❶: ${CODE[0]}` : (S.elfFails ? "📜 pe Lista Obraznicilor" : "socoteli rapide"));
+  set("snow", S.snow, S.snow ? `✅ cifra ❷: ${CODE[1]}` : "prinde fulgii");
+  set("tree", S.tree, S.tree ? "✅ cadourile au vorbit" : "puzzle glisant");
+  set("riddle", S.riddle, S.riddle ? `✅ cifrele ❸❹: ${CODE.slice(2)}` : (S.tree ? "gata de rezolvat" : "🔒 bradul are cheia"), !S.tree && !S.riddle);
+}
+$$(".station").forEach(b => b.addEventListener("click", () => openPanel(b.dataset.go)));
+$("#present").addEventListener("click", () => openPanel(S.opened ? "invite" : "lock"));
+$("#hub").addEventListener("pointerdown", e => {
+  if (e.target.closest("button")) return;
+  burst(e.clientX, e.clientY, pick(["❄", "✨", "★"]), 6);
+});
+
+/* =====================================================================
+   🧝 ELVES
+   ===================================================================== */
+const ELF_SVG = `<svg viewBox="0 0 100 110" aria-hidden="true">
+  <path d="M22 60 L2 44 L26 52 Z" fill="#f6cfa8" stroke="#7a4a2a" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M78 60 L98 44 L74 52 Z" fill="#f6cfa8" stroke="#7a4a2a" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M24 92 Q50 82 76 92 L84 112 L16 112 Z" fill="#c0392b" stroke="#6e1a12" stroke-width="3"/>
+  <path d="M44 88 L50 98 L56 88" fill="#ffd84d" stroke="#7a5a00" stroke-width="2"/>
+  <ellipse cx="50" cy="62" rx="28" ry="27" fill="#f6cfa8" stroke="#7a4a2a" stroke-width="3"/>
+  <path d="M22 46 Q46 -6 88 8 Q72 22 78 46 Z" fill="#2fa84f" stroke="#145c2a" stroke-width="3" stroke-linejoin="round"/>
+  <circle cx="88" cy="9" r="7" fill="#fff" stroke="#bbb" stroke-width="2"/>
+  <rect x="18" y="40" width="64" height="11" rx="5.5" fill="#fff" stroke="#bbb" stroke-width="2"/>
+  <circle cx="40" cy="62" r="4.2" fill="#111"/><circle cx="60" cy="62" r="4.2" fill="#111"/>
+  <circle cx="41.5" cy="60.5" r="1.3" fill="#fff"/><circle cx="61.5" cy="60.5" r="1.3" fill="#fff"/>
+  <circle cx="31" cy="72" r="5" fill="#ff8a8a" opacity=".55"/><circle cx="69" cy="72" r="5" fill="#ff8a8a" opacity=".55"/>
+  <path d="M41 75 Q50 85 59 75" stroke="#5a2a1a" stroke-width="3" fill="none" stroke-linecap="round"/>
+</svg>`;
+
+let E = null; // current elf run
+
+function naughtyHTML(extraYou) {
+  const names = [...CONFIG.naughtySeed, ...S.naughty];
+  return `<div class="naughty"><b>📜 Lista Obraznicilor</b><ol>
+    ${names.map(n => `<li>${esc(n)}</li>`).join("")}
+    ${extraYou ? `<li class="you">${esc(extraYou)} 👈 tu</li>` : ""}
+  </ol></div>`;
+}
+
+renders.elf = () => {
+  $("#elfCount").textContent = "";
+  const body = $("#elfBody");
+  if (S.elf) {
+    body.innerHTML = `<div class="card"><h3>Gata! 🎉</h3><p>Prima cifră a codului:</p><div class="big-digit">${CODE[0]}</div>
+      ${S.naughty.length ? naughtyHTML() : ""}
+      <p><button class="btn ghost" id="elfReplay">Mai joc o dată, de distracție</button></p></div>`;
+    $("#elfReplay").onclick = () => elfIntro(true);
+    return;
+  }
+  elfIntro(false);
+};
+
+function elfIntro(forFun) {
+  const second = S.elfFails > 0 && !forFun;
+  $("#elfBody").innerHTML = `<div class="card">
+    <h3>${second ? "Revanșa 😤" : "Spiridușii Socotitori"}</h3>
+    <p>Pornești de la un număr. Fiecare spiriduș care iese ține o <b>operație</b> (+2, ×3, ÷2...).</p>
+    <p>${CONFIG.elf.onlyHitsCount ? "<b>Contează doar spiridușii pe care îi lovești!</b> Pe cei ratați îi ignori." : "<b>Toți spiridușii contează</b>, chiar dacă nu-i lovești."}</p>
+    <p>Ține socoteala în cap. La final te întreb rezultatul. 🧠</p>
+    ${second ? naughtyHTML() : ""}
+    <button class="btn green" id="elfGo">Start!</button></div>`;
+  $("#elfGo").onclick = () => elfBegin(second, forFun);
+}
+
+function elfBegin(second, forFun) {
+  stoppers.elf();
+  const total = randInt(CONFIG.elf.minElves, CONFIG.elf.maxElves);
+  const start = randInt(2, 9);
+  E = { value: start, total, left: total, second, forFun, active: null, timers: [], lastHole: -1 };
+  $("#elfBody").innerHTML = `
+    <div class="elf-top"><div class="elf-start">Pornești de la <b>${start}</b></div>
+    <div class="elf-note">${CONFIG.elf.onlyHitsCount ? "lovește-i ca să conteze!" : "toți contează!"}</div></div>
+    <div class="holes">${Array.from({ length: 6 }, (_, i) => `<div class="hole"><div class="elf" data-i="${i}"><div class="esign"></div>${ELF_SVG}</div></div>`).join("")}</div>`;
+  $$("#elfBody .elf").forEach(el => el.addEventListener("pointerdown", ev => { ev.preventDefault(); elfHit(+el.dataset.i, ev); }));
+  elfCountUI();
+  E.timers.push(setTimeout(elfNext, 1500));
+}
+
+function elfCountUI() { $("#elfCount").textContent = E ? `🧝 ${E.left}` : ""; }
+
+function pickOp(v) {
+  const c = [];
+  const add = (label, fn, w = 1) => c.push({ label, fn, w });
+  add("+1", x => x + 1, .8); add("+2", x => x + 2); add("+3", x => x + 3); add("+5", x => x + 5, .6);
+  if (v >= 2) add("−1", x => x - 1, .7);
+  if (v >= 3) add("−2", x => x - 2);
+  if (v >= 5) add("−3", x => x - 3);
+  if (v >= 2 && v % 2 === 0) add("÷2", x => x / 2, 1.7);
+  if (v >= 3 && v % 3 === 0 && v <= 30) add("÷3", x => x / 3, .9);
+  if (v <= 20) add("×2", x => x * 2, 1.3);
+  if (v <= 10) add("×3", x => x * 3, .8);
+  if (v <= 6) add("×4", x => x * 4, .6);
+  let r = Math.random() * c.reduce((s, o) => s + o.w, 0);
+  for (const o of c) { if ((r -= o.w) <= 0) return o; }
+  return c[0];
+}
+
+function elfNext() {
+  if (!E) return;
+  if (E.left <= 0) { E.timers.push(setTimeout(elfEnd, 650)); return; }
+  let i; do { i = randInt(0, 5); } while (i === E.lastHole);
+  E.lastHole = i;
+  const op = pickOp(E.value);
+  const el = $$("#elfBody .elf")[i];
+  el.className = "elf";
+  $(".esign", el).textContent = op.label;
+  void el.offsetWidth;
+  el.classList.add("up");
+  E.active = { i, op, done: false };
+  const vis = CONFIG.elf.visibleMs * (E.second ? .92 : 1);
+  E.active.timer = setTimeout(elfMiss, vis);
+  E.timers.push(E.active.timer);
+}
+
+function elfResolve(hit) {
+  const a = E.active; a.done = true; clearTimeout(a.timer);
+  E.left--; elfCountUI();
+  const el = $$("#elfBody .elf")[a.i];
+  if (hit || !CONFIG.elf.onlyHitsCount) E.value = a.op.fn(E.value);
+  el.classList.add(hit ? "hit" : "miss");
+  if (!hit) $(".esign", el).textContent = pick(CONFIG.elf.missTaunts);
+  E.timers.push(setTimeout(() => {
+    el.classList.remove("up");
+    E.timers.push(setTimeout(elfNext, rand(250, 700)));
+  }, hit ? 330 : 520));
+}
+function elfHit(i, ev) {
+  if (!E || !E.active || E.active.done || E.active.i !== i) return;
+  burst(ev.clientX, ev.clientY, "💥", 5);
+  elfResolve(true);
+}
+function elfMiss() { if (E && E.active && !E.active.done) elfResolve(false); }
+
+function elfEnd() {
+  const answer = E.value, second = E.second, forFun = E.forFun;
+  $("#elfCount").textContent = "";
+  if (second) {
+    $("#elfBody").innerHTML = `<div class="card"><h3>Știi ce?</h3>
+      <p>Nu mai contează rezultatul. 🙃<br>Spune-mi doar <b>cum te cheamă</b>.</p>
+      <input class="big" id="elfName" maxlength="30" placeholder="Numele tău" autocomplete="off">
+      <div class="msg" id="elfMsg"></div>
+      <button class="btn green" id="elfOk">Gata</button></div>`;
+    const inp = $("#elfName");
+    const go = () => {
+      const n = inp.value.trim();
+      if (!n) { $("#elfMsg").textContent = "Hai, nu fi timid(ă)."; shake(inp); return; }
+      S.naughty.push(n); S.elf = true; save(); E = null;
+      $("#elfBody").innerHTML = `<div class="card"><h3>Mulțumesc, ${esc(n)}. 📝</h3>
+        <p>Ai fost trecut(ă) oficial pe Lista Obraznicilor.</p>${naughtyHTML()}
+        <p>Dar e Crăciun, așa că uite cifra:</p><div class="big-digit">${CODE[0]}</div>
+        <p><button class="btn" id="elfHome">Înapoi la cadou</button></p></div>`;
+      $("#elfHome").onclick = () => history.back();
+      confetti(90);
+    };
+    $("#elfOk").onclick = go;
+    inp.addEventListener("keydown", e => e.key === "Enter" && go());
+    setTimeout(() => inp.focus(), 50);
+    return;
+  }
+
+  $("#elfBody").innerHTML = `<div class="card"><h3>Cu cât ai rămas? 🤔</h3>
+    <input class="big" id="elfAns" inputmode="numeric" pattern="[0-9]*" autocomplete="off" placeholder="?">
+    <div class="msg" id="elfMsg"></div>
+    <button class="btn green" id="elfOk">Verifică</button></div>`;
+  const inp = $("#elfAns");
+  const go = () => {
+    if (inp.value.trim() === "") { shake(inp); return; }
+    const ok = parseInt(inp.value, 10) === answer;
+    E = null;
+    if (ok) {
+      if (!forFun) { S.elf = true; save(); }
+      confetti();
+      $("#elfBody").innerHTML = `<div class="card"><h3>CORECT! 🎉</h3><p>Rezultatul era <b>${answer}</b>.</p>
+        <p>Prima cifră a codului:</p><div class="big-digit">${CODE[0]}</div>
+        <p><button class="btn" id="elfHome">Înapoi la cadou</button></p></div>`;
+      $("#elfHome").onclick = () => history.back();
+    } else if (forFun) {
+      $("#elfBody").innerHTML = `<div class="card"><h3>Greșit 😅</h3><p>Era <b>${answer}</b>. Noroc că ai deja cifra.</p>
+        <button class="btn ghost" id="elfRe">Încă o dată</button></div>`;
+      $("#elfRe").onclick = () => elfIntro(true);
+    } else {
+      S.elfFails++; save();
+      $("#elfBody").innerHTML = `<div class="card shake"><h3>GREȘIT! ❌</h3>
+        <p>Răspunsul corect era <b>${answer}</b>.</p>
+        <p>Moș Crăciun te-a trecut pe <b>Lista Obraznicilor</b>.</p>
+        ${naughtyHTML("???")}
+        <button class="btn" id="elfRe">Mai încerc o dată 😤</button></div>`;
+      $("#elfRe").onclick = () => elfIntro(false);
+    }
+  };
+  $("#elfOk").onclick = go;
+  inp.addEventListener("keydown", e => e.key === "Enter" && go());
+  setTimeout(() => inp.focus(), 50);
+}
+
+stoppers.elf = () => { if (E) { E.timers.forEach(clearTimeout); E = null; } $("#elfCount").textContent = ""; };
+
+/* =====================================================================
+   ⛄ SNOWMAN
+   ===================================================================== */
+const SNOWMAN_SVG = `<svg viewBox="0 0 200 250" aria-hidden="true">
+  <defs><radialGradient id="sg" cx="38%" cy="32%" r="75%"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#c6d8f5"/></radialGradient></defs>
+  <ellipse cx="100" cy="243" rx="95" ry="10" fill="#eaf2ff" opacity=".9"/>
+  <g class="sm-part" id="sm0"><circle cx="100" cy="194" r="50" fill="url(#sg)" stroke="#9fb6dd" stroke-width="3"/></g>
+  <g class="sm-part" id="sm1"><circle cx="100" cy="120" r="36" fill="url(#sg)" stroke="#9fb6dd" stroke-width="3"/></g>
+  <g class="sm-part" id="sm2"><circle cx="100" cy="62" r="27" fill="url(#sg)" stroke="#9fb6dd" stroke-width="3"/></g>
+  <g class="sm-part" id="sm3">
+    <line x1="68" y1="114" x2="28" y2="88" stroke="#6b3f22" stroke-width="5" stroke-linecap="round"/>
+    <line x1="40" y1="96" x2="30" y2="104" stroke="#6b3f22" stroke-width="4" stroke-linecap="round"/>
+    <line x1="132" y1="114" x2="172" y2="86" stroke="#6b3f22" stroke-width="5" stroke-linecap="round"/>
+    <line x1="160" y1="94" x2="170" y2="104" stroke="#6b3f22" stroke-width="4" stroke-linecap="round"/>
+    <circle cx="100" cy="106" r="4.5" fill="#222"/><circle cx="100" cy="122" r="4.5" fill="#222"/><circle cx="100" cy="138" r="4.5" fill="#222"/>
+    <path d="M72 84 Q100 98 128 84 L128 93 Q100 106 72 93 Z" fill="#d8323a" stroke="#7a1218" stroke-width="2"/>
+    <path d="M114 94 L122 122 L110 122 L106 96 Z" fill="#d8323a" stroke="#7a1218" stroke-width="2"/>
+    <circle cx="91" cy="56" r="3.6" fill="#222"/><circle cx="109" cy="56" r="3.6" fill="#222"/>
+    <path d="M100 62 L126 67 L100 70 Z" fill="#ff8a1f" stroke="#a04a00" stroke-width="1.5"/>
+    <circle cx="90" cy="75" r="2" fill="#222"/><circle cx="96" cy="78" r="2" fill="#222"/><circle cx="104" cy="78" r="2" fill="#222"/><circle cx="110" cy="75" r="2" fill="#222"/>
+    <rect x="70" y="38" width="60" height="8" rx="3" fill="#1a1a1a"/>
+    <rect x="80" y="10" width="40" height="30" rx="3" fill="#1a1a1a"/>
+    <rect x="80" y="30" width="40" height="6" fill="#d8323a"/>
+  </g>
+</svg>`;
+
+let SN = null;
+renders.snow = () => {
+  const body = $("#snowBody");
+  body.innerHTML = `
+    <div class="snow-hud"><div class="bar"><div class="fill" id="snowFill"></div></div><span id="snowScore"></span></div>
+    <div class="snow-area" id="snowArea">
+      <div class="snowman-wrap" id="snowman">${SNOWMAN_SVG}<div class="sm-sign" id="smSign">cifra ❷: ${CODE[1]}</div></div>
+    </div>`;
+  const goal = CONFIG.snow.goal;
+  if (S.snow) {
+    snowDraw(goal);
+    $("#smSign").classList.add("show");
+    $("#snowArea").insertAdjacentHTML("beforeend", `<div class="overlay-card" style="background:none;align-items:flex-start"><div class="card"><h3>Omul de zăpadă e gata! ⛄</h3><p>A doua cifră a codului: <b style="font-size:24px">${CODE[1]}</b></p></div></div>`);
+    return;
+  }
+  snowDraw(0);
+  $("#snowArea").insertAdjacentHTML("beforeend", `<div class="overlay-card" id="snowIntro"><div class="card">
+    <h3>Construiește omul de zăpadă</h3>
+    <p>Prinde <b>${goal}</b> de fulgi ❄ ca să-l construiești.</p>
+    <p>✨ Fulgii <b style="color:#c48a00">aurii</b> valorează <b>+3</b>.<br>🔥 <b>Nu atinge focul</b> — topește 3!</p>
+    <button class="btn green" id="snowGo">Start!</button></div></div>`);
+  $("#snowGo").onclick = () => { $("#snowIntro").remove(); snowStart(); };
+};
+
+function snowDraw(score) {
+  const goal = CONFIG.snow.goal, p = score / goal;
+  $("#snowFill").style.width = (p * 100) + "%";
+  $("#snowScore").textContent = `❄ ${score}/${goal}`;
+  for (let i = 0; i < 4; i++) {
+    const s = clamp((p - i / 4) * 4, 0, 1);
+    $("#sm" + i).style.transform = `scale(${s})`;
+  }
+}
+
+function snowStart() {
+  SN = { score: 0, timer: setInterval(spawnFlake, CONFIG.snow.spawnMs) };
+  spawnFlake();
+}
+function spawnFlake() {
+  const area = $("#snowArea"); if (!area || !SN) return;
+  const r = Math.random();
+  const type = r < CONFIG.snow.goldChance ? "gold" : r < CONFIG.snow.goldChance + CONFIG.snow.fireChance ? "fire" : "norm";
+  const el = document.createElement("button");
+  el.className = "flake " + type;
+  el.textContent = type === "fire" ? "🔥" : "❄";
+  el.style.left = rand(8, 92) + "%";
+  const p = SN.score / CONFIG.snow.goal;
+  el.style.animationDuration = (6.2 - 3 * p) * rand(.85, 1.15) + "s";
+  el.style.setProperty("--sway", rand(-50, 50) + "px");
+  el.style.setProperty("--fall", area.clientHeight + 80 + "px");
+  el.addEventListener("pointerdown", e => { e.preventDefault(); catchFlake(el, type, e); }, { once: true });
+  el.addEventListener("animationend", () => el.remove());
+  area.appendChild(el);
+}
+function catchFlake(el, type, e) {
+  if (!SN) return;
+  el.remove();
+  const goal = CONFIG.snow.goal;
+  const d = type === "gold" ? 3 : type === "fire" ? -3 : 1;
+  SN.score = clamp(SN.score + d, 0, goal);
+  floaty(e.clientX, e.clientY, (d > 0 ? "+" : "") + d, d < 0);
+  if (type === "gold") burst(e.clientX, e.clientY, "✨", 5);
+  if (type === "fire") { const sm = $("#snowman"); sm.classList.remove("melt"); void sm.offsetWidth; sm.classList.add("melt"); }
+  snowDraw(SN.score);
+  if (SN.score >= goal) snowWin();
+}
+function snowWin() {
+  stoppers.snow();
+  S.snow = true; save();
+  $$("#snowArea .flake").forEach(f => f.remove());
+  confetti();
+  setTimeout(() => {
+    $("#smSign").classList.add("show");
+    $("#snowArea").insertAdjacentHTML("beforeend", `<div class="overlay-card" style="background:none;align-items:flex-start"><div class="card"><h3>BRAVO! ⛄</h3><p>A doua cifră a codului: <b style="font-size:24px">${CODE[1]}</b></p><button class="btn" onclick="history.back()">Înapoi la cadou</button></div></div>`);
+  }, 500);
+}
+stoppers.snow = () => { if (SN) { clearInterval(SN.timer); SN = null; } };
+
+/* =====================================================================
+   🎄 TREE SLIDING PUZZLE
+   ===================================================================== */
+function treeSVG(showDigits) {
+  const [a, b, c] = CONFIG.giftDigits;
+  const dig = (x, y, d) => showDigits
+    ? `<text x="${x}" y="${y}" text-anchor="middle" font-family="Impact, Arial Black, sans-serif" font-size="32" fill="#fff" stroke="#000" stroke-width="5" paint-order="stroke">${d}</text>` : "";
+  const stars = [[22, 70], [60, 22], [250, 30], [275, 85], [215, 60], [30, 140], [268, 150], [95, 45]]
+    .map(([x, y]) => `<circle cx="${x}" cy="${y}" r="1.8" fill="#fff"/>`).join("");
+  const baubles = [[132, 80, "#d8323a"], [170, 88, "#6aa9ff"], [116, 128, "#ffd84d"], [186, 132, "#ff8ad8"], [150, 145, "#d8323a"],
+    [94, 180, "#6aa9ff"], [138, 186, "#ffd84d"], [204, 178, "#d8323a"], [168, 200, "#ff8ad8"], [110, 202, "#ffd84d"]]
+    .map(([x, y, col]) => `<circle cx="${x}" cy="${y}" r="7" fill="${col}" stroke="#222" stroke-width="1.5"/><circle cx="${x - 2}" cy="${y - 2}" r="2" fill="#fff" opacity=".8"/>`).join("");
+  const bow = (x, y, col) => `<ellipse cx="${x - 9}" cy="${y}" rx="10" ry="6" fill="none" stroke="${col}" stroke-width="5"/><ellipse cx="${x + 9}" cy="${y}" rx="10" ry="6" fill="none" stroke="${col}" stroke-width="5"/>`;
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0b1838"/><stop offset="1" stop-color="#25469a"/></linearGradient>
+    <linearGradient id="tg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#45d175"/><stop offset="1" stop-color="#136030"/></linearGradient>
+  </defs>
+  <rect width="300" height="300" fill="url(#bg)"/>
+  ${stars}
+  <circle cx="44" cy="44" r="16" fill="#fff6c8"/><circle cx="51" cy="39" r="14" fill="#0e1d45"/>
+  <path d="M0 250 Q75 232 150 246 T300 242 V300 H0 Z" fill="#eaf2ff"/>
+  <rect x="137" y="204" width="26" height="34" fill="#6b3f22" stroke="#3a2010" stroke-width="2"/>
+  <polygon points="150,92 56,214 244,214" fill="url(#tg)" stroke="#0d4a24" stroke-width="3" stroke-linejoin="round"/>
+  <polygon points="150,62 76,160 224,160" fill="url(#tg)" stroke="#0d4a24" stroke-width="3" stroke-linejoin="round"/>
+  <polygon points="150,34 98,112 202,112" fill="url(#tg)" stroke="#0d4a24" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M112 96 Q150 114 188 96" stroke="#ffd84d" stroke-width="3" fill="none" stroke-dasharray="2 5" stroke-linecap="round"/>
+  <path d="M92 144 Q150 168 208 144" stroke="#ffd84d" stroke-width="3" fill="none" stroke-dasharray="2 5" stroke-linecap="round"/>
+  <path d="M72 194 Q150 222 228 194" stroke="#ffd84d" stroke-width="3" fill="none" stroke-dasharray="2 5" stroke-linecap="round"/>
+  ${baubles}
+  <polygon points="150,12 156,27 172,27 159,36 164,51 150,42 136,51 141,36 128,27 144,27" fill="#ffd84d" stroke="#a06a00" stroke-width="2" stroke-linejoin="round"/>
+  <rect x="56" y="224" width="64" height="56" rx="3" fill="#d8323a" stroke="#7a1218" stroke-width="3"/>
+  <rect x="83" y="224" width="10" height="56" fill="#ffd84d"/>${bow(88, 219, "#ffd84d")}
+  <rect x="124" y="238" width="54" height="44" rx="3" fill="#2fa84f" stroke="#0d4a24" stroke-width="3"/>
+  <rect x="146" y="238" width="10" height="44" fill="#ffffff"/>${bow(151, 233, "#ffffff")}
+  <rect x="182" y="218" width="64" height="62" rx="3" fill="#f0b429" stroke="#8a5a00" stroke-width="3"/>
+  <rect x="209" y="218" width="10" height="62" fill="#d8323a"/>${bow(214, 213, "#d8323a")}
+  ${dig(88, 264, a)}${dig(151, 272, b)}${dig(214, 262, c)}
+</svg>`;
+}
+const svgURL = svg => `url('data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg).replace(/'/g, "%27")}')`;
+
+let T = null;
+function treeNeighbors(pos, N) {
+  const r = Math.floor(pos / N), c = pos % N, out = [];
+  if (r > 0) out.push(pos - N); if (r < N - 1) out.push(pos + N);
+  if (c > 0) out.push(pos - 1); if (c < N - 1) out.push(pos + 1);
+  return out;
+}
+function treeNew() {
+  const N = CONFIG.tree.size, total = N * N;
+  let board, empty;
+  do {
+    board = [...Array(total).keys()]; empty = total - 1; let last = -1;
+    for (let k = 0; k < CONFIG.tree.shuffleMoves; k++) {
+      const nb = treeNeighbors(empty, N).filter(p => p !== last);
+      const p = pick(nb);
+      [board[empty], board[p]] = [board[p], board[empty]];
+      last = empty; empty = p;
+    }
+  } while (board.every((t, i) => t === i));
+  T = { N, board, empty, moves: 0 };
+}
+
+renders.tree = () => {
+  const body = $("#treeBody");
+  $("#treeMoves").textContent = "";
+  if (S.tree) {
+    body.innerHTML = `<p class="lead">Bradul e la locul lui! 🎄 Uită-te atent la cadouri...</p>
+      <div class="puzzle solved"><div class="full" style="background-image:${svgURL(treeSVG(true))}"></div></div>
+      <button class="btn" id="toRiddle">Mergi la ghicitoare 📜</button>`;
+    $("#toRiddle").onclick = () => openPanel("riddle", true);
+    return;
+  }
+  if (!T) treeNew();
+  body.innerHTML = `<p class="lead">Spiridușii au încurcat bradul! Atinge o piesă de lângă locul gol ca s-o muți.</p>
+    <div class="puzzle" id="puzzle">
+      <div class="full peekimg" style="background-image:${svgURL(treeSVG(false))}"></div>
+      <div class="full done" style="background-image:${svgURL(treeSVG(true))}"></div>
+    </div>
+    <div class="tree-tools">
+      <button class="pill" id="peek">👁 Ține apăsat: model</button>
+      <button class="pill" id="reshuffle">🔀 Amestecă din nou</button>
+    </div>`;
+  const pz = $("#puzzle"), N = T.N, img = svgURL(treeSVG(false));
+  for (let id = 0; id < N * N - 1; id++) {
+    const t = document.createElement("div");
+    t.className = "tile"; t.dataset.id = id;
+    const hr = Math.floor(id / N), hc = id % N;
+    t.style.width = t.style.height = (100 / N) + "%";
+    t.style.backgroundImage = img;
+    t.style.backgroundSize = `${N * 100}% ${N * 100}%`;
+    t.style.backgroundPosition = `${hc / (N - 1) * 100}% ${hr / (N - 1) * 100}%`;
+    t.addEventListener("pointerdown", e => { e.preventDefault(); treeMove(id); });
+    pz.insertBefore(t, pz.firstChild);
+  }
+  treeLayout();
+  const peek = $("#peek");
+  const on = e => { e.preventDefault(); pz.classList.add("peek"); }, off = () => pz.classList.remove("peek");
+  peek.addEventListener("pointerdown", on); peek.addEventListener("pointerup", off); peek.addEventListener("pointerleave", off); peek.addEventListener("pointercancel", off);
+  $("#reshuffle").onclick = () => { treeNew(); renders.tree(); };
+};
+function treeLayout() {
+  const N = T.N, near = treeNeighbors(T.empty, N);
+  $$("#puzzle .tile").forEach(t => {
+    const pos = T.board.indexOf(+t.dataset.id);
+    t.style.left = (pos % N) * (100 / N) + "%";
+    t.style.top = Math.floor(pos / N) * (100 / N) + "%";
+    t.classList.toggle("near", near.includes(pos));
+  });
+  $("#treeMoves").textContent = `${T.moves} mutări`;
+}
+function treeMove(id) {
+  if (!T || S.tree) return;
+  const pos = T.board.indexOf(id);
+  if (!treeNeighbors(T.empty, T.N).includes(pos)) return;
+  [T.board[T.empty], T.board[pos]] = [T.board[pos], T.board[T.empty]];
+  T.empty = pos; T.moves++;
+  treeLayout();
+  if (T.board.every((t, i) => t === i)) {
+    S.tree = true; save();
+    const pz = $("#puzzle");
+    setTimeout(() => {
+      pz.classList.add("solved");
+      $$("#puzzle .tile").forEach(t => t.style.opacity = 0);
+      confetti();
+      $(".tree-tools").innerHTML = `<p class="lead">🎁 Cadourile au cifre! Ține minte culorile...</p><button class="btn" id="toRiddle">Mergi la ghicitoare 📜</button>`;
+      $("#toRiddle").onclick = () => openPanel("riddle", true);
+    }, 250);
+  }
+}
+
+/* =====================================================================
+   📜 RIDDLE
+   ===================================================================== */
+renders.riddle = () => {
+  const body = $("#riddleBody");
+  if (!S.tree) {
+    body.innerHTML = `<div class="card"><h3>🔒 Încuiat</h3><p>Ghicitoarea are nevoie de ce e <b>sub brad</b>.</p><p>Rezolvă mai întâi <b>Bradul Încurcat</b>.</p>
+      <button class="btn green" id="goTree">La brad 🎄</button></div>`;
+    $("#goTree").onclick = () => openPanel("tree", true);
+    return;
+  }
+  const tree = `<div class="puzzle solved" style="width:min(60vw,220px);animation:none"><div class="full" style="background-image:${svgURL(treeSVG(true))}"></div></div>`;
+  if (S.riddle) {
+    body.innerHTML = `${tree}<div class="card"><h3>Rezolvat! 🧠</h3><p>Ultimele două cifre ale codului:</p><div class="big-digit">${CODE.slice(2)}</div></div>`;
+    return;
+  }
+  body.innerHTML = `${tree}<div class="card"><h3>Ghicitoarea Moșului</h3><p>${CONFIG.riddle.text}</p>
+    <input class="big" id="rAns" autocomplete="off" placeholder="răspunsul tău">
+    <div class="msg" id="rMsg"></div>
+    <button class="btn green" id="rOk">Verifică</button></div>`;
+  const inp = $("#rAns");
+  const go = () => {
+    if (!inp.value.trim()) { shake(inp); return; }
+    if (CONFIG.riddle.answers.some(a => norm(a) === norm(inp.value))) {
+      S.riddle = true; save(); confetti(); renders.riddle();
+      $("#riddleBody .card").insertAdjacentHTML("beforeend", `<button class="btn" onclick="history.back()">Înapoi la cadou</button>`);
+    } else {
+      S.riddleTries++; save(); shake(inp);
+      $("#rMsg").textContent = S.riddleTries >= CONFIG.riddle.hintAfterTries ? `Indiciu: ${CONFIG.riddle.hint}` : pick(["Nu. 🙂", "Mai gândește-te...", "Moșul clatină din cap.", "Aproape? Nu."]);
+    }
+  };
+  $("#rOk").onclick = go;
+  inp.addEventListener("keydown", e => e.key === "Enter" && go());
+};
+
+/* =====================================================================
+   🔐 LOCK
+   ===================================================================== */
+let dialVals = [0, 0, 0, 0];
+renders.lock = () => {
+  const k = digitsKnown();
+  $("#lockBody").innerHTML = `<div class="card" id="lockCard">
+    <h3>Introdu codul</h3>
+    <div class="clues">
+      <span class="clue">🧝 ❶ ${k[0]}</span><span class="clue">⛄ ❷ ${k[1]}</span><span class="clue">📜 ❸❹ ${k[2]}${k[3]}</span>
+    </div>
+    <div class="dials">${dialVals.map((v, i) => `<div class="dial"><button data-i="${i}" data-d="1">▲</button><div class="dv" id="dv${i}">${v}</div><button data-i="${i}" data-d="-1">▼</button></div>`).join("")}</div>
+    <div class="msg" id="lockMsg"></div>
+    <button class="btn green" id="lockOpen">Deschide! 🔓</button></div>`;
+  $$("#lockBody .dial button").forEach(b => b.addEventListener("click", () => {
+    const i = +b.dataset.i;
+    dialVals[i] = (dialVals[i] + +b.dataset.d + 10) % 10;
+    $("#dv" + i).textContent = dialVals[i];
+  }));
+  $("#lockOpen").onclick = () => {
+    if (dialVals.join("") === CODE) {
+      S.opened = true; save();
+      openPanel("invite", true);
+    } else {
+      shake($("#lockCard"));
+      $("#lockMsg").textContent = pick(CONFIG.lockTaunts);
+    }
+  };
+};
+
+/* =====================================================================
+   🎉 INVITE + SECRET SANTA
+   ===================================================================== */
+renders.invite = () => {
+  const P = CONFIG.party;
+  const row = (ic, main, sub) => main ? `<div class="row"><span class="ic">${ic}</span><div>${main}${sub ? `<small>${sub}</small>` : ""}</div></div>` : "";
+  const place = P.mapsUrl ? `<a href="${esc(P.mapsUrl)}" target="_blank" rel="noopener">${esc(P.place)}</a>` : esc(P.place);
+  let santa;
+  if (TOKEN && TOKEN.r) {
+    santa = S.santaShown
+      ? santaReveal()
+      : `<h4>🎅 Secret Santa</h4><p>Ești Moșul secret al cuiva. Ești gata să afli al cui?</p><button class="btn" id="santaGo">Dezvăluie 🎁</button>`;
+  } else if (CONFIG.secretSantaFallbackUrl) {
+    santa = `<h4>🎅 Secret Santa</h4><p>Află cui îi faci cadou:</p><a class="btn" href="${esc(CONFIG.secretSantaFallbackUrl)}" target="_blank" rel="noopener">Trage la sorți 🎲</a>`;
+  } else {
+    santa = `<h4>🎅 Secret Santa</h4><p>Linkul tău personal vine de la organizator. 🤫</p>`;
+  }
+  $("#inviteBody").innerHTML = `<div class="card invite">
+    <div class="kicker">${TOKEN && TOKEN.n ? esc(TOKEN.n) + ", ești" : "Ești"} invitat(ă) la</div>
+    <h3>${esc(P.title)}</h3>
+    ${row("📅", esc(P.date), esc(P.time))}
+    ${row("📍", place, esc(P.address))}
+    ${row("👕", esc(P.dress))}
+    ${row("🎒", esc(P.bring))}
+    ${row("✉️", esc(P.rsvp))}
+    <p class="note">${esc(P.note)}</p>
+    <div class="santa" id="santaBox">${santa}</div>
+  </div>`;
+  const go = $("#santaGo");
+  if (go) go.onclick = () => {
+    S.santaShown = true; save();
+    $("#santaBox").innerHTML = santaReveal();
+    confetti(200);
+  };
+  if (!renders.invite.played) { renders.invite.played = true; confetti(220); }
+};
+function santaReveal() {
+  return `<h4>🎅 Tu îi faci cadou lui/ei:</h4><div class="who">${esc(TOKEN.r)}</div>
+    ${TOKEN.b ? `<p>💸 Buget: <b>${esc(TOKEN.b)}</b></p>` : ""}
+    ${TOKEN.m ? `<p>${esc(TOKEN.m)}</p>` : ""}
+    <p style="font-size:13px;opacity:.85">🤫 Nu spune nimănui!</p>`;
+}
+
+/* ---------- dev mode: add ?dev to the URL ---------- */
+if (new URLSearchParams(location.search).has("dev")) {
+  const d = $("#dev"); d.style.display = "flex";
+  const btn = (t, f) => { const b = document.createElement("button"); b.textContent = t; b.onclick = () => { f(); save(); renderHub(); }; d.appendChild(b); };
+  btn("✓ spiriduși", () => S.elf = true);
+  btn("✓ om de zăpadă", () => S.snow = true);
+  btn("✓ brad", () => S.tree = true);
+  btn("✓ ghicitoare", () => S.riddle = true);
+  btn("↺ reset", () => { S = { ...defaultState, naughty: [] }; });
+}
+
+renderHub();
+</script>
+</body>
+</html>

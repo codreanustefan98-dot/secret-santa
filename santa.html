@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="dark">
+<meta name="robots" content="noindex">
+<title>Secret Santa — Organizator 🎅</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; min-height: 100vh; padding: 18px 14px 40px;
+    font-family: "Trebuchet MS", Arial, sans-serif; color: #eaf1ff;
+    background: radial-gradient(circle at 50% 20%, #1c3170, #071028 72%) fixed;
+  }
+  main { max-width: 560px; margin: 0 auto; display: flex; flex-direction: column; gap: 14px; }
+  h1 {
+    margin: 0; text-align: center; font-family: Impact, "Arial Black", sans-serif; font-weight: normal;
+    font-size: clamp(30px, 8vw, 48px); color: #ffd84d;
+    filter: drop-shadow(0 3px 0 #7a1218);
+  }
+  .sub { text-align: center; color: #9fb6e8; margin: -6px 0 0; font-size: 14px; }
+  .card {
+    background: #fffbe7; color: #1b1b1b; border: 3px solid #333; border-radius: 6px;
+    box-shadow: 5px 6px 0 rgba(0,0,0,.35); padding: 16px;
+  }
+  .card h2 { margin: 0 0 10px; font: 900 20px "Comic Sans MS", "Trebuchet MS", sans-serif; }
+  label { display: block; font-weight: bold; margin: 12px 0 4px; }
+  label small { font-weight: normal; color: #6b5a3a; }
+  textarea, input {
+    width: 100%; padding: 10px; font: inherit; font-size: 16px;
+    border: 2px solid #333; border-radius: 8px; background: #fff; color: #111;
+  }
+  textarea { min-height: 120px; resize: vertical; }
+  .btn {
+    display: inline-block; padding: 12px 20px; border-radius: 14px; cursor: pointer;
+    background: linear-gradient(#4fd17a, #1f8a45); color: #fff; font: inherit; font-weight: 900; font-size: 17px;
+    border: 3px solid #0d4a24; box-shadow: 0 4px 0 #0d4a24; text-decoration: none;
+  }
+  .btn:active { transform: translateY(3px); box-shadow: 0 1px 0 #0d4a24; }
+  .btn.small { padding: 7px 11px; font-size: 14px; border-width: 2px; box-shadow: 0 2px 0 #0d4a24; }
+  .btn.wa { background: linear-gradient(#3ee07a, #12a150); }
+  .btn.grey { background: linear-gradient(#8e9ab0, #5b667c); border-color: #2b3242; box-shadow: 0 2px 0 #2b3242; }
+  .err { color: #c4202a; font-weight: bold; min-height: 20px; margin-top: 8px; }
+  .person { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; padding: 10px 0; border-bottom: 1px dashed #d6c79a; }
+  .person:last-child { border-bottom: 0; }
+  .person .nm { flex: 1 1 120px; font-weight: bold; font-size: 17px; }
+  .person .pair { flex-basis: 100%; font-size: 13px; color: #8a5a2a; display: none; }
+  .spoil .person .pair { display: block; }
+  .tip { font-size: 13px; color: #6b5a3a; line-height: 1.45; }
+  .row { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+</style>
+</head>
+<body>
+<main>
+  <h1>🎅 SECRET SANTA</h1>
+  <p class="sub">Pagina organizatorului — nu o trimite invitaților 🤫</p>
+
+  <div class="card">
+    <h2>1. Cine participă?</h2>
+    <label for="names">Nume <small>(câte unul pe rând)</small></label>
+    <textarea id="names" placeholder="Ana&#10;Mihai&#10;Ioana&#10;Vlad"></textarea>
+
+    <label for="excl">Cine NU are voie să se tragă între ei <small>(opțional, ex: cupluri — „Ana + Mihai”, câte o pereche pe rând)</small></label>
+    <textarea id="excl" style="min-height:70px" placeholder="Ana + Mihai"></textarea>
+
+    <label for="budget">Buget <small>(opțional)</small></label>
+    <input id="budget" placeholder="ex: 100 lei / £20">
+
+    <label for="msg">Mesaj pentru toți <small>(opțional)</small></label>
+    <input id="msg" placeholder="ex: Cadoul se deschide la miezul nopții!">
+
+    <label for="url">Linkul invitației <small>(pagina cu jocul, de pe GitHub Pages)</small></label>
+    <input id="url" placeholder="https://numele-tau.github.io/craciun/">
+
+    <div class="err" id="err"></div>
+    <button class="btn" id="draw">🎲 Trage la sorți</button>
+  </div>
+
+  <div class="card" id="results" style="display:none">
+    <h2>2. Trimite fiecăruia linkul lui</h2>
+    <p class="tip">Fiecare link deschide invitația-joc, iar la final arată <b>doar</b> pe cine a tras persoana respectivă. Trimite-l numai persoanei de lângă el.</p>
+    <div id="list"></div>
+    <div class="row" style="margin-top:12px">
+      <label style="margin:0;font-weight:normal"><input type="checkbox" id="spoil" style="width:auto"> Arată perechile (spoiler!)</label>
+    </div>
+    <p class="tip">⚠️ Totul e în link (nu există server), așa că nu deschide linkurile altora dacă vrei să rămână secret și pentru tine. Tragerea se salvează în acest browser.</p>
+    <button class="btn grey small" id="redo">Tragere nouă</button>
+  </div>
+</main>
+
+<script>
+/* Must match SANTA_KEY in index.html */
+const SANTA_KEY = "mos-craciun-2026";
+function encodeToken(obj) {
+  const bytes = new TextEncoder().encode(JSON.stringify(obj));
+  const k = new TextEncoder().encode(SANTA_KEY);
+  let s = "";
+  bytes.forEach((b, i) => s += String.fromCharCode(b ^ k[i % k.length]));
+  return btoa(s).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
+}
+
+const $ = s => document.querySelector(s);
+const esc = s => String(s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const KEY = "santa2026-organizer";
+
+// Default invite URL = index.html next to this page
+$("#url").value = location.href.replace(/[^/]*(\?.*)?(#.*)?$/, "");
+
+function load() { try { return JSON.parse(localStorage.getItem(KEY) || "null"); } catch (e) { return null; } }
+function store(d) { try { localStorage.setItem(KEY, JSON.stringify(d)); } catch (e) {} }
+
+const saved = load();
+if (saved) {
+  $("#names").value = saved.names.join("\n");
+  $("#excl").value = saved.excl || "";
+  $("#budget").value = saved.budget || "";
+  $("#msg").value = saved.msg || "";
+  $("#url").value = saved.url || $("#url").value;
+  if (saved.pairs) showResults(saved);
+}
+
+function shuffle(a) {
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function draw(names, banned) {
+  for (let t = 0; t < 20000; t++) {
+    const r = shuffle([...names]);
+    if (names.every((n, i) => r[i] !== n && !banned.has(n + "\u0000" + r[i]))) {
+      return names.map((n, i) => [n, r[i]]);
+    }
+  }
+  return null;
+}
+
+$("#draw").onclick = () => {
+  const err = $("#err"); err.textContent = "";
+  const names = $("#names").value.split("\n").map(s => s.trim()).filter(Boolean);
+  const lower = names.map(n => n.toLowerCase());
+  if (names.length < 3) { err.textContent = "Ai nevoie de cel puțin 3 participanți."; return; }
+  const dup = lower.find((n, i) => lower.indexOf(n) !== i);
+  if (dup) { err.textContent = `Numele „${dup}” apare de două ori.`; return; }
+
+  const banned = new Set();
+  for (const line of $("#excl").value.split("\n")) {
+    if (!line.trim()) continue;
+    const parts = line.split(/[+,&]/).map(s => s.trim()).filter(Boolean);
+    const real = parts.map(p => names[lower.indexOf(p.toLowerCase())]);
+    if (real.some(x => !x)) { err.textContent = `Nu găsesc numele din „${line.trim()}” în listă.`; return; }
+    for (const a of real) for (const b of real) if (a !== b) banned.add(a + "\u0000" + b);
+  }
+
+  const pairs = draw(names, banned);
+  if (!pairs) { err.textContent = "Nu se poate face o tragere cu restricțiile astea. Scoate câteva."; return; }
+
+  let url = $("#url").value.trim();
+  if (!url) { err.textContent = "Pune linkul invitației."; return; }
+  url = url.split("#")[0];
+
+  const d = { names, excl: $("#excl").value, budget: $("#budget").value.trim(), msg: $("#msg").value.trim(), url, pairs };
+  store(d);
+  showResults(d);
+  $("#results").scrollIntoView({ behavior: "smooth" });
+};
+
+function linkFor(d, giver, receiver) {
+  const t = encodeToken({ n: giver, r: receiver, b: d.budget || undefined, m: d.msg || undefined });
+  return `${d.url}#t=${t}`;
+}
+
+function showResults(d) {
+  $("#results").style.display = "block";
+  $("#draw").style.display = "none";
+  $("#list").innerHTML = d.pairs.map(([g, r], i) => {
+    const link = linkFor(d, g, r);
+    const text = `Salut, ${g}! 🎄 Ai primit o invitație de Crăciun. E încuiată, așa că va trebui s-o deschizi singur(ă) 😈\n${link}`;
+    return `<div class="person">
+      <span class="nm">${esc(g)}</span>
+      <a class="btn small wa" href="https://wa.me/?text=${encodeURIComponent(text)}" target="_blank" rel="noopener">WhatsApp</a>
+      <button class="btn small grey" data-copy="${i}">Copiază</button>
+      <span class="pair">${esc(g)} → ${esc(r)}</span>
+    </div>`;
+  }).join("");
+  document.querySelectorAll("[data-copy]").forEach(b => b.onclick = async () => {
+    const [g, r] = d.pairs[+b.dataset.copy];
+    const link = linkFor(d, g, r);
+    try { await navigator.clipboard.writeText(link); b.textContent = "Copiat ✓"; }
+    catch (e) { b.textContent = "Nu merge"; }
+    setTimeout(() => b.textContent = "Copiază", 1600);
+  });
+}
+
+$("#spoil").onchange = e => $("#results").classList.toggle("spoil", e.target.checked);
+
+let redoArmed = false;
+$("#redo").onclick = () => {
+  if (!redoArmed) {
+    redoArmed = true; $("#redo").textContent = "Sigur? Linkurile trimise deja vor arăta tragerea veche. Apasă din nou.";
+    setTimeout(() => { redoArmed = false; $("#redo").textContent = "Tragere nouă"; }, 4000);
+    return;
+  }
+  const d = load(); if (d) { delete d.pairs; store(d); }
+  $("#results").style.display = "none";
+  $("#draw").style.display = "inline-block";
+  redoArmed = false; $("#redo").textContent = "Tragere nouă";
+};
+</script>
+</body>
+</html>
