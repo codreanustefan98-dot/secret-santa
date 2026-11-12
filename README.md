@@ -11,13 +11,15 @@
 
 ## Customise
 Everything is in the `CONFIG` block at the top of the script in `index.html`:
-- `code` — the 4-digit lock code (digit 1 = elves, 2 = snowman, 3+4 = riddle answer)
-- `giftDigits` — numbers on the [red, green, gold] gifts under the tree
-- `riddle` — your riddle text + accepted answers (must equal code digits 3+4)
+- `code` — the 4-digit lock code (digit 1 = Counting Elves, digits 2–4 = Santa's Riddle)
+- `jigsawNumbers` — numbers on the presents in the jigsaw (a trap for the lock, a key for the riddle)
+- `geo` — Street View location, Google Maps key and accepted answers for "Where's Santa?"
+- `riddle` — riddle text + accepted answers
+- `songs` — the two mp3 files in the `songs/` folder
 - `party` — date, place, dress code, RSVP…
 - `naughtySeed` — names already on the Naughty List (inside jokes)
 - `elf.onlyHitsCount` — `true`: missed elves don't count; `false`: all elves count
-- difficulty knobs: elf speed, snowflake goal, fire chance, puzzle size (3 = 3×3, 4 = 4×4)
+- difficulty knobs: elf speed, jigsaw piece/fire chances
 
 ## Send it out
 1. Open `https://<you>.github.io/craciun/santa.html`

@@ -8,12 +8,7 @@
 <title>Merry Christmas! 🎁 Crăciun Fericit!</title>
 <style>
   * { box-sizing: border-box; }
-  :root {
-    --gold: #ffd84d;
-    --red: #d8323a;
-    --green: #2fa84f;
-    --card: #fffbe7;
-  }
+  :root { --gold: #ffd84d; --red: #d8323a; --green: #2fa84f; --card: #fffbe7; }
   html, body { margin: 0; min-height: 100%; color-scheme: dark; }
   body {
     font-family: "Trebuchet MS", Arial, sans-serif;
@@ -37,18 +32,14 @@
     min-height: 100vh; min-height: 100dvh;
     display: flex; flex-direction: column; align-items: center;
     padding: max(5vh, env(safe-area-inset-top)) 14px 28px;
-    gap: 8px;
-    cursor: crosshair;
+    gap: 8px; cursor: crosshair;
   }
-
   /* Deliberately cheesy PowerPoint-2007 title, Christmas edition */
   #title {
     margin: 0;
-    font-family: Impact, "Arial Black", sans-serif;
-    font-weight: normal;
+    font-family: Impact, "Arial Black", sans-serif; font-weight: normal;
     font-size: clamp(26px, 8.4vw, 92px);
-    white-space: nowrap;
-    letter-spacing: 1px;
+    white-space: nowrap; letter-spacing: 1px;
     background: linear-gradient(#ffffff 8%, #fff0b8 32%, #ffbf2e 58%, #d8323a 100%);
     -webkit-background-clip: text; background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -56,41 +47,31 @@
     filter: drop-shadow(0 3px 0 #7a1218) drop-shadow(0 0 14px rgba(255,216,77,.55));
     animation: titleFloat 2.8s ease-in-out infinite;
   }
+  #title span { display: block; text-align: center; }
+  #title .t2 { font-size: .78em; margin-top: -.06em; }
   @keyframes titleFloat {
     0%,100% { transform: rotate(-1.5deg) scale(1); }
     50% { transform: rotate(1.5deg) scale(1.03); }
   }
-  #title span { display: block; text-align: center; }
-  #title .t2 { font-size: .78em; margin-top: -.06em; }
-  #subtitle {
-    margin: 0; text-align: center; font-weight: bold;
-    color: #cbdcff; font-size: clamp(14px, 3.8vw, 19px);
-  }
+  #subtitle { margin: 0; text-align: center; font-weight: bold; color: #cbdcff; font-size: clamp(14px, 3.8vw, 19px); }
 
   /* Present */
   .present {
-    position: relative;
-    width: clamp(150px, 44vw, 210px);
-    aspect-ratio: 1 / 1;
-    margin: 22px 0 0;
-    animation: wobble 3.2s ease-in-out infinite;
+    position: relative; width: clamp(150px, 44vw, 210px); aspect-ratio: 1 / 1;
+    margin: 22px 0 0; animation: wobble 3.2s ease-in-out infinite;
   }
   @keyframes wobble {
     0%, 82%, 100% { transform: rotate(0); }
-    86% { transform: rotate(-4deg); }
-    90% { transform: rotate(4deg); }
-    94% { transform: rotate(-2deg); }
+    86% { transform: rotate(-4deg); } 90% { transform: rotate(4deg); } 94% { transform: rotate(-2deg); }
   }
   .present .box {
     position: absolute; left: 7%; right: 7%; bottom: 0; height: 66%;
     background: linear-gradient(135deg, #ef4a52, #a3161f);
-    border: 4px solid #5e0b12; border-radius: 6px;
-    box-shadow: 0 16px 26px rgba(0,0,0,.5);
+    border: 4px solid #5e0b12; border-radius: 6px; box-shadow: 0 16px 26px rgba(0,0,0,.5);
   }
   .present .box::before, .present .lid::before {
     content: ""; position: absolute; left: 50%; top: 0; bottom: 0; width: 16%;
-    transform: translateX(-50%);
-    background: linear-gradient(90deg, #d9a520, #ffe27a, #d9a520);
+    transform: translateX(-50%); background: linear-gradient(90deg, #d9a520, #ffe27a, #d9a520);
   }
   .present .lid {
     position: absolute; left: 0; right: 0; top: 18%; height: 20%; z-index: 3;
@@ -105,38 +86,26 @@
   }
   .bow::before { left: 0; transform: rotate(-18deg); }
   .bow::after { right: 0; border-radius: 50% 50% 50% 12%; transform: rotate(18deg); }
-  .padlock {
-    position: absolute; left: 50%; top: 44%; z-index: 4;
-    width: 70%; transform: translateX(-50%);
-  }
+  .padlock { position: absolute; left: 50%; top: 44%; z-index: 4; width: 70%; transform: translateX(-50%); }
   .shackle {
     width: 52%; height: clamp(26px, 8vw, 36px); margin: 0 auto -5px;
-    border: 7px solid #c3ccdd; border-bottom: 0; border-radius: 40px 40px 0 0;
-    transition: transform .5s;
+    border: 7px solid #c3ccdd; border-bottom: 0; border-radius: 40px 40px 0 0; transition: transform .5s;
   }
   .lock-body {
-    background: linear-gradient(#ffe27a, #d9a520);
-    border: 3px solid #7a5a00; border-radius: 10px;
+    background: linear-gradient(#ffe27a, #d9a520); border: 3px solid #7a5a00; border-radius: 10px;
     padding: 8px 2px; text-align: center;
-    font: 900 clamp(15px, 4.8vw, 23px) "Courier New", monospace;
-    color: #3a2a00; letter-spacing: 0; white-space: nowrap;
+    font: 900 clamp(15px, 4.8vw, 23px) "Courier New", monospace; color: #3a2a00; white-space: nowrap;
   }
   .present.open { animation: none; }
   .present.open .lid { transform: translateY(-85%) rotate(-20deg); }
   .present.open .shackle { transform: translateY(-12px); }
   #presentHint { margin: 4px 0 6px; font-size: 13px; color: #9fb6e8; text-align: center; }
 
-  .stations {
-    display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
-    width: min(100%, 520px); margin-top: 6px;
-  }
+  .stations { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; width: min(100%, 520px); margin-top: 6px; }
   .station {
     display: flex; flex-direction: column; align-items: center; gap: 3px;
-    padding: 12px 8px; border-radius: 16px;
-    background: rgba(20,35,80,.78);
-    border: 2px solid rgba(160,190,255,.25);
-    box-shadow: 0 6px 16px rgba(0,0,0,.3);
-    transition: transform .12s;
+    padding: 12px 8px; border-radius: 16px; background: rgba(20,35,80,.78);
+    border: 2px solid rgba(160,190,255,.25); box-shadow: 0 6px 16px rgba(0,0,0,.3); transition: transform .12s;
   }
   .station:active { transform: scale(.96); }
   .st-ico { font-size: 34px; line-height: 1.1; }
@@ -148,10 +117,8 @@
   #foot { margin-top: 10px; font-size: 11px; color: #7f95c4; opacity: .8; }
 
   .burst {
-    position: fixed; z-index: 250; pointer-events: none;
-    font-size: 18px; font-weight: bold; color: #fff;
-    text-shadow: 0 0 6px #fff, 0 0 12px #6aa9ff;
-    animation: burst .7s ease-out forwards;
+    position: fixed; z-index: 250; pointer-events: none; font-size: 18px; font-weight: bold; color: #fff;
+    text-shadow: 0 0 6px #fff, 0 0 12px #6aa9ff; animation: burst .7s ease-out forwards;
   }
   @keyframes burst {
     from { transform: translate(-50%,-50%) scale(.4); opacity: 1; }
@@ -159,29 +126,17 @@
   }
   .floaty {
     position: fixed; z-index: 250; pointer-events: none;
-    font: 900 22px "Comic Sans MS", "Trebuchet MS", sans-serif;
-    color: #fff; text-shadow: 0 2px 0 #000;
+    font: 900 22px "Comic Sans MS", "Trebuchet MS", sans-serif; color: #fff; text-shadow: 0 2px 0 #000;
     animation: floaty .8s ease-out forwards;
   }
   .floaty.bad { color: #ff8080; }
-  @keyframes floaty {
-    from { transform: translate(-50%, -50%); opacity: 1; }
-    to { transform: translate(-50%, -140%); opacity: 0; }
-  }
+  @keyframes floaty { from { transform: translate(-50%, -50%); opacity: 1; } to { transform: translate(-50%, -140%); opacity: 0; } }
 
   /* ---------- PANELS ---------- */
-  .panel {
-    position: fixed; inset: 0; z-index: 50;
-    display: none; flex-direction: column;
-    background: radial-gradient(circle at 50% 18%, #1c3170, #071028 72%);
-  }
+  .panel { position: fixed; inset: 0; z-index: 50; display: none; flex-direction: column; background: radial-gradient(circle at 50% 18%, #1c3170, #071028 72%); }
   .panel.open { display: flex; animation: panelIn .22s ease-out; }
   @keyframes panelIn { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
-  .ph {
-    display: flex; align-items: center; gap: 8px;
-    padding: 10px 12px; padding-top: max(10px, env(safe-area-inset-top));
-    background: rgba(0,0,0,.28);
-  }
+  .ph { display: flex; align-items: center; gap: 8px; padding: 10px 12px; padding-top: max(10px, env(safe-area-inset-top)); background: rgba(0,0,0,.28); }
   .ph h2 { margin: 0; flex: 1; text-align: center; font-size: clamp(16px, 4.6vw, 22px); }
   .back { padding: 8px 12px; border-radius: 10px; background: rgba(255,255,255,.13); font-weight: bold; font-size: 15px; }
   .ph-extra { min-width: 64px; text-align: right; font-weight: bold; color: var(--gold); font-size: 16px; }
@@ -190,12 +145,9 @@
     padding: 14px 14px max(18px, env(safe-area-inset-bottom));
     display: flex; flex-direction: column; align-items: center; gap: 14px;
   }
-
   .card {
-    background: var(--card); color: #1b1b1b;
-    border: 3px solid #333; border-radius: 6px;
-    box-shadow: 5px 6px 0 rgba(0,0,0,.35);
-    padding: 16px 18px; width: min(100%, 460px);
+    background: var(--card); color: #1b1b1b; border: 3px solid #333; border-radius: 6px;
+    box-shadow: 5px 6px 0 rgba(0,0,0,.35); padding: 16px 18px; width: min(100%, 460px);
     font-size: 16px; line-height: 1.45; text-align: center;
   }
   .card h3 { margin: 0 0 8px; font: 900 23px "Comic Sans MS", "Trebuchet MS", sans-serif; }
@@ -205,40 +157,38 @@
     font: 900 54px "Courier New", monospace; color: #3a2a00;
     background: linear-gradient(#ffe27a, #d9a520); border: 3px solid #7a5a00; border-radius: 12px;
   }
+  .title-badge {
+    display: inline-block; margin: 6px 0; padding: 6px 14px; border-radius: 999px;
+    background: #1b1b1b; color: var(--gold); font-weight: 900; font-size: 18px;
+  }
   .btn {
-    display: inline-block; margin-top: 8px;
-    padding: 12px 22px; border-radius: 14px;
-    background: linear-gradient(#ff6a70, #c4202a); color: #fff;
-    font-weight: 900; font-size: 17px;
-    border: 3px solid #5e0b12; box-shadow: 0 4px 0 #5e0b12;
+    display: inline-block; margin-top: 8px; padding: 12px 22px; border-radius: 14px;
+    background: linear-gradient(#ff6a70, #c4202a); color: #fff; font-weight: 900; font-size: 17px;
+    border: 3px solid #5e0b12; box-shadow: 0 4px 0 #5e0b12; text-decoration: none;
   }
   .btn:active { transform: translateY(3px); box-shadow: 0 1px 0 #5e0b12; }
   .btn.green { background: linear-gradient(#4fd17a, #1f8a45); border-color: #0d4a24; box-shadow: 0 4px 0 #0d4a24; }
   .btn.ghost { background: rgba(0,0,0,.08); color: #333; border-color: #333; box-shadow: 0 3px 0 #333; font-size: 15px; padding: 9px 16px; }
-  .panel > .pbody > .btn.ghost { background: rgba(255,255,255,.12); color: #eaf1ff; border-color: rgba(255,255,255,.4); box-shadow: none; }
   input.big {
-    width: 100%; margin: 8px 0 4px; padding: 10px;
-    font-size: 26px; font-weight: bold; text-align: center;
+    width: 100%; margin: 8px 0 4px; padding: 10px; font-size: 26px; font-weight: bold; text-align: center;
     border: 3px solid #333; border-radius: 10px; background: #fff; color: #111;
     user-select: text; -webkit-user-select: text;
   }
   .msg { min-height: 22px; font-weight: bold; color: #c4202a; }
   .shake { animation: shake .45s; }
   @keyframes shake {
-    0%,100% { transform: translateX(0); }
-    20% { transform: translateX(-10px); } 40% { transform: translateX(10px); }
+    0%,100% { transform: translateX(0); } 20% { transform: translateX(-10px); } 40% { transform: translateX(10px); }
     60% { transform: translateX(-7px); } 80% { transform: translateX(7px); }
   }
-
   .naughty {
     margin: 10px auto 2px; padding: 10px 14px 12px; max-width: 280px;
     background: #f3e4bf; border: 2px dashed #8a5a2a; border-radius: 4px;
-    font-family: "Comic Sans MS", "Trebuchet MS", sans-serif; color: #4a2a10; text-align: left;
-    transform: rotate(-1.5deg);
+    font-family: "Comic Sans MS", "Trebuchet MS", sans-serif; color: #4a2a10; text-align: left; transform: rotate(-1.5deg);
   }
   .naughty b { display: block; text-align: center; font-size: 17px; margin-bottom: 4px; }
   .naughty ol { margin: 0; padding-left: 24px; }
   .naughty li.you { color: #c4202a; font-weight: bold; }
+  .lead { margin: 0; text-align: center; color: #cbdcff; max-width: 460px; font-size: 15px; line-height: 1.4; }
 
   /* ---------- ELVES ---------- */
   .elf-top { text-align: center; }
@@ -249,35 +199,27 @@
     background: linear-gradient(#ffe27a, #d9a520); border: 3px solid #7a5a00; border-radius: 10px;
   }
   .elf-note { font-size: 13px; color: #9fb6e8; margin-top: 6px; }
-  .holes {
-    display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;
-    width: min(100%, 500px);
-  }
+  .holes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; width: min(100%, 500px); }
   .hole { position: relative; aspect-ratio: 3 / 4; overflow: hidden; }
   .hole::before {
     content: ""; position: absolute; left: 12%; right: 12%; bottom: 13%; height: 13%;
-    background: #040a1c; border-radius: 50%; z-index: 1;
-    box-shadow: inset 0 4px 8px rgba(0,0,0,.8);
+    background: #040a1c; border-radius: 50%; z-index: 1; box-shadow: inset 0 4px 8px rgba(0,0,0,.8);
   }
   .hole::after {
     content: ""; position: absolute; left: -4%; right: -4%; bottom: 0; height: 21%;
     background: radial-gradient(ellipse at 50% 20%, #ffffff, #c9dbff);
-    border-radius: 50% 50% 8px 8px; z-index: 3;
-    box-shadow: 0 -2px 0 rgba(255,255,255,.6);
+    border-radius: 50% 50% 8px 8px; z-index: 3; box-shadow: 0 -2px 0 rgba(255,255,255,.6);
   }
   .elf {
     position: absolute; left: 6%; right: 6%; bottom: 12%; height: 88%; z-index: 2;
-    transform: translateY(110%); transition: transform .13s ease-out;
-    cursor: pointer; touch-action: none;
+    transform: translateY(110%); transition: transform .13s ease-out; cursor: pointer; touch-action: none;
   }
   .elf.up { transform: translateY(0); }
   .elf .esign {
     position: absolute; top: 0; left: -2%; right: -2%; height: 30%; z-index: 2;
     display: flex; align-items: center; justify-content: center;
-    background: linear-gradient(#fff, #fffbe7); color: #111;
-    border: 3px solid #333; box-shadow: 3px 4px 0 rgba(0,0,0,.25);
-    font: 900 clamp(19px, 6.6vw, 34px) "Comic Sans MS", "Trebuchet MS", sans-serif;
-    transform: rotate(-4deg); white-space: nowrap;
+    background: linear-gradient(#fff, #fffbe7); color: #111; border: 3px solid #333; box-shadow: 3px 4px 0 rgba(0,0,0,.25);
+    font: 900 clamp(19px, 6.6vw, 34px) "Comic Sans MS", "Trebuchet MS", sans-serif; transform: rotate(-4deg); white-space: nowrap;
   }
   .elf .esign::before, .elf .esign::after {
     content: ""; position: absolute; bottom: -16%; width: 20%; aspect-ratio: 1;
@@ -290,108 +232,100 @@
   .elf.hit svg { transform: scaleY(.78) scaleX(1.08); }
   .elf.miss .esign { background: #ffd6d6; font-size: clamp(15px, 4.8vw, 26px); }
 
-  /* ---------- SNOWMAN ---------- */
+  /* ---------- SNOWY JIGSAW ---------- */
   .snow-hud { display: flex; align-items: center; gap: 10px; width: min(100%, 460px); }
   .bar { flex: 1; height: 16px; border-radius: 10px; background: rgba(255,255,255,.14); overflow: hidden; border: 2px solid rgba(255,255,255,.3); }
-  .bar .fill { height: 100%; width: 0; background: linear-gradient(90deg, #bfe3ff, #fff); transition: width .2s; }
-  #snowScore { font-weight: bold; min-width: 62px; text-align: right; }
+  .bar .fill { height: 100%; width: 0; background: linear-gradient(90deg, #ffe27a, #fff); transition: width .2s; }
+  #jigScore { font-weight: bold; min-width: 62px; text-align: right; }
   .snow-area {
-    position: relative; flex: 1; width: min(100%, 520px); min-height: 380px;
-    overflow: hidden; border-radius: 18px;
-    background: linear-gradient(#0d1d48, #1e3c80);
-    border: 2px solid rgba(160,190,255,.25);
+    position: relative; flex: 1; width: min(100%, 520px); min-height: 380px; overflow: hidden; border-radius: 18px;
+    background: linear-gradient(#0d1d48, #1e3c80); border: 2px solid rgba(160,190,255,.25);
   }
-  .snowman-wrap { position: absolute; left: 50%; bottom: 0; height: 52%; aspect-ratio: 200 / 250; transform: translateX(-50%); }
-  .snowman-wrap svg { width: 100%; height: 100%; overflow: visible; }
-  .sm-part { transform-box: fill-box; transform-origin: 50% 100%; transform: scale(0); transition: transform .25s cubic-bezier(.3,1.5,.5,1); }
-  .snowman-wrap.melt svg { animation: melt .5s; }
-  @keyframes melt { 0%,100% { filter: none; } 50% { filter: drop-shadow(0 0 16px #ff6a00) brightness(1.4) hue-rotate(-20deg); } }
-  .sm-sign {
-    position: absolute; left: 50%; bottom: 102%; transform: translateX(-50%) rotate(4deg) scale(0);
-    background: linear-gradient(#fff, #fffbe7); color: #111; border: 3px solid #333;
-    font: 900 26px "Comic Sans MS", "Trebuchet MS", sans-serif;
-    padding: 4px 14px; white-space: nowrap; box-shadow: 3px 4px 0 rgba(0,0,0,.25);
-    transition: transform .4s cubic-bezier(.3,1.6,.5,1);
+  .snow-area::after {
+    content: ""; position: absolute; left: -5%; right: -5%; bottom: -30px; height: 70px;
+    background: radial-gradient(ellipse at 50% 0, #ffffff, #c9dbff); border-radius: 50% 50% 0 0;
   }
-  .sm-sign.show { transform: translateX(-50%) rotate(4deg) scale(1); }
   .flake {
-    position: absolute; top: 0; z-index: 5;
-    width: 46px; height: 46px; margin-left: -23px;
+    position: absolute; top: 0; z-index: 5; width: 48px; height: 48px; margin-left: -24px;
     display: flex; align-items: center; justify-content: center;
-    font-size: 30px; line-height: 1; color: #fff;
-    text-shadow: 0 0 6px #fff, 0 0 14px #8fc4ff;
-    animation: fall linear forwards;
-    touch-action: none;
+    font-size: 30px; line-height: 1; color: #fff; text-shadow: 0 0 6px #fff, 0 0 14px #8fc4ff;
+    animation: fall linear forwards; touch-action: none;
   }
-  .flake.gold { color: var(--gold); font-size: 36px; text-shadow: 0 0 8px #fff3b0, 0 0 18px #ffb000; }
-  .flake.fire { font-size: 30px; text-shadow: 0 0 12px #ff5a00; }
+  .flake.piece { font-size: 32px; filter: drop-shadow(0 0 6px #ffd84d) drop-shadow(0 0 14px #ffb000); }
+  .flake.fire { font-size: 30px; filter: drop-shadow(0 0 10px #ff5a00); }
   @keyframes fall {
     from { transform: translate(0, -60px) rotate(0deg); }
     to { transform: translate(var(--sway), var(--fall)) rotate(300deg); }
   }
+  .flake.piece { animation-name: fallStraight; }
+  @keyframes fallStraight { from { transform: translate(0, -60px); } to { transform: translate(var(--sway), var(--fall)); } }
   .overlay-card { position: absolute; inset: 0; z-index: 10; display: flex; align-items: center; justify-content: center; padding: 14px; background: rgba(4,10,28,.55); }
-
-  /* ---------- TREE PUZZLE ---------- */
-  .puzzle {
-    position: relative; width: min(88vw, 380px); aspect-ratio: 1 / 1;
-    border: 4px solid #ffd84d; border-radius: 10px; overflow: hidden;
+  .jframe {
+    position: relative; width: min(84vw, 340px); aspect-ratio: 1 / 1; flex: none;
+    border: 4px solid var(--gold); border-radius: 10px; overflow: hidden;
     background: #071028; box-shadow: 0 0 0 4px #7a5a00, 0 14px 30px rgba(0,0,0,.5);
   }
-  .tile {
-    position: absolute; background-repeat: no-repeat;
-    border: 1px solid rgba(255,255,255,.35);
-    transition: left .14s ease-out, top .14s ease-out;
-    cursor: pointer;
-  }
-  .tile.near { box-shadow: inset 0 0 0 2px rgba(255,216,77,.7); }
-  .puzzle .full { position: absolute; inset: 0; background-size: 100% 100%; opacity: 0; transition: opacity .8s; pointer-events: none; }
-  .puzzle.solved .full { opacity: 1; }
-  .puzzle.solved { animation: glow 1.4s ease-in-out 3; }
+  .jframe .guide { position: absolute; inset: 0; background-size: 100% 100%; opacity: .14; filter: grayscale(1); }
+  .jcell { position: absolute; width: 33.3333%; height: 33.3333%; border: 1px dashed rgba(255,255,255,.25); background-repeat: no-repeat; background-size: 300% 300%; }
+  .jcell.filled { border-color: transparent; animation: snap .25s ease-out; }
+  .jcell.flash { background-color: rgba(255,80,80,.35); }
+  @keyframes snap { from { transform: scale(1.12); } to { transform: scale(1); } }
+  .jframe .full { position: absolute; inset: 0; background-size: 100% 100%; opacity: 0; transition: opacity .8s; pointer-events: none; }
+  .jframe.solved .full { opacity: 1; }
+  .jframe.solved { animation: glow 1.4s ease-in-out 3; }
   @keyframes glow { 50% { box-shadow: 0 0 0 4px #7a5a00, 0 0 40px 10px rgba(255,216,77,.8); } }
-  .puzzle.peek .full.peekimg { opacity: 1; }
-  .tree-tools { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; justify-content: center; }
-  .pill { padding: 9px 14px; border-radius: 12px; background: rgba(255,255,255,.13); font-weight: bold; font-size: 14px; }
-  .lead { margin: 0; text-align: center; color: #cbdcff; max-width: 460px; font-size: 15px; line-height: 1.4; }
+  .jtray { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; width: min(100%, 380px); min-height: 70px; }
+  .jp {
+    width: min(22vw, 84px); aspect-ratio: 1 / 1; border-radius: 6px; border: 2px solid rgba(255,255,255,.5);
+    background-repeat: no-repeat; background-size: 300% 300%; box-shadow: 0 4px 10px rgba(0,0,0,.4);
+    touch-action: none; cursor: grab; transition: transform .1s;
+  }
+  .jp.sel { border-color: var(--gold); transform: scale(1.08); box-shadow: 0 0 0 3px var(--gold), 0 6px 14px rgba(0,0,0,.5); }
+  .jp.ghost { position: fixed; z-index: 260; pointer-events: none; opacity: .9; transform: translate(-50%, -50%) scale(1.1); }
+  .jp.dragging { opacity: .3; }
+
+  /* ---------- GEO ---------- */
+  .geo-wrap {
+    position: relative; width: min(100%, 640px); height: min(58vh, 520px); flex: none;
+    border-radius: 16px; overflow: hidden; border: 3px solid var(--gold); background: #0b1533;
+  }
+  #pano { position: absolute; inset: 0; }
+  .geo-wrap iframe { position: absolute; left: 0; top: -80px; width: 100%; height: calc(100% + 80px); border: 0; }
+  .geo-loading { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; color: #9fb6e8; }
+  .place { font: 900 40px Impact, "Arial Black", sans-serif; color: #b81d27; letter-spacing: 2px; }
 
   /* ---------- LOCK ---------- */
   .clues { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
   .clue { padding: 6px 10px; border-radius: 10px; background: rgba(0,0,0,.08); border: 2px solid #333; font-weight: bold; font-size: 15px; }
   .dials { display: flex; gap: 8px; justify-content: center; margin: 12px 0 4px; }
-  .dial {
-    display: flex; flex-direction: column; align-items: center; width: 62px;
-    background: linear-gradient(#ffe27a, #d9a520); border: 3px solid #7a5a00; border-radius: 12px; padding: 3px;
-  }
+  .dial { display: flex; flex-direction: column; align-items: center; width: 62px; background: linear-gradient(#ffe27a, #d9a520); border: 3px solid #7a5a00; border-radius: 12px; padding: 3px; }
   .dial button { width: 100%; font-size: 22px; padding: 6px 0; color: #3a2a00; }
-  .dial .dv {
-    width: 100%; text-align: center; border-radius: 6px;
-    font: 900 42px "Courier New", monospace; color: #2a1d00;
-    background: #fff8dc; border: 2px solid #7a5a00;
-  }
+  .dial .dv { width: 100%; text-align: center; border-radius: 6px; font: 900 42px "Courier New", monospace; color: #2a1d00; background: #fff8dc; border: 2px solid #7a5a00; }
 
   /* ---------- INVITE ---------- */
   .invite { text-align: left; }
   .invite .kicker { text-align: center; font-weight: bold; color: #8a5a2a; letter-spacing: 1px; text-transform: uppercase; font-size: 13px; }
   .invite h3 { text-align: center; font-size: 27px; color: #b81d27; }
+  .invite .badges { text-align: center; }
   .invite .row { display: flex; gap: 10px; padding: 7px 0; border-bottom: 1px dashed #d6c79a; }
   .invite .row:last-of-type { border-bottom: 0; }
   .invite .row .ic { font-size: 22px; width: 30px; text-align: center; flex: none; }
   .invite .row small { display: block; color: #6b5a3a; }
   .invite a { color: #1f6fd1; font-weight: bold; }
   .invite .note { text-align: center; font-style: italic; margin-top: 10px; }
-  .santa {
-    margin-top: 14px; padding: 14px; border-radius: 10px; text-align: center;
-    background: linear-gradient(135deg, #b81d27, #7a1218); color: #fff; border: 3px solid #4a0a10;
-  }
+  .santa { margin-top: 14px; padding: 14px; border-radius: 10px; text-align: center; background: linear-gradient(135deg, #b81d27, #7a1218); color: #fff; border: 3px solid #4a0a10; }
   .santa h4 { margin: 0 0 6px; font: 900 21px "Comic Sans MS", "Trebuchet MS", sans-serif; }
   .santa .who { font: 900 34px Impact, "Arial Black", sans-serif; color: var(--gold); letter-spacing: 1px; margin: 6px 0; animation: pop .5s cubic-bezier(.3,1.7,.5,1); }
   @keyframes pop { from { transform: scale(.2); } to { transform: scale(1); } }
   .santa .btn { background: linear-gradient(#ffe27a, #d9a520); color: #3a2a00; border-color: #7a5a00; box-shadow: 0 4px 0 #7a5a00; }
 
-  #dev {
-    position: fixed; right: 8px; bottom: 8px; z-index: 400; display: none;
-    flex-direction: column; gap: 4px; padding: 8px; border-radius: 10px;
-    background: rgba(0,0,0,.8); font-size: 12px;
+  #music {
+    position: fixed; right: 12px; bottom: max(12px, env(safe-area-inset-bottom)); z-index: 280;
+    display: none; width: 48px; height: 48px; border-radius: 50%; font-size: 22px;
+    background: rgba(20,35,80,.9); border: 2px solid var(--gold); box-shadow: 0 4px 14px rgba(0,0,0,.5);
   }
+  #music.show { display: block; animation: pop .4s; }
+  #dev { position: fixed; left: 8px; bottom: 8px; z-index: 400; display: none; flex-direction: column; gap: 4px; padding: 8px; border-radius: 10px; background: rgba(0,0,0,.8); font-size: 12px; }
   #dev button { padding: 5px 8px; border-radius: 6px; background: #334; }
 </style>
 </head>
@@ -401,54 +335,30 @@
 
 <main id="hub">
   <h1 id="title"><span>MERRY CHRISTMAS!</span><span class="t2">CRĂCIUN FERICIT!</span></h1>
-  <p id="subtitle">🎁 Your present is locked. Find the code.</p>
-
+  <p id="subtitle"></p>
   <button id="present" class="present" aria-label="The lock">
     <div class="lid"><div class="bow"></div></div>
     <div class="box"></div>
     <div class="padlock"><div class="shackle"></div><div class="lock-body" id="lockSlots">? ? ? ?</div></div>
   </button>
-  <p id="presentHint">Tap the present to enter the code</p>
-
+  <p id="presentHint"></p>
   <section class="stations">
     <button class="station" data-go="elf"><span class="st-ico">🧝</span><span class="st-name">Counting Elves</span><span class="st-status" id="st-elf"></span></button>
-    <button class="station" data-go="snow"><span class="st-ico">⛄</span><span class="st-name">The Snowman</span><span class="st-status" id="st-snow"></span></button>
-    <button class="station" data-go="tree"><span class="st-ico">🎄</span><span class="st-name">The Tangled Tree</span><span class="st-status" id="st-tree"></span></button>
-    <button class="station" data-go="riddle"><span class="st-ico">📜</span><span class="st-name">The Riddle</span><span class="st-status" id="st-riddle"></span></button>
+    <button class="station" data-go="jig"><span class="st-ico">🧩</span><span class="st-name">The Snowy Jigsaw</span><span class="st-status" id="st-jig"></span></button>
+    <button class="station" data-go="geo"><span class="st-ico">🌍</span><span class="st-name">Where's Santa?</span><span class="st-status" id="st-geo"></span></button>
+    <button class="station" data-go="riddle"><span class="st-ico">📜</span><span class="st-name">Santa's Riddle</span><span class="st-status" id="st-riddle"></span></button>
   </section>
-  <div id="foot">❄ tap anywhere ❄ · v2</div>
+  <div id="foot">❄ tap anywhere ❄ · v3</div>
 </main>
 
-<section class="panel" id="p-elf">
-  <header class="ph"><button class="back">← Back</button><h2>🧝 Counting Elves</h2><span class="ph-extra" id="elfCount"></span></header>
-  <div class="pbody" id="elfBody"></div>
-</section>
+<section class="panel" id="p-elf"><header class="ph"><button class="back">← Back</button><h2>🧝 Counting Elves</h2><span class="ph-extra" id="elfCount"></span></header><div class="pbody" id="elfBody"></div></section>
+<section class="panel" id="p-jig"><header class="ph"><button class="back">← Back</button><h2>🧩 The Snowy Jigsaw</h2><span class="ph-extra"></span></header><div class="pbody" id="jigBody"></div></section>
+<section class="panel" id="p-geo"><header class="ph"><button class="back">← Back</button><h2>🌍 Where's Santa?</h2><span class="ph-extra"></span></header><div class="pbody" id="geoBody"></div></section>
+<section class="panel" id="p-riddle"><header class="ph"><button class="back">← Back</button><h2>📜 Santa's Riddle</h2><span class="ph-extra"></span></header><div class="pbody" id="riddleBody"></div></section>
+<section class="panel" id="p-lock"><header class="ph"><button class="back">← Back</button><h2>🔐 The Lock</h2><span class="ph-extra"></span></header><div class="pbody" id="lockBody"></div></section>
+<section class="panel" id="p-invite"><header class="ph"><button class="back">← Back</button><h2>🎉 The Invitation</h2><span class="ph-extra"></span></header><div class="pbody" id="inviteBody"></div></section>
 
-<section class="panel" id="p-snow">
-  <header class="ph"><button class="back">← Back</button><h2>⛄ The Snowman</h2><span class="ph-extra"></span></header>
-  <div class="pbody" id="snowBody"></div>
-</section>
-
-<section class="panel" id="p-tree">
-  <header class="ph"><button class="back">← Back</button><h2>🎄 The Tangled Tree</h2><span class="ph-extra" id="treeMoves"></span></header>
-  <div class="pbody" id="treeBody"></div>
-</section>
-
-<section class="panel" id="p-riddle">
-  <header class="ph"><button class="back">← Back</button><h2>📜 The Riddle</h2><span class="ph-extra"></span></header>
-  <div class="pbody" id="riddleBody"></div>
-</section>
-
-<section class="panel" id="p-lock">
-  <header class="ph"><button class="back">← Back</button><h2>🔐 The Lock</h2><span class="ph-extra"></span></header>
-  <div class="pbody" id="lockBody"></div>
-</section>
-
-<section class="panel" id="p-invite">
-  <header class="ph"><button class="back">← Back</button><h2>🎉 The Invitation</h2><span class="ph-extra"></span></header>
-  <div class="pbody" id="inviteBody"></div>
-</section>
-
+<button id="music" aria-label="Music on/off">🔊</button>
 <div id="dev"></div>
 
 <script>
@@ -456,19 +366,44 @@
    ✏️  EVERYTHING YOU NEED TO EDIT IS IN THIS CONFIG BLOCK
    ===================================================================== */
 const CONFIG = {
-  // The 4-digit code for the lock.
-  //   digit 1 = Elves, digit 2 = Snowman, digits 3+4 = the riddle's answer
-  code: "2512",
+  // The lock code. Digit 1 = Counting Elves, digits 2-4 = Santa's Riddle.
+  code: "2027",
 
-  // Digits shown on the gifts under the solved tree: [red, green, gold]
-  giftDigits: [2, 7, 2],
+  // Numbers on the presents in the jigsaw picture (a decoy for the lock, a key for the riddle)
+  jigsawNumbers: [3, 6, 7],
 
-  // TODO: write your own riddle. Its answer must equal code digits 3+4.
-  riddle: {
-    text: "Santa forgot the last two digits of the code. You'll find them under the tree:<br><br><b>Multiply the red present by the green one, then take away the gold one.</b>",
-    answers: ["12"],          // accepted answers (case/diacritics ignored)
-    hint: "Red × Green − Gold 😉",
+  // Where's Santa? — Google Street View
+  geo: {
+    apiKey: "AIzaSyAMjo0SwUWH5XEUy4newgnlmfUdcOcUB4o",
+    pano: "1F52NZaVtRDKv9iOQLFMEg",
+    lat: 66.5438262, lng: 25.8474325,
+    heading: 343.84, pitch: 3.87,
+    display: "LApLAnd",                        // how the answer is shown once solved
+    answers: ["lapland", "laponia", "lappi"],   // accepted answers (case/spaces ignored)
+    nearMisses: ["rovaniemi", "finland", "santaclausvillage", "santasvillage", "arcticcircle", "northpole", "santaclaus", "santa"],
+    hint: "Not the town, not the village… the whole snowy region 🦌",
     hintAfterTries: 3
+  },
+
+  riddle: {
+    text: `Down the chimney, one by one,<br>
+three numbered presents fell — they're gone! 🎁<br>
+The jigsaw showed you which ones fell,<br>
+the place you saw will serve you well. 🌍<br><br>
+Spell out where Santa spends his days,<br>
+then count the letters, find their place.<br>
+Take the fallen numbers out —<br>
+what's left is what the carols shout! 🎶<br><br>
+<i>Type it, and it's cookie time… 🍪</i>`,
+    answers: ["lala"],                           // spaces, dashes, capitals ignored
+    hint: "LApLAnd: letters 3, 6, 7 fell down the chimney 😉",
+    hintAfterTries: 3
+  },
+
+  // Christmas songs (upload the files into a "songs" folder in the repo)
+  songs: {
+    riddle: "songs/song1.mp3",   // plays when the riddle is solved
+    lock: "songs/song2.mp3"      // plays when the present opens
   },
 
   // TODO: party details
@@ -478,37 +413,33 @@ const CONFIG = {
     time: "from 7pm until the mulled wine runs out",
     place: "[Party place]",
     address: "[Address]",
-    mapsUrl: "",              // e.g. a Google Maps link, or leave empty
+    mapsUrl: "",
     dress: "Ugly Christmas jumper — mandatory 🎄",
     bring: "Your Secret Santa present + good vibes",
     rsvp: "Confirm on WhatsApp by 10 December",
     note: "See you there! 🎅"
   },
 
-  // Shown if someone opens the invite WITHOUT a personal Secret Santa link.
-  // Leave empty to just show "you'll get your link from the organiser".
   secretSantaFallbackUrl: "",
 
-  // Seed names already on the Naughty List (inside jokes go here 😈)
   naughtySeed: ["Grinch", "Whoever ate all the mince pies"],
 
   elf: {
     minElves: 7, maxElves: 10,
-    visibleMs: 1500,          // how long each elf stays up
-    onlyHitsCount: true,      // true = missed elves don't count. false = every elf counts
+    visibleMs: 1500,
+    onlyHitsCount: true,
     missTaunts: ["hehe", "too slow", "bye-bye!", "😜", "missed!", "can't catch me"]
   },
 
-  snow: {
-    goal: 30,                 // snowflakes needed
-    spawnMs: 430,
-    goldChance: 0.09,         // gold flake = +3
-    fireChance: 0.13          // fire = −3
-  },
+  jigsaw: { spawnMs: 430, pieceChance: 0.22, fireChance: 0.14 },
 
-  tree: { size: 3, shuffleMoves: 160 },
-
-  lockTaunts: ["Nope. 🙂", "Close... or maybe not.", "Santa is laughing at you 🎅", "Keep looking!", "Try again?", "HEHE"]
+  lockTaunts: ["Nope. 🙂", "Close... or maybe not.", "Santa is laughing at you 🎅", "Keep looking!", "Try again?", "HEHE"],
+  lockSpecial: {
+    "2026": "That's THIS year. Santa is thinking ahead… 😏",
+    "2512": "Too obvious. Santa is disappointed. 🎅",
+    "1225": "Too obvious. Santa is disappointed. 🎅",
+    "0000": "Really? 🙄"
+  }
 };
 /* ===================================================================== */
 
@@ -535,19 +466,20 @@ const randInt = (a, b) => Math.floor(rand(a, b + 1));
 const pick = arr => arr[randInt(0, arr.length - 1)];
 const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
 const esc = s => String(s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
-const norm = s => String(s).trim().toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/\s+/g, " ");
+const squash = s => String(s).toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/[^a-z0-9]/g, "");
 const CODE = CONFIG.code;
 
 /* ---------- saved progress ---------- */
-const STORE = "craciun2026";
-const defaultState = { elf: false, snow: false, tree: false, riddle: false, opened: false, elfFails: 0, naughty: [], riddleTries: 0, santaShown: false };
+const STORE = "craciun2026-v3";
+const defaultState = { elf: false, jig: false, geo: false, riddle: false, opened: false, elfFails: 0, nerdy: false, rushed: false, naughty: [], geoTries: 0, riddleTries: 0, santaShown: false };
 let S = { ...defaultState };
 try {
-  const qs = new URLSearchParams(location.search);
-  if (qs.has("reset")) localStorage.removeItem(STORE);
+  if (new URLSearchParams(location.search).has("reset")) localStorage.removeItem(STORE);
   Object.assign(S, JSON.parse(localStorage.getItem(STORE) || "{}"));
 } catch (e) {}
 function save() { try { localStorage.setItem(STORE, JSON.stringify(S)); } catch (e) {} }
+function addNaughty(name) { if (!S.naughty.includes(name)) S.naughty.push(name); save(); }
+const myName = () => (TOKEN && TOKEN.n) || "";
 
 /* ---------- effects ---------- */
 function burst(x, y, text = "✨", n = 6) {
@@ -570,20 +502,14 @@ function floaty(x, y, text, bad = false) {
 }
 function shake(el) { el.classList.remove("shake"); void el.offsetWidth; el.classList.add("shake"); }
 
-/* Ambient snow */
-(() => {
+(() => { /* ambient snow */
   const c = $("#snow"), ctx = c.getContext("2d");
   let w, h, flakes = [];
-  function resize() {
-    const d = Math.min(2, devicePixelRatio || 1);
-    w = innerWidth; h = innerHeight;
-    c.width = w * d; c.height = h * d; ctx.setTransform(d, 0, 0, d, 0, 0);
-  }
+  function resize() { const d = Math.min(2, devicePixelRatio || 1); w = innerWidth; h = innerHeight; c.width = w * d; c.height = h * d; ctx.setTransform(d, 0, 0, d, 0, 0); }
   resize(); addEventListener("resize", resize);
   for (let i = 0; i < 90; i++) flakes.push({ x: rand(0, w), y: rand(0, h), r: rand(.8, 2.8), s: rand(.3, 1.1), d: rand(0, 6.28) });
   (function loop() {
-    ctx.clearRect(0, 0, w, h);
-    ctx.fillStyle = "rgba(255,255,255,.85)";
+    ctx.clearRect(0, 0, w, h); ctx.fillStyle = "rgba(255,255,255,.85)";
     for (const f of flakes) {
       f.y += f.s; f.d += .01; f.x += Math.sin(f.d) * .4;
       if (f.y > h + 5) { f.y = -5; f.x = rand(0, w); }
@@ -593,7 +519,6 @@ function shake(el) { el.classList.remove("shake"); void el.offsetWidth; el.class
   })();
 })();
 
-/* Confetti */
 const confetti = (() => {
   const c = $("#confetti"), ctx = c.getContext("2d");
   let parts = [], running = false, w, h;
@@ -604,9 +529,7 @@ const confetti = (() => {
     parts = parts.filter(p => p.y < h + 30);
     for (const p of parts) {
       p.vy += .28; p.vx *= .99; p.x += p.vx; p.y += p.vy; p.rot += p.vr;
-      ctx.save(); ctx.translate(p.x, p.y); ctx.rotate(p.rot);
-      ctx.fillStyle = p.c; ctx.fillRect(-p.s / 2, -p.s / 4, p.s, p.s / 2);
-      ctx.restore();
+      ctx.save(); ctx.translate(p.x, p.y); ctx.rotate(p.rot); ctx.fillStyle = p.c; ctx.fillRect(-p.s / 2, -p.s / 4, p.s, p.s / 2); ctx.restore();
     }
     if (parts.length) requestAnimationFrame(loop); else { running = false; ctx.clearRect(0, 0, w, h); }
   }
@@ -617,23 +540,33 @@ const confetti = (() => {
   };
 })();
 
+/* ---------- music ---------- */
+let audio = null;
+function playSong(key) {
+  const src = CONFIG.songs[key]; if (!src) return;
+  try { if (audio) audio.pause(); } catch (e) {}
+  audio = new Audio(src);
+  audio.volume = .85;
+  audio.play().then(() => { $("#music").textContent = "🔊"; $("#music").classList.add("show"); }).catch(() => {});
+  audio.addEventListener("ended", () => $("#music").classList.remove("show"));
+}
+$("#music").addEventListener("click", () => {
+  if (!audio) return;
+  if (audio.paused) { audio.play(); $("#music").textContent = "🔊"; } else { audio.pause(); $("#music").textContent = "🔇"; }
+});
+
 /* ---------- panels + Android back button ---------- */
-const renders = {};
-const stoppers = {};
+const renders = {}, stoppers = {};
 let current = null;
 function openPanel(id, replace = false) {
   if (current) hidePanel(current);
   current = id;
   $("#p-" + id).classList.add("open");
   document.body.classList.add("lock-scroll");
-  if (replace) history.replaceState({ p: id }, "", location.href);
-  else history.pushState({ p: id }, "", location.href);
+  if (replace) history.replaceState({ p: id }, "", location.href); else history.pushState({ p: id }, "", location.href);
   renders[id] && renders[id]();
 }
-function hidePanel(id) {
-  $("#p-" + id).classList.remove("open");
-  stoppers[id] && stoppers[id]();
-}
+function hidePanel(id) { $("#p-" + id).classList.remove("open"); stoppers[id] && stoppers[id](); }
 function closePanel() {
   if (!current) return;
   hidePanel(current); current = null;
@@ -645,37 +578,30 @@ $$(".back").forEach(b => b.addEventListener("click", () => history.back()));
 addEventListener("keydown", e => { if (e.key === "Escape" && current) history.back(); });
 
 /* ---------- HUB ---------- */
-function digitsKnown() {
-  return [S.elf ? CODE[0] : "?", S.snow ? CODE[1] : "?", S.riddle ? CODE[2] : "?", S.riddle ? CODE[3] : "?"];
-}
+const digitsKnown = () => [S.elf ? CODE[0] : "?", ...(S.riddle ? CODE.slice(1).split("") : ["?", "?", "?"])];
 function renderHub() {
-  const name = TOKEN && TOKEN.n ? `Hi ${esc(TOKEN.n)}! ` : "";
-  $("#subtitle").innerHTML = S.opened
-    ? `🎉 ${name}You opened the present!`
-    : `🎁 ${name}Your present is locked. Find the code.`;
+  const name = myName() ? `Hi ${esc(myName())}! ` : "";
+  $("#subtitle").innerHTML = S.opened ? `🎉 ${name}You opened the present!` : `🎁 ${name}Your present is locked. Find the code.`;
   $("#lockSlots").textContent = digitsKnown().join(" ");
   $("#present").classList.toggle("open", S.opened);
   $("#presentHint").textContent = S.opened ? "Tap the present to see the invitation" : "Tap the present to enter the code";
-
   const set = (id, done, txt, locked = false) => {
     const el = $("#st-" + id); el.textContent = txt;
     el.parentElement.classList.toggle("done", done);
     el.parentElement.classList.toggle("locked", locked);
   };
-  set("elf", S.elf, S.elf ? `✅ digit ❶: ${CODE[0]}` : (S.elfFails ? "📜 on the Naughty List" : "quick maths"));
-  set("snow", S.snow, S.snow ? `✅ digit ❷: ${CODE[1]}` : "catch the snowflakes");
-  set("tree", S.tree, S.tree ? "✅ the presents have spoken" : "sliding puzzle");
-  set("riddle", S.riddle, S.riddle ? `✅ digits ❸❹: ${CODE.slice(2)}` : (S.tree ? "ready to solve" : "🔒 the tree has the key"), !S.tree && !S.riddle);
+  set("elf", S.elf, S.elf ? `✅ digit ❶: ${CODE[0]}${S.nerdy ? " 🤓" : ""}` : (S.elfFails ? "📜 on the Naughty List" : "quick maths"));
+  set("jig", S.jig, S.jig ? `✅ ${CONFIG.jigsawNumbers.join(" · ")}` : "catch & build");
+  set("geo", S.geo, S.geo ? `✅ 📍 ${CONFIG.geo.display}` : "look around");
+  const ready = S.jig && S.geo;
+  set("riddle", S.riddle, S.riddle ? `✅ digits ❷❸❹: ${CODE.slice(1)}` : (ready ? "ready to solve" : "🔒 needs 🧩 + 🌍"), !ready && !S.riddle);
 }
 $$(".station").forEach(b => b.addEventListener("click", () => openPanel(b.dataset.go)));
 $("#present").addEventListener("click", () => openPanel(S.opened ? "invite" : "lock"));
-$("#hub").addEventListener("pointerdown", e => {
-  if (e.target.closest("button")) return;
-  burst(e.clientX, e.clientY, pick(["❄", "✨", "★"]), 6);
-});
+$("#hub").addEventListener("pointerdown", e => { if (!e.target.closest("button")) burst(e.clientX, e.clientY, pick(["❄", "✨", "★"]), 6); });
 
 /* =====================================================================
-   🧝 ELVES
+   🧝 COUNTING ELVES
    ===================================================================== */
 const ELF_SVG = `<svg viewBox="0 0 100 110" aria-hidden="true">
   <path d="M22 60 L2 44 L26 52 Z" fill="#f6cfa8" stroke="#7a4a2a" stroke-width="3" stroke-linejoin="round"/>
@@ -692,8 +618,7 @@ const ELF_SVG = `<svg viewBox="0 0 100 110" aria-hidden="true">
   <path d="M41 75 Q50 85 59 75" stroke="#5a2a1a" stroke-width="3" fill="none" stroke-linecap="round"/>
 </svg>`;
 
-let E = null; // current elf run
-
+let E = null;
 function naughtyHTML(extraYou) {
   const names = [...CONFIG.naughtySeed, ...S.naughty];
   return `<div class="naughty"><b>📜 The Naughty List</b><ol>
@@ -701,20 +626,19 @@ function naughtyHTML(extraYou) {
     ${extraYou ? `<li class="you">${esc(extraYou)} 👈 you</li>` : ""}
   </ol></div>`;
 }
-
 renders.elf = () => {
   $("#elfCount").textContent = "";
-  const body = $("#elfBody");
   if (S.elf) {
-    body.innerHTML = `<div class="card"><h3>Done! 🎉</h3><p>First digit of the code:</p><div class="big-digit">${CODE[0]}</div>
-      ${S.naughty.length ? naughtyHTML() : ""}
+    $("#elfBody").innerHTML = `<div class="card"><h3>Done! 🎉</h3>
+      ${S.nerdy ? `<div class="title-badge">🤓 The Nerdy Elf</div>` : ""}
+      <p>First digit of the code:</p><div class="big-digit">${CODE[0]}</div>
+      ${S.elfFails ? naughtyHTML() : ""}
       <p><button class="btn ghost" id="elfReplay">Play again, just for fun</button></p></div>`;
     $("#elfReplay").onclick = () => elfIntro(true);
     return;
   }
   elfIntro(false);
 };
-
 function elfIntro(forFun) {
   const second = S.elfFails > 0 && !forFun;
   $("#elfBody").innerHTML = `<div class="card">
@@ -722,15 +646,14 @@ function elfIntro(forFun) {
     <p>You start from a number. Every elf that pops up holds an <b>operation</b> (+2, ×3, ÷2...).</p>
     <p>${CONFIG.elf.onlyHitsCount ? "<b>Only the elves you whack count!</b> Ignore the ones you miss." : "<b>Every elf counts</b>, even if you don't whack it."}</p>
     <p>Keep count in your head. At the end I'll ask for the result. 🧠</p>
+    ${!second && !forFun ? `<p><small>Get it right first time and earn a special title… 🤓</small></p>` : ""}
     ${second ? naughtyHTML() : ""}
     <button class="btn green" id="elfGo">Start!</button></div>`;
   $("#elfGo").onclick = () => elfBegin(second, forFun);
 }
-
 function elfBegin(second, forFun) {
   stoppers.elf();
-  const total = randInt(CONFIG.elf.minElves, CONFIG.elf.maxElves);
-  const start = randInt(2, 9);
+  const total = randInt(CONFIG.elf.minElves, CONFIG.elf.maxElves), start = randInt(2, 9);
   E = { value: start, total, left: total, second, forFun, active: null, timers: [], lastHole: -1 };
   $("#elfBody").innerHTML = `
     <div class="elf-top"><div class="elf-start">You start from <b>${start}</b></div>
@@ -740,12 +663,9 @@ function elfBegin(second, forFun) {
   elfCountUI();
   E.timers.push(setTimeout(elfNext, 1500));
 }
-
 function elfCountUI() { $("#elfCount").textContent = E ? `🧝 ${E.left}` : ""; }
-
 function pickOp(v) {
-  const c = [];
-  const add = (label, fn, w = 1) => c.push({ label, fn, w });
+  const c = [], add = (label, fn, w = 1) => c.push({ label, fn, w });
   add("+1", x => x + 1, .8); add("+2", x => x + 2); add("+3", x => x + 3); add("+5", x => x + 5, .6);
   if (v >= 2) add("−1", x => x - 1, .7);
   if (v >= 3) add("−2", x => x - 2);
@@ -756,27 +676,20 @@ function pickOp(v) {
   if (v <= 10) add("×3", x => x * 3, .8);
   if (v <= 6) add("×4", x => x * 4, .6);
   let r = Math.random() * c.reduce((s, o) => s + o.w, 0);
-  for (const o of c) { if ((r -= o.w) <= 0) return o; }
+  for (const o of c) if ((r -= o.w) <= 0) return o;
   return c[0];
 }
-
 function elfNext() {
   if (!E) return;
   if (E.left <= 0) { E.timers.push(setTimeout(elfEnd, 650)); return; }
   let i; do { i = randInt(0, 5); } while (i === E.lastHole);
   E.lastHole = i;
-  const op = pickOp(E.value);
-  const el = $$("#elfBody .elf")[i];
-  el.className = "elf";
-  $(".esign", el).textContent = op.label;
-  void el.offsetWidth;
-  el.classList.add("up");
+  const op = pickOp(E.value), el = $$("#elfBody .elf")[i];
+  el.className = "elf"; $(".esign", el).textContent = op.label; void el.offsetWidth; el.classList.add("up");
   E.active = { i, op, done: false };
-  const vis = CONFIG.elf.visibleMs * (E.second ? .92 : 1);
-  E.active.timer = setTimeout(elfMiss, vis);
+  E.active.timer = setTimeout(elfMiss, CONFIG.elf.visibleMs * (E.second ? .92 : 1));
   E.timers.push(E.active.timer);
 }
-
 function elfResolve(hit) {
   const a = E.active; a.done = true; clearTimeout(a.timer);
   E.left--; elfCountUI();
@@ -784,10 +697,7 @@ function elfResolve(hit) {
   if (hit || !CONFIG.elf.onlyHitsCount) E.value = a.op.fn(E.value);
   el.classList.add(hit ? "hit" : "miss");
   if (!hit) $(".esign", el).textContent = pick(CONFIG.elf.missTaunts);
-  E.timers.push(setTimeout(() => {
-    el.classList.remove("up");
-    E.timers.push(setTimeout(elfNext, rand(250, 700)));
-  }, hit ? 330 : 520));
+  E.timers.push(setTimeout(() => { el.classList.remove("up"); E.timers.push(setTimeout(elfNext, rand(250, 700))); }, hit ? 330 : 520));
 }
 function elfHit(i, ev) {
   if (!E || !E.active || E.active.done || E.active.i !== i) return;
@@ -795,7 +705,6 @@ function elfHit(i, ev) {
   elfResolve(true);
 }
 function elfMiss() { if (E && E.active && !E.active.done) elfResolve(false); }
-
 function elfEnd() {
   const answer = E.value, second = E.second, forFun = E.forFun;
   $("#elfCount").textContent = "";
@@ -803,14 +712,14 @@ function elfEnd() {
     $("#elfBody").innerHTML = `<div class="card"><h3>You know what?</h3>
       <p>The result doesn't matter anymore. 🙃<br>Just tell me <b>your name</b>.</p>
       <input class="big" id="elfName" maxlength="30" placeholder="Your name" autocomplete="off">
-      <div class="msg" id="elfMsg"></div>
-      <button class="btn green" id="elfOk">Done</button></div>`;
+      <div class="msg" id="elfMsg"></div><button class="btn green" id="elfOk">Done</button></div>`;
     const inp = $("#elfName");
     const go = () => {
       const n = inp.value.trim();
       if (!n) { $("#elfMsg").textContent = "Come on, don't be shy."; shake(inp); return; }
-      S.naughty.push(n); S.elf = true; save(); E = null;
-      $("#elfBody").innerHTML = `<div class="card"><h3>Thank you, ${esc(n)}. 📝</h3>
+      const knew = myName() && squash(n) === squash(myName());
+      addNaughty(n); S.elf = true; save(); E = null;
+      $("#elfBody").innerHTML = `<div class="card"><h3>${knew ? "I know. I was just testing you. 😏" : `Thank you, ${esc(n)}. 📝`}</h3>
         <p>You are now officially on the Naughty List.</p>${naughtyHTML()}
         <p>But it's Christmas, so here's the digit:</p><div class="big-digit">${CODE[0]}</div>
         <p><button class="btn" id="elfHome">Back to the present</button></p></div>`;
@@ -822,34 +731,30 @@ function elfEnd() {
     setTimeout(() => inp.focus(), 50);
     return;
   }
-
   $("#elfBody").innerHTML = `<div class="card"><h3>What number did you end up with? 🤔</h3>
     <input class="big" id="elfAns" inputmode="numeric" pattern="[0-9]*" autocomplete="off" placeholder="?">
-    <div class="msg" id="elfMsg"></div>
-    <button class="btn green" id="elfOk">Check</button></div>`;
+    <div class="msg" id="elfMsg"></div><button class="btn green" id="elfOk">Check</button></div>`;
   const inp = $("#elfAns");
   const go = () => {
     if (inp.value.trim() === "") { shake(inp); return; }
     const ok = parseInt(inp.value, 10) === answer;
     E = null;
     if (ok) {
-      if (!forFun) { S.elf = true; save(); }
+      if (!forFun) { S.elf = true; S.nerdy = true; save(); }
       confetti();
       $("#elfBody").innerHTML = `<div class="card"><h3>CORRECT! 🎉</h3><p>The answer was <b>${answer}</b>.</p>
+        ${forFun ? "" : `<p>First try! You are officially:</p><div class="title-badge">🤓 The Nerdy Elf</div>`}
         <p>First digit of the code:</p><div class="big-digit">${CODE[0]}</div>
         <p><button class="btn" id="elfHome">Back to the present</button></p></div>`;
       $("#elfHome").onclick = () => history.back();
     } else if (forFun) {
-      $("#elfBody").innerHTML = `<div class="card"><h3>Wrong 😅</h3><p>It was <b>${answer}</b>. Lucky you already have the digit.</p>
-        <button class="btn ghost" id="elfRe">Again</button></div>`;
+      $("#elfBody").innerHTML = `<div class="card"><h3>Wrong 😅</h3><p>It was <b>${answer}</b>. Lucky you already have the digit.</p><button class="btn ghost" id="elfRe">Again</button></div>`;
       $("#elfRe").onclick = () => elfIntro(true);
     } else {
       S.elfFails++; save();
       $("#elfBody").innerHTML = `<div class="card shake"><h3>WRONG! ❌</h3>
-        <p>The right answer was <b>${answer}</b>.</p>
-        <p>Santa has put you on <b>the Naughty List</b>.</p>
-        ${naughtyHTML("???")}
-        <button class="btn" id="elfRe">Let me try again 😤</button></div>`;
+        <p>The right answer was <b>${answer}</b>.</p><p>Santa has put you on <b>the Naughty List</b>.</p>
+        ${naughtyHTML("???")}<button class="btn" id="elfRe">Let me try again 😤</button></div>`;
       $("#elfRe").onclick = () => elfIntro(false);
     }
   };
@@ -857,271 +762,304 @@ function elfEnd() {
   inp.addEventListener("keydown", e => e.key === "Enter" && go());
   setTimeout(() => inp.focus(), 50);
 }
-
 stoppers.elf = () => { if (E) { E.timers.forEach(clearTimeout); E = null; } $("#elfCount").textContent = ""; };
 
 /* =====================================================================
-   ⛄ SNOWMAN
+   🧩 THE SNOWY JIGSAW — catch 9 pieces, then build the picture
    ===================================================================== */
-const SNOWMAN_SVG = `<svg viewBox="0 0 200 250" aria-hidden="true">
-  <defs><radialGradient id="sg" cx="38%" cy="32%" r="75%"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#c6d8f5"/></radialGradient></defs>
-  <ellipse cx="100" cy="243" rx="95" ry="10" fill="#eaf2ff" opacity=".9"/>
-  <g class="sm-part" id="sm0"><circle cx="100" cy="194" r="50" fill="url(#sg)" stroke="#9fb6dd" stroke-width="3"/></g>
-  <g class="sm-part" id="sm1"><circle cx="100" cy="120" r="36" fill="url(#sg)" stroke="#9fb6dd" stroke-width="3"/></g>
-  <g class="sm-part" id="sm2"><circle cx="100" cy="62" r="27" fill="url(#sg)" stroke="#9fb6dd" stroke-width="3"/></g>
-  <g class="sm-part" id="sm3">
-    <line x1="68" y1="114" x2="28" y2="88" stroke="#6b3f22" stroke-width="5" stroke-linecap="round"/>
-    <line x1="40" y1="96" x2="30" y2="104" stroke="#6b3f22" stroke-width="4" stroke-linecap="round"/>
-    <line x1="132" y1="114" x2="172" y2="86" stroke="#6b3f22" stroke-width="5" stroke-linecap="round"/>
-    <line x1="160" y1="94" x2="170" y2="104" stroke="#6b3f22" stroke-width="4" stroke-linecap="round"/>
-    <circle cx="100" cy="106" r="4.5" fill="#222"/><circle cx="100" cy="122" r="4.5" fill="#222"/><circle cx="100" cy="138" r="4.5" fill="#222"/>
-    <path d="M72 84 Q100 98 128 84 L128 93 Q100 106 72 93 Z" fill="#d8323a" stroke="#7a1218" stroke-width="2"/>
-    <path d="M114 94 L122 122 L110 122 L106 96 Z" fill="#d8323a" stroke="#7a1218" stroke-width="2"/>
-    <circle cx="91" cy="56" r="3.6" fill="#222"/><circle cx="109" cy="56" r="3.6" fill="#222"/>
-    <path d="M100 62 L126 67 L100 70 Z" fill="#ff8a1f" stroke="#a04a00" stroke-width="1.5"/>
-    <circle cx="90" cy="75" r="2" fill="#222"/><circle cx="96" cy="78" r="2" fill="#222"/><circle cx="104" cy="78" r="2" fill="#222"/><circle cx="110" cy="75" r="2" fill="#222"/>
-    <rect x="70" y="38" width="60" height="8" rx="3" fill="#1a1a1a"/>
-    <rect x="80" y="10" width="40" height="30" rx="3" fill="#1a1a1a"/>
-    <rect x="80" y="30" width="40" height="6" fill="#d8323a"/>
-  </g>
-</svg>`;
-
-let SN = null;
-renders.snow = () => {
-  const body = $("#snowBody");
-  body.innerHTML = `
-    <div class="snow-hud"><div class="bar"><div class="fill" id="snowFill"></div></div><span id="snowScore"></span></div>
-    <div class="snow-area" id="snowArea">
-      <div class="snowman-wrap" id="snowman">${SNOWMAN_SVG}<div class="sm-sign" id="smSign">digit ❷: ${CODE[1]}</div></div>
-    </div>`;
-  const goal = CONFIG.snow.goal;
-  if (S.snow) {
-    snowDraw(goal);
-    $("#smSign").classList.add("show");
-    $("#snowArea").insertAdjacentHTML("beforeend", `<div class="overlay-card" style="background:none;align-items:flex-start"><div class="card"><h3>The snowman is done! ⛄</h3><p>Second digit of the code: <b style="font-size:24px">${CODE[1]}</b></p></div></div>`);
-    return;
-  }
-  snowDraw(0);
-  $("#snowArea").insertAdjacentHTML("beforeend", `<div class="overlay-card" id="snowIntro"><div class="card">
-    <h3>Build the snowman</h3>
-    <p>Catch <b>${goal}</b> snowflakes ❄ to build him.</p>
-    <p>✨ <b style="color:#c48a00">Gold</b> flakes are worth <b>+3</b>.<br>🔥 <b>Don't touch the fire</b> — it melts 3!</p>
-    <button class="btn green" id="snowGo">Start!</button></div></div>`);
-  $("#snowGo").onclick = () => { $("#snowIntro").remove(); snowStart(); };
-};
-
-function snowDraw(score) {
-  const goal = CONFIG.snow.goal, p = score / goal;
-  $("#snowFill").style.width = (p * 100) + "%";
-  $("#snowScore").textContent = `❄ ${score}/${goal}`;
-  for (let i = 0; i < 4; i++) {
-    const s = clamp((p - i / 4) * 4, 0, 1);
-    $("#sm" + i).style.transform = `scale(${s})`;
-  }
-}
-
-function snowStart() {
-  SN = { score: 0, timer: setInterval(spawnFlake, CONFIG.snow.spawnMs) };
-  spawnFlake();
-}
-function spawnFlake() {
-  const area = $("#snowArea"); if (!area || !SN) return;
-  const r = Math.random();
-  const type = r < CONFIG.snow.goldChance ? "gold" : r < CONFIG.snow.goldChance + CONFIG.snow.fireChance ? "fire" : "norm";
-  const el = document.createElement("button");
-  el.className = "flake " + type;
-  el.textContent = type === "fire" ? "🔥" : "❄";
-  el.style.left = rand(8, 92) + "%";
-  const p = SN.score / CONFIG.snow.goal;
-  el.style.animationDuration = (6.2 - 3 * p) * rand(.85, 1.15) + "s";
-  el.style.setProperty("--sway", rand(-50, 50) + "px");
-  el.style.setProperty("--fall", area.clientHeight + 80 + "px");
-  el.addEventListener("pointerdown", e => { e.preventDefault(); catchFlake(el, type, e); }, { once: true });
-  el.addEventListener("animationend", () => el.remove());
-  area.appendChild(el);
-}
-function catchFlake(el, type, e) {
-  if (!SN) return;
-  el.remove();
-  const goal = CONFIG.snow.goal;
-  const d = type === "gold" ? 3 : type === "fire" ? -3 : 1;
-  SN.score = clamp(SN.score + d, 0, goal);
-  floaty(e.clientX, e.clientY, (d > 0 ? "+" : "") + d, d < 0);
-  if (type === "gold") burst(e.clientX, e.clientY, "✨", 5);
-  if (type === "fire") { const sm = $("#snowman"); sm.classList.remove("melt"); void sm.offsetWidth; sm.classList.add("melt"); }
-  snowDraw(SN.score);
-  if (SN.score >= goal) snowWin();
-}
-function snowWin() {
-  stoppers.snow();
-  S.snow = true; save();
-  $$("#snowArea .flake").forEach(f => f.remove());
-  confetti();
-  setTimeout(() => {
-    $("#smSign").classList.add("show");
-    $("#snowArea").insertAdjacentHTML("beforeend", `<div class="overlay-card" style="background:none;align-items:flex-start"><div class="card"><h3>BRAVO! ⛄</h3><p>Second digit of the code: <b style="font-size:24px">${CODE[1]}</b></p><button class="btn" onclick="history.back()">Back to the present</button></div></div>`);
-  }, 500);
-}
-stoppers.snow = () => { if (SN) { clearInterval(SN.timer); SN = null; } };
-
-/* =====================================================================
-   🎄 TREE SLIDING PUZZLE
-   ===================================================================== */
-function treeSVG(showDigits) {
-  const [a, b, c] = CONFIG.giftDigits;
-  const dig = (x, y, d) => showDigits
-    ? `<text x="${x}" y="${y}" text-anchor="middle" font-family="Impact, Arial Black, sans-serif" font-size="32" fill="#fff" stroke="#000" stroke-width="5" paint-order="stroke">${d}</text>` : "";
-  const stars = [[22, 70], [60, 22], [250, 30], [275, 85], [215, 60], [30, 140], [268, 150], [95, 45]]
-    .map(([x, y]) => `<circle cx="${x}" cy="${y}" r="1.8" fill="#fff"/>`).join("");
-  const baubles = [[132, 80, "#d8323a"], [170, 88, "#6aa9ff"], [116, 128, "#ffd84d"], [186, 132, "#ff8ad8"], [150, 145, "#d8323a"],
-    [94, 180, "#6aa9ff"], [138, 186, "#ffd84d"], [204, 178, "#d8323a"], [168, 200, "#ff8ad8"], [110, 202, "#ffd84d"]]
-    .map(([x, y, col]) => `<circle cx="${x}" cy="${y}" r="7" fill="${col}" stroke="#222" stroke-width="1.5"/><circle cx="${x - 2}" cy="${y - 2}" r="2" fill="#fff" opacity=".8"/>`).join("");
-  const bow = (x, y, col) => `<ellipse cx="${x - 9}" cy="${y}" rx="10" ry="6" fill="none" stroke="${col}" stroke-width="5"/><ellipse cx="${x + 9}" cy="${y}" rx="10" ry="6" fill="none" stroke="${col}" stroke-width="5"/>`;
+function sceneSVG(showNumbers) {
+  const [a, b, c] = CONFIG.jigsawNumbers;
+  const num = (x, y, d) => showNumbers ? `<text x="${x}" y="${y}" text-anchor="middle" font-family="Impact, Arial Black, sans-serif" font-size="30" fill="#fff" stroke="#000" stroke-width="5" paint-order="stroke">${d}</text>` : "";
+  const stars = [[22, 70], [60, 22], [250, 22], [282, 70], [120, 30], [30, 150], [285, 140], [100, 70]].map(([x, y]) => `<circle cx="${x}" cy="${y}" r="1.8" fill="#fff"/>`).join("");
+  const baub = [[184, 84, "#d8323a"], [210, 92, "#6aa9ff"], [172, 130, "#ffd84d"], [226, 136, "#ff8ad8"], [198, 146, "#d8323a"], [156, 186, "#6aa9ff"], [190, 190, "#ffd84d"], [238, 180, "#d8323a"], [214, 202, "#ff8ad8"]]
+    .map(([x, y, col]) => `<circle cx="${x}" cy="${y}" r="6.5" fill="${col}" stroke="#222" stroke-width="1.5"/><circle cx="${x - 2}" cy="${y - 2}" r="2" fill="#fff" opacity=".8"/>`).join("");
+  const bow = (x, y, col) => `<ellipse cx="${x - 8}" cy="${y}" rx="9" ry="5.5" fill="none" stroke="${col}" stroke-width="4.5"/><ellipse cx="${x + 8}" cy="${y}" rx="9" ry="5.5" fill="none" stroke="${col}" stroke-width="4.5"/>`;
   return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300">
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0b1838"/><stop offset="1" stop-color="#25469a"/></linearGradient>
     <linearGradient id="tg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#45d175"/><stop offset="1" stop-color="#136030"/></linearGradient>
+    <radialGradient id="sg" cx="38%" cy="32%" r="75%"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#c6d8f5"/></radialGradient>
   </defs>
-  <rect width="300" height="300" fill="url(#bg)"/>
-  ${stars}
-  <circle cx="44" cy="44" r="16" fill="#fff6c8"/><circle cx="51" cy="39" r="14" fill="#0e1d45"/>
-  <path d="M0 250 Q75 232 150 246 T300 242 V300 H0 Z" fill="#eaf2ff"/>
-  <rect x="137" y="204" width="26" height="34" fill="#6b3f22" stroke="#3a2010" stroke-width="2"/>
-  <polygon points="150,92 56,214 244,214" fill="url(#tg)" stroke="#0d4a24" stroke-width="3" stroke-linejoin="round"/>
-  <polygon points="150,62 76,160 224,160" fill="url(#tg)" stroke="#0d4a24" stroke-width="3" stroke-linejoin="round"/>
-  <polygon points="150,34 98,112 202,112" fill="url(#tg)" stroke="#0d4a24" stroke-width="3" stroke-linejoin="round"/>
-  <path d="M112 96 Q150 114 188 96" stroke="#ffd84d" stroke-width="3" fill="none" stroke-dasharray="2 5" stroke-linecap="round"/>
-  <path d="M92 144 Q150 168 208 144" stroke="#ffd84d" stroke-width="3" fill="none" stroke-dasharray="2 5" stroke-linecap="round"/>
-  <path d="M72 194 Q150 222 228 194" stroke="#ffd84d" stroke-width="3" fill="none" stroke-dasharray="2 5" stroke-linecap="round"/>
-  ${baubles}
-  <polygon points="150,12 156,27 172,27 159,36 164,51 150,42 136,51 141,36 128,27 144,27" fill="#ffd84d" stroke="#a06a00" stroke-width="2" stroke-linejoin="round"/>
-  <rect x="56" y="224" width="64" height="56" rx="3" fill="#d8323a" stroke="#7a1218" stroke-width="3"/>
-  <rect x="83" y="224" width="10" height="56" fill="#ffd84d"/>${bow(88, 219, "#ffd84d")}
-  <rect x="124" y="238" width="54" height="44" rx="3" fill="#2fa84f" stroke="#0d4a24" stroke-width="3"/>
-  <rect x="146" y="238" width="10" height="44" fill="#ffffff"/>${bow(151, 233, "#ffffff")}
-  <rect x="182" y="218" width="64" height="62" rx="3" fill="#f0b429" stroke="#8a5a00" stroke-width="3"/>
-  <rect x="209" y="218" width="10" height="62" fill="#d8323a"/>${bow(214, 213, "#d8323a")}
-  ${dig(88, 264, a)}${dig(151, 272, b)}${dig(214, 262, c)}
+  <rect width="300" height="300" fill="url(#bg)"/>${stars}
+  <circle cx="40" cy="40" r="15" fill="#fff6c8"/><circle cx="47" cy="35" r="13" fill="#0e1d45"/>
+  <path d="M0 246 Q75 230 150 244 T300 240 V300 H0 Z" fill="#eaf2ff"/>
+  <!-- snowman -->
+  <circle cx="66" cy="232" r="34" fill="url(#sg)" stroke="#9fb6dd" stroke-width="2.5"/>
+  <circle cx="66" cy="180" r="25" fill="url(#sg)" stroke="#9fb6dd" stroke-width="2.5"/>
+  <circle cx="66" cy="139" r="19" fill="url(#sg)" stroke="#9fb6dd" stroke-width="2.5"/>
+  <line x1="44" y1="176" x2="16" y2="156" stroke="#6b3f22" stroke-width="4" stroke-linecap="round"/>
+  <line x1="88" y1="176" x2="114" y2="154" stroke="#6b3f22" stroke-width="4" stroke-linecap="round"/>
+  <circle cx="66" cy="172" r="3.2" fill="#222"/><circle cx="66" cy="184" r="3.2" fill="#222"/><circle cx="66" cy="196" r="3.2" fill="#222"/>
+  <path d="M46 154 Q66 164 86 154 L86 161 Q66 171 46 161 Z" fill="#d8323a" stroke="#7a1218" stroke-width="1.5"/>
+  <path d="M76 162 L82 182 L74 182 L71 163 Z" fill="#d8323a" stroke="#7a1218" stroke-width="1.5"/>
+  <circle cx="59" cy="135" r="2.6" fill="#222"/><circle cx="73" cy="135" r="2.6" fill="#222"/>
+  <path d="M66 140 L86 144 L66 146 Z" fill="#ff8a1f" stroke="#a04a00" stroke-width="1"/>
+  <rect x="48" y="119" width="36" height="6" rx="2" fill="#1a1a1a"/><rect x="54" y="97" width="24" height="24" rx="2" fill="#1a1a1a"/><rect x="54" y="113" width="24" height="4" fill="#d8323a"/>
+  <!-- tree -->
+  <rect x="186" y="206" width="22" height="30" fill="#6b3f22" stroke="#3a2010" stroke-width="2"/>
+  <polygon points="197,96 124,212 270,212" fill="url(#tg)" stroke="#0d4a24" stroke-width="3" stroke-linejoin="round"/>
+  <polygon points="197,66 140,158 254,158" fill="url(#tg)" stroke="#0d4a24" stroke-width="3" stroke-linejoin="round"/>
+  <polygon points="197,40 156,110 238,110" fill="url(#tg)" stroke="#0d4a24" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M166 96 Q197 112 228 96" stroke="#ffd84d" stroke-width="3" fill="none" stroke-dasharray="2 5" stroke-linecap="round"/>
+  <path d="M152 144 Q197 166 242 144" stroke="#ffd84d" stroke-width="3" fill="none" stroke-dasharray="2 5" stroke-linecap="round"/>
+  <path d="M136 192 Q197 220 258 192" stroke="#ffd84d" stroke-width="3" fill="none" stroke-dasharray="2 5" stroke-linecap="round"/>
+  ${baub}
+  <polygon points="197,18 203,32 218,32 206,41 211,55 197,46 183,55 188,41 176,32 191,32" fill="#ffd84d" stroke="#a06a00" stroke-width="2" stroke-linejoin="round"/>
+  <!-- presents -->
+  <rect x="124" y="228" width="50" height="48" rx="3" fill="#d8323a" stroke="#7a1218" stroke-width="3"/>
+  <rect x="145" y="228" width="8" height="48" fill="#ffd84d"/>${bow(149, 223, "#ffd84d")}
+  <rect x="180" y="240" width="42" height="36" rx="3" fill="#2fa84f" stroke="#0d4a24" stroke-width="3"/>
+  <rect x="197" y="240" width="8" height="36" fill="#ffffff"/>${bow(201, 235, "#ffffff")}
+  <rect x="228" y="222" width="52" height="54" rx="3" fill="#f0b429" stroke="#8a5a00" stroke-width="3"/>
+  <rect x="250" y="222" width="8" height="54" fill="#d8323a"/>${bow(254, 217, "#d8323a")}
+  ${num(149, 262, a)}${num(201, 268, b)}${num(254, 260, c)}
 </svg>`;
 }
 const svgURL = svg => `url('data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg).replace(/'/g, "%27")}')`;
+const pieceBG = id => `background-image:${svgURL(sceneSVG(false))};background-position:${(id % 3) * 50}% ${Math.floor(id / 3) * 50}%`;
 
-let T = null;
-function treeNeighbors(pos, N) {
-  const r = Math.floor(pos / N), c = pos % N, out = [];
-  if (r > 0) out.push(pos - N); if (r < N - 1) out.push(pos + N);
-  if (c > 0) out.push(pos - 1); if (c < N - 1) out.push(pos + 1);
-  return out;
+let J = null; // catch phase
+let JB = null; // build phase
+renders.jig = () => {
+  stoppers.jig();
+  if (S.jig) return jigDone(false);
+  if (JB && JB.got) return jigBuild();
+  $("#jigBody").innerHTML = `
+    <div class="snow-hud"><div class="bar"><div class="fill" id="jigFill"></div></div><span id="jigScore">🧩 0/9</span></div>
+    <div class="snow-area" id="jigArea"><div class="overlay-card" id="jigIntro"><div class="card">
+      <h3>The Snowy Jigsaw</h3>
+      <p>A storm blew Santa's picture into <b>9 pieces</b>! 🌨️</p>
+      <p>Catch the glowing 🧩 pieces as they fall. Plain snowflakes do nothing.</p>
+      <p>🔥 <b>Don't touch the fire</b> — it burns a piece and it flies back into the sky!</p>
+      <p>Then put the picture back together.</p>
+      <button class="btn green" id="jigGo">Start!</button></div></div></div>`;
+  $("#jigGo").onclick = () => { $("#jigIntro").remove(); jigStart(); };
+};
+function jigUI() {
+  const n = J.got.length;
+  $("#jigFill").style.width = (n / 9 * 100) + "%";
+  $("#jigScore").textContent = `🧩 ${n}/9`;
 }
-function treeNew() {
-  const N = CONFIG.tree.size, total = N * N;
-  let board, empty;
-  do {
-    board = [...Array(total).keys()]; empty = total - 1; let last = -1;
-    for (let k = 0; k < CONFIG.tree.shuffleMoves; k++) {
-      const nb = treeNeighbors(empty, N).filter(p => p !== last);
-      const p = pick(nb);
-      [board[empty], board[p]] = [board[p], board[empty]];
-      last = empty; empty = p;
-    }
-  } while (board.every((t, i) => t === i));
-  T = { N, board, empty, moves: 0 };
+function jigStart() {
+  J = { got: [], timer: setInterval(jigSpawn, CONFIG.jigsaw.spawnMs) };
+  jigSpawn();
 }
-
-renders.tree = () => {
-  const body = $("#treeBody");
-  $("#treeMoves").textContent = "";
-  if (S.tree) {
-    body.innerHTML = `<p class="lead">The tree is back together! 🎄 Take a good look at the presents...</p>
-      <div class="puzzle solved"><div class="full" style="background-image:${svgURL(treeSVG(true))}"></div></div>
-      <button class="btn" id="toRiddle">Go to the riddle 📜</button>`;
-    $("#toRiddle").onclick = () => openPanel("riddle", true);
+function jigSpawn() {
+  const area = $("#jigArea"); if (!area || !J) return;
+  const r = Math.random();
+  const type = r < CONFIG.jigsaw.pieceChance ? "piece" : r < CONFIG.jigsaw.pieceChance + CONFIG.jigsaw.fireChance ? "fire" : "norm";
+  const el = document.createElement("button");
+  el.className = "flake " + type;
+  el.textContent = type === "fire" ? "🔥" : type === "piece" ? "🧩" : "❄";
+  el.style.left = rand(8, 92) + "%";
+  el.style.animationDuration = (type === "piece" ? rand(3.6, 5) : rand(4, 6.5)) + "s";
+  el.style.setProperty("--sway", rand(-50, 50) + "px");
+  el.style.setProperty("--fall", area.clientHeight + 80 + "px");
+  el.addEventListener("pointerdown", e => { e.preventDefault(); jigCatch(el, type, e); }, { once: true });
+  el.addEventListener("animationend", () => el.remove());
+  area.appendChild(el);
+}
+function jigCatch(el, type, e) {
+  if (!J) return;
+  el.remove();
+  if (type === "norm") { burst(e.clientX, e.clientY, "❄", 3); return; }
+  if (type === "fire") {
+    if (J.got.length) { J.got.pop(); floaty(e.clientX, e.clientY, "−🧩", true); } else floaty(e.clientX, e.clientY, "🔥", true);
+    shake($("#jigArea"));
+  } else {
+    const missing = [...Array(9).keys()].filter(i => !J.got.includes(i));
+    J.got.push(pick(missing));
+    floaty(e.clientX, e.clientY, "+🧩");
+    burst(e.clientX, e.clientY, "✨", 5);
+  }
+  jigUI();
+  if (J.got.length >= 9) {
+    stoppers.jig();
+    JB = { got: true, placed: [], order: [...Array(9).keys()].sort(() => Math.random() - .5) };
+    confetti(80);
+    setTimeout(jigBuild, 500);
+  }
+}
+function jigBuild() {
+  $("#jigBody").innerHTML = `<p class="lead">All 9 pieces! Now put Santa's picture back together.<br><small>Drag a piece into the frame — or tap a piece, then tap its spot.</small></p>
+    <div class="jframe" id="jframe">
+      <div class="guide" style="background-image:${svgURL(sceneSVG(false))}"></div>
+      ${[...Array(9).keys()].map(i => `<div class="jcell" data-cell="${i}" style="left:${(i % 3) * 33.3333}%;top:${Math.floor(i / 3) * 33.3333}%"></div>`).join("")}
+      <div class="full" style="background-image:${svgURL(sceneSVG(true))}"></div>
+    </div>
+    <div class="jtray" id="jtray"></div>`;
+  JB.placed.forEach(id => jigFill(id));
+  JB.order.filter(id => !JB.placed.includes(id)).forEach(id => {
+    const p = document.createElement("div");
+    p.className = "jp"; p.dataset.id = id; p.setAttribute("style", pieceBG(id));
+    $("#jtray").appendChild(p);
+    jigDragify(p);
+  });
+  $$("#jframe .jcell").forEach(c => c.addEventListener("click", () => {
+    const sel = $("#jtray .jp.sel"); if (sel) jigTry(+sel.dataset.id, +c.dataset.cell);
+  }));
+}
+function jigFill(id) {
+  const c = $(`#jframe .jcell[data-cell="${id}"]`);
+  c.setAttribute("style", c.getAttribute("style") + ";" + pieceBG(id));
+  c.classList.add("filled");
+}
+function jigTry(id, cell) {
+  const p = $(`#jtray .jp[data-id="${id}"]`);
+  if (id !== cell) {
+    const c = $(`#jframe .jcell[data-cell="${cell}"]`);
+    if (c && !c.classList.contains("filled")) { c.classList.add("flash"); setTimeout(() => c.classList.remove("flash"), 300); }
+    if (p) shake(p);
     return;
   }
-  if (!T) treeNew();
-  body.innerHTML = `<p class="lead">The elves messed up the tree! Tap a piece next to the empty spot to move it.</p>
-    <div class="puzzle" id="puzzle">
-      <div class="full peekimg" style="background-image:${svgURL(treeSVG(false))}"></div>
-      <div class="full done" style="background-image:${svgURL(treeSVG(true))}"></div>
-    </div>
-    <div class="tree-tools">
-      <button class="pill" id="peek">👁 Hold: show picture</button>
-      <button class="pill" id="reshuffle">🔀 Shuffle again</button>
-    </div>`;
-  const pz = $("#puzzle"), N = T.N, img = svgURL(treeSVG(false));
-  for (let id = 0; id < N * N - 1; id++) {
-    const t = document.createElement("div");
-    t.className = "tile"; t.dataset.id = id;
-    const hr = Math.floor(id / N), hc = id % N;
-    t.style.width = t.style.height = (100 / N) + "%";
-    t.style.backgroundImage = img;
-    t.style.backgroundSize = `${N * 100}% ${N * 100}%`;
-    t.style.backgroundPosition = `${hc / (N - 1) * 100}% ${hr / (N - 1) * 100}%`;
-    t.addEventListener("pointerdown", e => { e.preventDefault(); treeMove(id); });
-    pz.insertBefore(t, pz.firstChild);
+  JB.placed.push(id); jigFill(id); if (p) p.remove();
+  if (JB.placed.length === 9) {
+    S.jig = true; save();
+    setTimeout(() => { $("#jframe").classList.add("solved"); confetti(); setTimeout(() => jigDone(true), 1200); }, 200);
   }
-  treeLayout();
-  const peek = $("#peek");
-  const on = e => { e.preventDefault(); pz.classList.add("peek"); }, off = () => pz.classList.remove("peek");
-  peek.addEventListener("pointerdown", on); peek.addEventListener("pointerup", off); peek.addEventListener("pointerleave", off); peek.addEventListener("pointercancel", off);
-  $("#reshuffle").onclick = () => { treeNew(); renders.tree(); };
-};
-function treeLayout() {
-  const N = T.N, near = treeNeighbors(T.empty, N);
-  $$("#puzzle .tile").forEach(t => {
-    const pos = T.board.indexOf(+t.dataset.id);
-    t.style.left = (pos % N) * (100 / N) + "%";
-    t.style.top = Math.floor(pos / N) * (100 / N) + "%";
-    t.classList.toggle("near", near.includes(pos));
+}
+function jigDragify(p) {
+  let sx, sy, ghost = null;
+  p.addEventListener("pointerdown", e => {
+    e.preventDefault(); sx = e.clientX; sy = e.clientY;
+    p.setPointerCapture(e.pointerId);
   });
-  $("#treeMoves").textContent = `${T.moves} moves`;
+  p.addEventListener("pointermove", e => {
+    if (sx === undefined) return;
+    if (!ghost && Math.hypot(e.clientX - sx, e.clientY - sy) > 8) {
+      ghost = p.cloneNode(); ghost.classList.add("ghost"); ghost.classList.remove("sel");
+      ghost.style.width = p.offsetWidth + "px"; document.body.appendChild(ghost); p.classList.add("dragging");
+    }
+    if (ghost) { ghost.style.left = e.clientX + "px"; ghost.style.top = e.clientY + "px"; }
+  });
+  const end = e => {
+    if (sx === undefined) return;
+    if (ghost) {
+      ghost.remove(); ghost = null; p.classList.remove("dragging");
+      const under = document.elementFromPoint(e.clientX, e.clientY);
+      const cell = under && under.closest(".jcell");
+      if (cell) jigTry(+p.dataset.id, +cell.dataset.cell);
+    } else {
+      const was = p.classList.contains("sel");
+      $$("#jtray .jp").forEach(x => x.classList.remove("sel"));
+      if (!was) p.classList.add("sel");
+    }
+    sx = undefined;
+  };
+  p.addEventListener("pointerup", end);
+  p.addEventListener("pointercancel", () => { if (ghost) { ghost.remove(); ghost = null; p.classList.remove("dragging"); } sx = undefined; });
 }
-function treeMove(id) {
-  if (!T || S.tree) return;
-  const pos = T.board.indexOf(id);
-  if (!treeNeighbors(T.empty, T.N).includes(pos)) return;
-  [T.board[T.empty], T.board[pos]] = [T.board[pos], T.board[T.empty]];
-  T.empty = pos; T.moves++;
-  treeLayout();
-  if (T.board.every((t, i) => t === i)) {
-    S.tree = true; save();
-    const pz = $("#puzzle");
-    setTimeout(() => {
-      pz.classList.add("solved");
-      $$("#puzzle .tile").forEach(t => t.style.opacity = 0);
-      confetti();
-      $(".tree-tools").innerHTML = `<p class="lead">🎁 The presents have numbers! Remember the colours...</p><button class="btn" id="toRiddle">Go to the riddle 📜</button>`;
-      $("#toRiddle").onclick = () => openPanel("riddle", true);
-    }, 250);
-  }
+function jigDone(fresh) {
+  $("#jigBody").innerHTML = `<div class="jframe solved" style="animation:${fresh ? "" : "none"}"><div class="full" style="background-image:${svgURL(sceneSVG(true))}"></div></div>
+    <div class="card"><h3>${fresh ? "Picture complete! 🎄" : "Santa's picture 🎄"}</h3>
+    <p>The presents have numbers:</p><div class="big-digit">${CONFIG.jigsawNumbers.join(" ")}</div>
+    <p><small>Hmm… what could they be for? 🤔</small></p>
+    <button class="btn" onclick="history.back()">Back to the present</button></div>`;
 }
+stoppers.jig = () => { if (J) { clearInterval(J.timer); J = null; } };
 
 /* =====================================================================
-   📜 RIDDLE
+   🌍 WHERE'S SANTA? — look-only Street View
+   ===================================================================== */
+let geoLoaded = false;
+renders.geo = () => {
+  const G = CONFIG.geo;
+  $("#geoBody").innerHTML = `
+    <p class="lead">Santa sent you a photo from where he is right now. 📸<br><small>Drag to look around — no walking allowed!</small></p>
+    <div class="geo-wrap"><div id="pano"></div><div class="geo-loading" id="geoLoading">Loading Santa's view… 🛷</div></div>
+    <div class="card" id="geoCard">${S.geo
+      ? `<h3>Found him! 🎅</h3><p>Santa is in…</p><div class="place">📍 ${esc(G.display)}</div>`
+      : `<h3>Where on Earth is Santa?</h3>
+         <input class="big" id="geoAns" autocomplete="off" autocapitalize="off" placeholder="type the place">
+         <div class="msg" id="geoMsg"></div><button class="btn green" id="geoOk">Check</button>`}</div>`;
+  geoMount();
+  if (!S.geo) {
+    const inp = $("#geoAns");
+    const go = () => {
+      const v = squash(inp.value);
+      if (!v) { shake(inp); return; }
+      if (G.answers.some(a => squash(a) === v)) {
+        S.geo = true; save(); confetti(); renders.geo();
+        $("#geoCard").insertAdjacentHTML("beforeend", `<button class="btn" onclick="history.back()">Back to the present</button>`);
+        return;
+      }
+      S.geoTries++; save(); shake(inp);
+      $("#geoMsg").textContent = G.nearMisses.includes(v) ? "Close! Zoom out a bit… think of the whole region 🗺️"
+        : S.geoTries >= G.hintAfterTries ? `Hint: ${G.hint}` : pick(["Nope. Santa isn't there. 🙂", "Look around more… 👀", "Cold! ❄️", "Santa giggles. Try again."]);
+    };
+    $("#geoOk").onclick = go;
+    inp.addEventListener("keydown", e => e.key === "Enter" && go());
+  }
+};
+function geoMount() {
+  if (window.google && google.maps && google.maps.StreetViewPanorama) return geoPano();
+  if (!geoLoaded) {
+    geoLoaded = true;
+    window.__geoReady = () => { if (current === "geo") geoPano(); };
+    const s = document.createElement("script");
+    s.src = `https://maps.googleapis.com/maps/api/js?key=${encodeURIComponent(CONFIG.geo.apiKey)}&callback=__geoReady&loading=async`;
+    s.async = true;
+    s.onerror = geoFallback;
+    document.head.appendChild(s);
+  }
+}
+function geoPano() {
+  const G = CONFIG.geo, el = $("#pano"); if (!el) return;
+  const l = $("#geoLoading"); if (l) l.remove();
+  new google.maps.StreetViewPanorama(el, {
+    pano: G.pano,
+    pov: { heading: G.heading, pitch: G.pitch },
+    zoom: 0,
+    disableDefaultUI: true,
+    zoomControl: true,
+    addressControl: false,
+    linksControl: false,
+    clickToGo: false,
+    showRoadLabels: false,
+    panControl: false,
+    fullscreenControl: false,
+    motionTracking: false,
+    motionTrackingControl: false,
+    enableCloseButton: false,
+    imageDateControl: false,
+    disableDoubleClickZoom: true
+  });
+}
+/* If the key fails (wrong domain, billing off...), fall back to the free embed */
+function geoFallback() {
+  const G = CONFIG.geo, wrap = $(".geo-wrap"); if (!wrap) return;
+  wrap.innerHTML = `<iframe allowfullscreen referrerpolicy="no-referrer-when-downgrade"
+    src="https://www.google.com/maps/embed?pb=!4v1!6m8!1m7!1s${G.pano}!2m2!1d${G.lat}!2d${G.lng}!3f${G.heading}!4f${G.pitch}!5f0.78"></iframe>`;
+}
+window.gm_authFailure = geoFallback;
+
+/* =====================================================================
+   📜 SANTA'S RIDDLE
    ===================================================================== */
 renders.riddle = () => {
   const body = $("#riddleBody");
-  if (!S.tree) {
-    body.innerHTML = `<div class="card"><h3>🔒 Locked</h3><p>The riddle needs what's <b>under the tree</b>.</p><p>Solve <b>The Tangled Tree</b> first.</p>
-      <button class="btn green" id="goTree">To the tree 🎄</button></div>`;
-    $("#goTree").onclick = () => openPanel("tree", true);
+  if (!(S.jig && S.geo) && !S.riddle) {
+    body.innerHTML = `<div class="card"><h3>🔒 Locked</h3><p>Santa's riddle needs two clues first:</p>
+      <p>${S.jig ? "✅" : "❌"} <b>The Snowy Jigsaw</b> 🧩<br>${S.geo ? "✅" : "❌"} <b>Where's Santa?</b> 🌍</p>
+      <button class="btn green" id="goNext">${!S.jig ? "To the jigsaw 🧩" : "Find Santa 🌍"}</button></div>`;
+    $("#goNext").onclick = () => openPanel(!S.jig ? "jig" : "geo", true);
     return;
   }
-  const tree = `<div class="puzzle solved" style="width:min(60vw,220px);animation:none"><div class="full" style="background-image:${svgURL(treeSVG(true))}"></div></div>`;
+  const clues = `<div class="clues" style="margin-bottom:6px"><span class="clue">🧩 ${CONFIG.jigsawNumbers.join(" · ")}</span><span class="clue">🌍 ${esc(CONFIG.geo.display)}</span></div>`;
   if (S.riddle) {
-    body.innerHTML = `${tree}<div class="card"><h3>Solved! 🧠</h3><p>The last two digits of the code:</p><div class="big-digit">${CODE.slice(2)}</div></div>`;
+    body.innerHTML = `<div class="card">${clues}<h3>Cookie time! 🍪</h3><p>The last three digits of the code:</p><div class="big-digit">${CODE.slice(1).split("").join(" ")}</div>
+      <p><button class="btn" onclick="history.back()">Back to the present</button></p></div>`;
     return;
   }
-  body.innerHTML = `${tree}<div class="card"><h3>Santa's Riddle</h3><p>${CONFIG.riddle.text}</p>
-    <input class="big" id="rAns" autocomplete="off" placeholder="your answer">
-    <div class="msg" id="rMsg"></div>
-    <button class="btn green" id="rOk">Check</button></div>`;
+  body.innerHTML = `<div class="card">${clues}<h3>Santa's Riddle</h3><p style="font-family:'Comic Sans MS','Trebuchet MS',sans-serif">${CONFIG.riddle.text}</p>
+    <input class="big" id="rAns" autocomplete="off" autocapitalize="characters" placeholder="your answer">
+    <div class="msg" id="rMsg"></div><button class="btn green" id="rOk">Check</button></div>`;
   const inp = $("#rAns");
   const go = () => {
-    if (!inp.value.trim()) { shake(inp); return; }
-    if (CONFIG.riddle.answers.some(a => norm(a) === norm(inp.value))) {
-      S.riddle = true; save(); confetti(); renders.riddle();
-      $("#riddleBody .card").insertAdjacentHTML("beforeend", `<button class="btn" onclick="history.back()">Back to the present</button>`);
+    const v = squash(inp.value);
+    if (!v) { shake(inp); return; }
+    if (CONFIG.riddle.answers.some(a => squash(a) === v)) {
+      S.riddle = true; save(); playSong("riddle"); confetti(); renders.riddle();
     } else {
       S.riddleTries++; save(); shake(inp);
       $("#rMsg").textContent = S.riddleTries >= CONFIG.riddle.hintAfterTries ? `Hint: ${CONFIG.riddle.hint}` : pick(["Nope. 🙂", "Think again...", "Santa shakes his head.", "Close? No."]);
@@ -1137,70 +1075,66 @@ renders.riddle = () => {
 let dialVals = [0, 0, 0, 0];
 renders.lock = () => {
   const k = digitsKnown();
-  $("#lockBody").innerHTML = `<div class="card" id="lockCard">
-    <h3>Enter the code</h3>
-    <div class="clues">
-      <span class="clue">🧝 ❶ ${k[0]}</span><span class="clue">⛄ ❷ ${k[1]}</span><span class="clue">📜 ❸❹ ${k[2]}${k[3]}</span>
-    </div>
+  $("#lockBody").innerHTML = `<div class="card" id="lockCard"><h3>Enter the code</h3>
+    <div class="clues"><span class="clue">🧝 ❶ ${k[0]}</span><span class="clue">📜 ❷❸❹ ${k.slice(1).join("")}</span></div>
     <div class="dials">${dialVals.map((v, i) => `<div class="dial"><button data-i="${i}" data-d="1">▲</button><div class="dv" id="dv${i}">${v}</div><button data-i="${i}" data-d="-1">▼</button></div>`).join("")}</div>
-    <div class="msg" id="lockMsg"></div>
-    <button class="btn green" id="lockOpen">Open! 🔓</button></div>`;
+    <div class="msg" id="lockMsg"></div><button class="btn green" id="lockOpen">Open! 🔓</button><div id="lockExtra"></div></div>`;
   $$("#lockBody .dial button").forEach(b => b.addEventListener("click", () => {
-    const i = +b.dataset.i;
-    dialVals[i] = (dialVals[i] + +b.dataset.d + 10) % 10;
-    $("#dv" + i).textContent = dialVals[i];
+    const i = +b.dataset.i; dialVals[i] = (dialVals[i] + +b.dataset.d + 10) % 10; $("#dv" + i).textContent = dialVals[i];
   }));
   $("#lockOpen").onclick = () => {
-    if (dialVals.join("") === CODE) {
-      S.opened = true; save();
-      openPanel("invite", true);
-    } else {
-      shake($("#lockCard"));
-      $("#lockMsg").textContent = pick(CONFIG.lockTaunts);
+    const v = dialVals.join("");
+    if (v === CODE) { S.opened = true; save(); playSong("lock"); openPanel("invite", true); return; }
+    shake($("#lockCard"));
+    if (v.includes(CONFIG.jigsawNumbers.join(""))) {
+      S.rushed = true; addNaughty(myName() || "Someone in a hurry");
+      $("#lockMsg").textContent = "WHOA, slow down! You rush too much. 🛷💨";
+      $("#lockExtra").innerHTML = `<p>Those numbers aren't for the lock… Santa has added you to the list:</p>${naughtyHTML()}`;
+      return;
     }
+    $("#lockExtra").innerHTML = "";
+    $("#lockMsg").textContent = CONFIG.lockSpecial[v] || pick(CONFIG.lockTaunts);
   };
 };
 
 /* =====================================================================
    🎉 INVITE + SECRET SANTA
    ===================================================================== */
+function badges() {
+  const b = [];
+  if (S.nerdy) b.push("🤓 The Nerdy Elf");
+  if (S.elfFails) b.push("😈 Officially Naughty");
+  if (S.rushed) b.push("🛷 Rushed the lock");
+  return b;
+}
 renders.invite = () => {
   const P = CONFIG.party;
   const row = (ic, main, sub) => main ? `<div class="row"><span class="ic">${ic}</span><div>${main}${sub ? `<small>${sub}</small>` : ""}</div></div>` : "";
   const place = P.mapsUrl ? `<a href="${esc(P.mapsUrl)}" target="_blank" rel="noopener">${esc(P.place)}</a>` : esc(P.place);
   let santa;
-  if (TOKEN && TOKEN.r) {
-    santa = S.santaShown
-      ? santaReveal()
-      : `<h4>🎅 Secret Santa</h4><p>You are someone's Secret Santa. Ready to find out whose?</p><button class="btn" id="santaGo">Reveal 🎁</button>`;
-  } else if (CONFIG.secretSantaFallbackUrl) {
-    santa = `<h4>🎅 Secret Santa</h4><p>Find out who you're buying for:</p><a class="btn" href="${esc(CONFIG.secretSantaFallbackUrl)}" target="_blank" rel="noopener">Draw names 🎲</a>`;
-  } else {
-    santa = `<h4>🎅 Secret Santa</h4><p>Your personal link comes from the organiser. 🤫</p>`;
-  }
+  if (TOKEN && TOKEN.r) santa = S.santaShown ? santaReveal() : `<h4>🎅 Secret Santa</h4><p>You are someone's Secret Santa. Ready to find out whose?</p><button class="btn" id="santaGo">Reveal 🎁</button>`;
+  else if (CONFIG.secretSantaFallbackUrl) santa = `<h4>🎅 Secret Santa</h4><p>Find out who you're buying for:</p><a class="btn" href="${esc(CONFIG.secretSantaFallbackUrl)}" target="_blank" rel="noopener">Draw names 🎲</a>`;
+  else santa = `<h4>🎅 Secret Santa</h4><p>Your personal link comes from the organiser. 🤫</p>`;
+  const b = badges();
+  const brag = b.length ? `https://wa.me/?text=${encodeURIComponent(`I opened the Christmas invite as ${b.join(" + ")}! 🎄🎁`)}` : "";
   $("#inviteBody").innerHTML = `<div class="card invite">
-    <div class="kicker">${TOKEN && TOKEN.n ? esc(TOKEN.n) + ", you're" : "You're"} invited to</div>
+    <div class="kicker">${myName() ? esc(myName()) + ", you're" : "You're"} invited to</div>
     <h3>${esc(P.title)}</h3>
+    ${b.length ? `<div class="badges">${b.map(x => `<span class="title-badge" style="font-size:15px">${x}</span>`).join(" ")}<br><a class="btn ghost" href="${brag}" target="_blank" rel="noopener" style="font-size:14px">Brag in the group chat 📣</a></div>` : ""}
     ${row("📅", esc(P.date), esc(P.time))}
     ${row("📍", place, esc(P.address))}
     ${row("👕", esc(P.dress))}
     ${row("🎒", esc(P.bring))}
     ${row("✉️", esc(P.rsvp))}
     <p class="note">${esc(P.note)}</p>
-    <div class="santa" id="santaBox">${santa}</div>
-  </div>`;
+    <div class="santa" id="santaBox">${santa}</div></div>`;
   const go = $("#santaGo");
-  if (go) go.onclick = () => {
-    S.santaShown = true; save();
-    $("#santaBox").innerHTML = santaReveal();
-    confetti(200);
-  };
+  if (go) go.onclick = () => { S.santaShown = true; save(); $("#santaBox").innerHTML = santaReveal(); confetti(200); };
   if (!renders.invite.played) { renders.invite.played = true; confetti(220); }
 };
 function santaReveal() {
   return `<h4>🎅 You're buying a present for:</h4><div class="who">${esc(TOKEN.r)}</div>
-    ${TOKEN.b ? `<p>💸 Budget: <b>${esc(TOKEN.b)}</b></p>` : ""}
-    ${TOKEN.m ? `<p>${esc(TOKEN.m)}</p>` : ""}
+    ${TOKEN.b ? `<p>💸 Budget: <b>${esc(TOKEN.b)}</b></p>` : ""}${TOKEN.m ? `<p>${esc(TOKEN.m)}</p>` : ""}
     <p style="font-size:13px;opacity:.85">🤫 Don't tell anyone!</p>`;
 }
 
@@ -1208,11 +1142,13 @@ function santaReveal() {
 if (new URLSearchParams(location.search).has("dev")) {
   const d = $("#dev"); d.style.display = "flex";
   const btn = (t, f) => { const b = document.createElement("button"); b.textContent = t; b.onclick = () => { f(); save(); renderHub(); }; d.appendChild(b); };
-  btn("✓ elves", () => S.elf = true);
-  btn("✓ snowman", () => S.snow = true);
-  btn("✓ tree", () => S.tree = true);
+  btn("✓ elves (nerdy)", () => { S.elf = true; S.nerdy = true; });
+  btn("✓ jigsaw", () => S.jig = true);
+  btn("✓ geo", () => S.geo = true);
   btn("✓ riddle", () => S.riddle = true);
-  btn("↺ reset", () => { S = { ...defaultState, naughty: [] }; });
+  btn("♪ song 1", () => playSong("riddle"));
+  btn("♪ song 2", () => playSong("lock"));
+  btn("↺ reset", () => { S = { ...defaultState, naughty: [] }; JB = null; });
 }
 
 renderHub();
