@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="ro">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="color-scheme" content="dark">
 <meta name="robots" content="noindex">
-<title>Secret Santa — Organizator 🎅</title>
+<title>Secret Santa — Organiser 🎅</title>
 <style>
   * { box-sizing: border-box; }
   body {
@@ -54,38 +54,38 @@
 <body>
 <main>
   <h1>🎅 SECRET SANTA</h1>
-  <p class="sub">Pagina organizatorului — nu o trimite invitaților 🤫</p>
+  <p class="sub">Organiser page — don't send this one to guests 🤫</p>
 
   <div class="card">
-    <h2>1. Cine participă?</h2>
-    <label for="names">Nume <small>(câte unul pe rând)</small></label>
+    <h2>1. Who's playing?</h2>
+    <label for="names">Names <small>(one per line)</small></label>
     <textarea id="names" placeholder="Ana&#10;Mihai&#10;Ioana&#10;Vlad"></textarea>
 
-    <label for="excl">Cine NU are voie să se tragă între ei <small>(opțional, ex: cupluri — „Ana + Mihai”, câte o pereche pe rând)</small></label>
+    <label for="excl">Who must NOT draw each other <small>(optional, e.g. couples — "Ana + Mihai", one pair per line)</small></label>
     <textarea id="excl" style="min-height:70px" placeholder="Ana + Mihai"></textarea>
 
-    <label for="budget">Buget <small>(opțional)</small></label>
-    <input id="budget" placeholder="ex: 100 lei / £20">
+    <label for="budget">Budget <small>(optional)</small></label>
+    <input id="budget" placeholder="e.g. £20">
 
-    <label for="msg">Mesaj pentru toți <small>(opțional)</small></label>
-    <input id="msg" placeholder="ex: Cadoul se deschide la miezul nopții!">
+    <label for="msg">Message for everyone <small>(optional)</small></label>
+    <input id="msg" placeholder="e.g. Presents get opened at midnight!">
 
-    <label for="url">Linkul invitației <small>(pagina cu jocul, de pe GitHub Pages)</small></label>
+    <label for="url">Invite link <small>(the game page on GitHub Pages)</small></label>
     <input id="url" placeholder="https://numele-tau.github.io/craciun/">
 
     <div class="err" id="err"></div>
-    <button class="btn" id="draw">🎲 Trage la sorți</button>
+    <button class="btn" id="draw">🎲 Draw names</button>
   </div>
 
   <div class="card" id="results" style="display:none">
-    <h2>2. Trimite fiecăruia linkul lui</h2>
-    <p class="tip">Fiecare link deschide invitația-joc, iar la final arată <b>doar</b> pe cine a tras persoana respectivă. Trimite-l numai persoanei de lângă el.</p>
+    <h2>2. Send everyone their own link</h2>
+    <p class="tip">Each link opens the invite game, and at the end it shows <b>only</b> who that person drew. Send each link only to the person next to it.</p>
     <div id="list"></div>
     <div class="row" style="margin-top:12px">
-      <label style="margin:0;font-weight:normal"><input type="checkbox" id="spoil" style="width:auto"> Arată perechile (spoiler!)</label>
+      <label style="margin:0;font-weight:normal"><input type="checkbox" id="spoil" style="width:auto"> Show the pairs (spoiler!)</label>
     </div>
-    <p class="tip">⚠️ Totul e în link (nu există server), așa că nu deschide linkurile altora dacă vrei să rămână secret și pentru tine. Tragerea se salvează în acest browser.</p>
-    <button class="btn grey small" id="redo">Tragere nouă</button>
+    <p class="tip">⚠️ Everything is inside the link (there's no server), so don't open other people's links if you want it to stay secret for you too. The draw is saved in this browser.</p>
+    <button class="btn grey small" id="redo">New draw</button>
   </div>
 </main>
 
@@ -142,24 +142,24 @@ $("#draw").onclick = () => {
   const err = $("#err"); err.textContent = "";
   const names = $("#names").value.split("\n").map(s => s.trim()).filter(Boolean);
   const lower = names.map(n => n.toLowerCase());
-  if (names.length < 3) { err.textContent = "Ai nevoie de cel puțin 3 participanți."; return; }
+  if (names.length < 3) { err.textContent = "You need at least 3 people."; return; }
   const dup = lower.find((n, i) => lower.indexOf(n) !== i);
-  if (dup) { err.textContent = `Numele „${dup}” apare de două ori.`; return; }
+  if (dup) { err.textContent = `The name "${dup}" appears twice.`; return; }
 
   const banned = new Set();
   for (const line of $("#excl").value.split("\n")) {
     if (!line.trim()) continue;
     const parts = line.split(/[+,&]/).map(s => s.trim()).filter(Boolean);
     const real = parts.map(p => names[lower.indexOf(p.toLowerCase())]);
-    if (real.some(x => !x)) { err.textContent = `Nu găsesc numele din „${line.trim()}” în listă.`; return; }
+    if (real.some(x => !x)) { err.textContent = `Can't find the names from "${line.trim()}" in the list.`; return; }
     for (const a of real) for (const b of real) if (a !== b) banned.add(a + "\u0000" + b);
   }
 
   const pairs = draw(names, banned);
-  if (!pairs) { err.textContent = "Nu se poate face o tragere cu restricțiile astea. Scoate câteva."; return; }
+  if (!pairs) { err.textContent = "A draw isn't possible with these restrictions. Remove some."; return; }
 
   let url = $("#url").value.trim();
-  if (!url) { err.textContent = "Pune linkul invitației."; return; }
+  if (!url) { err.textContent = "Add the invite link."; return; }
   url = url.split("#")[0];
 
   const d = { names, excl: $("#excl").value, budget: $("#budget").value.trim(), msg: $("#msg").value.trim(), url, pairs };
@@ -178,20 +178,20 @@ function showResults(d) {
   $("#draw").style.display = "none";
   $("#list").innerHTML = d.pairs.map(([g, r], i) => {
     const link = linkFor(d, g, r);
-    const text = `Salut, ${g}! 🎄 Ai primit o invitație de Crăciun. E încuiată, așa că va trebui s-o deschizi singur(ă) 😈\n${link}`;
+    const text = `Hi ${g}! 🎄 You've got a Christmas invitation. It's locked, so you'll have to open it yourself 😈\n${link}`;
     return `<div class="person">
       <span class="nm">${esc(g)}</span>
       <a class="btn small wa" href="https://wa.me/?text=${encodeURIComponent(text)}" target="_blank" rel="noopener">WhatsApp</a>
-      <button class="btn small grey" data-copy="${i}">Copiază</button>
+      <button class="btn small grey" data-copy="${i}">Copy</button>
       <span class="pair">${esc(g)} → ${esc(r)}</span>
     </div>`;
   }).join("");
   document.querySelectorAll("[data-copy]").forEach(b => b.onclick = async () => {
     const [g, r] = d.pairs[+b.dataset.copy];
     const link = linkFor(d, g, r);
-    try { await navigator.clipboard.writeText(link); b.textContent = "Copiat ✓"; }
-    catch (e) { b.textContent = "Nu merge"; }
-    setTimeout(() => b.textContent = "Copiază", 1600);
+    try { await navigator.clipboard.writeText(link); b.textContent = "Copied ✓"; }
+    catch (e) { b.textContent = "Didn't work"; }
+    setTimeout(() => b.textContent = "Copy", 1600);
   });
 }
 
@@ -200,14 +200,14 @@ $("#spoil").onchange = e => $("#results").classList.toggle("spoil", e.target.che
 let redoArmed = false;
 $("#redo").onclick = () => {
   if (!redoArmed) {
-    redoArmed = true; $("#redo").textContent = "Sigur? Linkurile trimise deja vor arăta tragerea veche. Apasă din nou.";
-    setTimeout(() => { redoArmed = false; $("#redo").textContent = "Tragere nouă"; }, 4000);
+    redoArmed = true; $("#redo").textContent = "Sure? Links already sent will still show the old draw. Tap again.";
+    setTimeout(() => { redoArmed = false; $("#redo").textContent = "New draw"; }, 4000);
     return;
   }
   const d = load(); if (d) { delete d.pairs; store(d); }
   $("#results").style.display = "none";
   $("#draw").style.display = "inline-block";
-  redoArmed = false; $("#redo").textContent = "Tragere nouă";
+  redoArmed = false; $("#redo").textContent = "New draw";
 };
 </script>
 </body>

@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="ro">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
 <meta name="color-scheme" content="dark">
 <meta name="theme-color" content="#0b1533">
-<title>Crăciun Fericit! 🎁</title>
+<title>Merry Christmas! 🎁 Crăciun Fericit!</title>
 <style>
   * { box-sizing: border-box; }
   :root {
@@ -46,7 +46,7 @@
     margin: 0;
     font-family: Impact, "Arial Black", sans-serif;
     font-weight: normal;
-    font-size: clamp(34px, 10vw, 100px);
+    font-size: clamp(26px, 8.4vw, 92px);
     white-space: nowrap;
     letter-spacing: 1px;
     background: linear-gradient(#ffffff 8%, #fff0b8 32%, #ffbf2e 58%, #d8323a 100%);
@@ -60,6 +60,8 @@
     0%,100% { transform: rotate(-1.5deg) scale(1); }
     50% { transform: rotate(1.5deg) scale(1.03); }
   }
+  #title span { display: block; text-align: center; }
+  #title .t2 { font-size: .78em; margin-top: -.06em; }
   #subtitle {
     margin: 0; text-align: center; font-weight: bold;
     color: #cbdcff; font-size: clamp(14px, 3.8vw, 19px);
@@ -398,52 +400,52 @@
 <canvas id="confetti"></canvas>
 
 <main id="hub">
-  <h1 id="title">CRĂCIUN FERICIT!</h1>
-  <p id="subtitle">🎁 Cadoul tău e încuiat. Găsește codul.</p>
+  <h1 id="title"><span>MERRY CHRISTMAS!</span><span class="t2">CRĂCIUN FERICIT!</span></h1>
+  <p id="subtitle">🎁 Your present is locked. Find the code.</p>
 
-  <button id="present" class="present" aria-label="Lacătul">
+  <button id="present" class="present" aria-label="The lock">
     <div class="lid"><div class="bow"></div></div>
     <div class="box"></div>
     <div class="padlock"><div class="shackle"></div><div class="lock-body" id="lockSlots">? ? ? ?</div></div>
   </button>
-  <p id="presentHint">Atinge cadoul ca să introduci codul</p>
+  <p id="presentHint">Tap the present to enter the code</p>
 
   <section class="stations">
-    <button class="station" data-go="elf"><span class="st-ico">🧝</span><span class="st-name">Spiridușii Socotitori</span><span class="st-status" id="st-elf"></span></button>
-    <button class="station" data-go="snow"><span class="st-ico">⛄</span><span class="st-name">Omul de Zăpadă</span><span class="st-status" id="st-snow"></span></button>
-    <button class="station" data-go="tree"><span class="st-ico">🎄</span><span class="st-name">Bradul Încurcat</span><span class="st-status" id="st-tree"></span></button>
-    <button class="station" data-go="riddle"><span class="st-ico">📜</span><span class="st-name">Ghicitoarea</span><span class="st-status" id="st-riddle"></span></button>
+    <button class="station" data-go="elf"><span class="st-ico">🧝</span><span class="st-name">Counting Elves</span><span class="st-status" id="st-elf"></span></button>
+    <button class="station" data-go="snow"><span class="st-ico">⛄</span><span class="st-name">The Snowman</span><span class="st-status" id="st-snow"></span></button>
+    <button class="station" data-go="tree"><span class="st-ico">🎄</span><span class="st-name">The Tangled Tree</span><span class="st-status" id="st-tree"></span></button>
+    <button class="station" data-go="riddle"><span class="st-ico">📜</span><span class="st-name">The Riddle</span><span class="st-status" id="st-riddle"></span></button>
   </section>
-  <div id="foot">❄ atinge oriunde ❄</div>
+  <div id="foot">❄ tap anywhere ❄ · v2</div>
 </main>
 
 <section class="panel" id="p-elf">
-  <header class="ph"><button class="back">← Înapoi</button><h2>🧝 Spiridușii Socotitori</h2><span class="ph-extra" id="elfCount"></span></header>
+  <header class="ph"><button class="back">← Back</button><h2>🧝 Counting Elves</h2><span class="ph-extra" id="elfCount"></span></header>
   <div class="pbody" id="elfBody"></div>
 </section>
 
 <section class="panel" id="p-snow">
-  <header class="ph"><button class="back">← Înapoi</button><h2>⛄ Omul de Zăpadă</h2><span class="ph-extra"></span></header>
+  <header class="ph"><button class="back">← Back</button><h2>⛄ The Snowman</h2><span class="ph-extra"></span></header>
   <div class="pbody" id="snowBody"></div>
 </section>
 
 <section class="panel" id="p-tree">
-  <header class="ph"><button class="back">← Înapoi</button><h2>🎄 Bradul Încurcat</h2><span class="ph-extra" id="treeMoves"></span></header>
+  <header class="ph"><button class="back">← Back</button><h2>🎄 The Tangled Tree</h2><span class="ph-extra" id="treeMoves"></span></header>
   <div class="pbody" id="treeBody"></div>
 </section>
 
 <section class="panel" id="p-riddle">
-  <header class="ph"><button class="back">← Înapoi</button><h2>📜 Ghicitoarea</h2><span class="ph-extra"></span></header>
+  <header class="ph"><button class="back">← Back</button><h2>📜 The Riddle</h2><span class="ph-extra"></span></header>
   <div class="pbody" id="riddleBody"></div>
 </section>
 
 <section class="panel" id="p-lock">
-  <header class="ph"><button class="back">← Înapoi</button><h2>🔐 Lacătul</h2><span class="ph-extra"></span></header>
+  <header class="ph"><button class="back">← Back</button><h2>🔐 The Lock</h2><span class="ph-extra"></span></header>
   <div class="pbody" id="lockBody"></div>
 </section>
 
 <section class="panel" id="p-invite">
-  <header class="ph"><button class="back">← Înapoi</button><h2>🎉 Invitația</h2><span class="ph-extra"></span></header>
+  <header class="ph"><button class="back">← Back</button><h2>🎉 The Invitation</h2><span class="ph-extra"></span></header>
   <div class="pbody" id="inviteBody"></div>
 </section>
 
@@ -463,24 +465,24 @@ const CONFIG = {
 
   // TODO: write your own riddle. Its answer must equal code digits 3+4.
   riddle: {
-    text: "Moșul a uitat ultimele două cifre ale codului. Le găsești sub brad:<br><br><b>Înmulțește cadoul roșu cu cel verde, apoi scade-l pe cel auriu.</b>",
+    text: "Santa forgot the last two digits of the code. You'll find them under the tree:<br><br><b>Multiply the red present by the green one, then take away the gold one.</b>",
     answers: ["12"],          // accepted answers (case/diacritics ignored)
-    hint: "Roșu × Verde − Auriu 😉",
+    hint: "Red × Green − Gold 😉",
     hintAfterTries: 3
   },
 
   // TODO: party details
   party: {
-    title: "Petrecerea de Crăciun 2026",
-    date: "Sâmbătă, 20 decembrie 2026",
-    time: "de la 19:00 până când se termină vinul fiert",
-    place: "[Locul petrecerii]",
-    address: "[Adresa]",
+    title: "Christmas Party 2026",
+    date: "Saturday, 20 December 2026",
+    time: "from 7pm until the mulled wine runs out",
+    place: "[Party place]",
+    address: "[Address]",
     mapsUrl: "",              // e.g. a Google Maps link, or leave empty
-    dress: "Pulover urât de Crăciun — obligatoriu 🎄",
-    bring: "Cadoul pentru Secret Santa + chef de joacă",
-    rsvp: "Confirmă pe WhatsApp până pe 10 decembrie",
-    note: "Te așteptăm! 🎅"
+    dress: "Ugly Christmas jumper — mandatory 🎄",
+    bring: "Your Secret Santa present + good vibes",
+    rsvp: "Confirm on WhatsApp by 10 December",
+    note: "See you there! 🎅"
   },
 
   // Shown if someone opens the invite WITHOUT a personal Secret Santa link.
@@ -488,13 +490,13 @@ const CONFIG = {
   secretSantaFallbackUrl: "",
 
   // Seed names already on the Naughty List (inside jokes go here 😈)
-  naughtySeed: ["Grinch", "Cel care a mâncat toți cozonacii"],
+  naughtySeed: ["Grinch", "Whoever ate all the mince pies"],
 
   elf: {
     minElves: 7, maxElves: 10,
     visibleMs: 1500,          // how long each elf stays up
     onlyHitsCount: true,      // true = missed elves don't count. false = every elf counts
-    missTaunts: ["hehe", "prea lent", "pa-pa!", "😜", "ratat!", "nu m-ai prins"]
+    missTaunts: ["hehe", "too slow", "bye-bye!", "😜", "missed!", "can't catch me"]
   },
 
   snow: {
@@ -506,7 +508,7 @@ const CONFIG = {
 
   tree: { size: 3, shuffleMoves: 160 },
 
-  lockTaunts: ["Nu. 🙂", "Aproape... sau poate nu.", "Moșul râde de tine 🎅", "Mai caută!", "Încă o dată?", "HEHE"]
+  lockTaunts: ["Nope. 🙂", "Close... or maybe not.", "Santa is laughing at you 🎅", "Keep looking!", "Try again?", "HEHE"]
 };
 /* ===================================================================== */
 
@@ -647,23 +649,23 @@ function digitsKnown() {
   return [S.elf ? CODE[0] : "?", S.snow ? CODE[1] : "?", S.riddle ? CODE[2] : "?", S.riddle ? CODE[3] : "?"];
 }
 function renderHub() {
-  const name = TOKEN && TOKEN.n ? `Salut, ${esc(TOKEN.n)}! ` : "";
+  const name = TOKEN && TOKEN.n ? `Hi ${esc(TOKEN.n)}! ` : "";
   $("#subtitle").innerHTML = S.opened
-    ? `🎉 ${name}Ai deschis cadoul!`
-    : `🎁 ${name}Cadoul tău e încuiat. Găsește codul.`;
+    ? `🎉 ${name}You opened the present!`
+    : `🎁 ${name}Your present is locked. Find the code.`;
   $("#lockSlots").textContent = digitsKnown().join(" ");
   $("#present").classList.toggle("open", S.opened);
-  $("#presentHint").textContent = S.opened ? "Atinge cadoul ca să vezi invitația" : "Atinge cadoul ca să introduci codul";
+  $("#presentHint").textContent = S.opened ? "Tap the present to see the invitation" : "Tap the present to enter the code";
 
   const set = (id, done, txt, locked = false) => {
     const el = $("#st-" + id); el.textContent = txt;
     el.parentElement.classList.toggle("done", done);
     el.parentElement.classList.toggle("locked", locked);
   };
-  set("elf", S.elf, S.elf ? `✅ cifra ❶: ${CODE[0]}` : (S.elfFails ? "📜 pe Lista Obraznicilor" : "socoteli rapide"));
-  set("snow", S.snow, S.snow ? `✅ cifra ❷: ${CODE[1]}` : "prinde fulgii");
-  set("tree", S.tree, S.tree ? "✅ cadourile au vorbit" : "puzzle glisant");
-  set("riddle", S.riddle, S.riddle ? `✅ cifrele ❸❹: ${CODE.slice(2)}` : (S.tree ? "gata de rezolvat" : "🔒 bradul are cheia"), !S.tree && !S.riddle);
+  set("elf", S.elf, S.elf ? `✅ digit ❶: ${CODE[0]}` : (S.elfFails ? "📜 on the Naughty List" : "quick maths"));
+  set("snow", S.snow, S.snow ? `✅ digit ❷: ${CODE[1]}` : "catch the snowflakes");
+  set("tree", S.tree, S.tree ? "✅ the presents have spoken" : "sliding puzzle");
+  set("riddle", S.riddle, S.riddle ? `✅ digits ❸❹: ${CODE.slice(2)}` : (S.tree ? "ready to solve" : "🔒 the tree has the key"), !S.tree && !S.riddle);
 }
 $$(".station").forEach(b => b.addEventListener("click", () => openPanel(b.dataset.go)));
 $("#present").addEventListener("click", () => openPanel(S.opened ? "invite" : "lock"));
@@ -694,9 +696,9 @@ let E = null; // current elf run
 
 function naughtyHTML(extraYou) {
   const names = [...CONFIG.naughtySeed, ...S.naughty];
-  return `<div class="naughty"><b>📜 Lista Obraznicilor</b><ol>
+  return `<div class="naughty"><b>📜 The Naughty List</b><ol>
     ${names.map(n => `<li>${esc(n)}</li>`).join("")}
-    ${extraYou ? `<li class="you">${esc(extraYou)} 👈 tu</li>` : ""}
+    ${extraYou ? `<li class="you">${esc(extraYou)} 👈 you</li>` : ""}
   </ol></div>`;
 }
 
@@ -704,9 +706,9 @@ renders.elf = () => {
   $("#elfCount").textContent = "";
   const body = $("#elfBody");
   if (S.elf) {
-    body.innerHTML = `<div class="card"><h3>Gata! 🎉</h3><p>Prima cifră a codului:</p><div class="big-digit">${CODE[0]}</div>
+    body.innerHTML = `<div class="card"><h3>Done! 🎉</h3><p>First digit of the code:</p><div class="big-digit">${CODE[0]}</div>
       ${S.naughty.length ? naughtyHTML() : ""}
-      <p><button class="btn ghost" id="elfReplay">Mai joc o dată, de distracție</button></p></div>`;
+      <p><button class="btn ghost" id="elfReplay">Play again, just for fun</button></p></div>`;
     $("#elfReplay").onclick = () => elfIntro(true);
     return;
   }
@@ -716,10 +718,10 @@ renders.elf = () => {
 function elfIntro(forFun) {
   const second = S.elfFails > 0 && !forFun;
   $("#elfBody").innerHTML = `<div class="card">
-    <h3>${second ? "Revanșa 😤" : "Spiridușii Socotitori"}</h3>
-    <p>Pornești de la un număr. Fiecare spiriduș care iese ține o <b>operație</b> (+2, ×3, ÷2...).</p>
-    <p>${CONFIG.elf.onlyHitsCount ? "<b>Contează doar spiridușii pe care îi lovești!</b> Pe cei ratați îi ignori." : "<b>Toți spiridușii contează</b>, chiar dacă nu-i lovești."}</p>
-    <p>Ține socoteala în cap. La final te întreb rezultatul. 🧠</p>
+    <h3>${second ? "The Rematch 😤" : "Counting Elves"}</h3>
+    <p>You start from a number. Every elf that pops up holds an <b>operation</b> (+2, ×3, ÷2...).</p>
+    <p>${CONFIG.elf.onlyHitsCount ? "<b>Only the elves you whack count!</b> Ignore the ones you miss." : "<b>Every elf counts</b>, even if you don't whack it."}</p>
+    <p>Keep count in your head. At the end I'll ask for the result. 🧠</p>
     ${second ? naughtyHTML() : ""}
     <button class="btn green" id="elfGo">Start!</button></div>`;
   $("#elfGo").onclick = () => elfBegin(second, forFun);
@@ -731,8 +733,8 @@ function elfBegin(second, forFun) {
   const start = randInt(2, 9);
   E = { value: start, total, left: total, second, forFun, active: null, timers: [], lastHole: -1 };
   $("#elfBody").innerHTML = `
-    <div class="elf-top"><div class="elf-start">Pornești de la <b>${start}</b></div>
-    <div class="elf-note">${CONFIG.elf.onlyHitsCount ? "lovește-i ca să conteze!" : "toți contează!"}</div></div>
+    <div class="elf-top"><div class="elf-start">You start from <b>${start}</b></div>
+    <div class="elf-note">${CONFIG.elf.onlyHitsCount ? "whack them to make them count!" : "they all count!"}</div></div>
     <div class="holes">${Array.from({ length: 6 }, (_, i) => `<div class="hole"><div class="elf" data-i="${i}"><div class="esign"></div>${ELF_SVG}</div></div>`).join("")}</div>`;
   $$("#elfBody .elf").forEach(el => el.addEventListener("pointerdown", ev => { ev.preventDefault(); elfHit(+el.dataset.i, ev); }));
   elfCountUI();
@@ -798,20 +800,20 @@ function elfEnd() {
   const answer = E.value, second = E.second, forFun = E.forFun;
   $("#elfCount").textContent = "";
   if (second) {
-    $("#elfBody").innerHTML = `<div class="card"><h3>Știi ce?</h3>
-      <p>Nu mai contează rezultatul. 🙃<br>Spune-mi doar <b>cum te cheamă</b>.</p>
-      <input class="big" id="elfName" maxlength="30" placeholder="Numele tău" autocomplete="off">
+    $("#elfBody").innerHTML = `<div class="card"><h3>You know what?</h3>
+      <p>The result doesn't matter anymore. 🙃<br>Just tell me <b>your name</b>.</p>
+      <input class="big" id="elfName" maxlength="30" placeholder="Your name" autocomplete="off">
       <div class="msg" id="elfMsg"></div>
-      <button class="btn green" id="elfOk">Gata</button></div>`;
+      <button class="btn green" id="elfOk">Done</button></div>`;
     const inp = $("#elfName");
     const go = () => {
       const n = inp.value.trim();
-      if (!n) { $("#elfMsg").textContent = "Hai, nu fi timid(ă)."; shake(inp); return; }
+      if (!n) { $("#elfMsg").textContent = "Come on, don't be shy."; shake(inp); return; }
       S.naughty.push(n); S.elf = true; save(); E = null;
-      $("#elfBody").innerHTML = `<div class="card"><h3>Mulțumesc, ${esc(n)}. 📝</h3>
-        <p>Ai fost trecut(ă) oficial pe Lista Obraznicilor.</p>${naughtyHTML()}
-        <p>Dar e Crăciun, așa că uite cifra:</p><div class="big-digit">${CODE[0]}</div>
-        <p><button class="btn" id="elfHome">Înapoi la cadou</button></p></div>`;
+      $("#elfBody").innerHTML = `<div class="card"><h3>Thank you, ${esc(n)}. 📝</h3>
+        <p>You are now officially on the Naughty List.</p>${naughtyHTML()}
+        <p>But it's Christmas, so here's the digit:</p><div class="big-digit">${CODE[0]}</div>
+        <p><button class="btn" id="elfHome">Back to the present</button></p></div>`;
       $("#elfHome").onclick = () => history.back();
       confetti(90);
     };
@@ -821,10 +823,10 @@ function elfEnd() {
     return;
   }
 
-  $("#elfBody").innerHTML = `<div class="card"><h3>Cu cât ai rămas? 🤔</h3>
+  $("#elfBody").innerHTML = `<div class="card"><h3>What number did you end up with? 🤔</h3>
     <input class="big" id="elfAns" inputmode="numeric" pattern="[0-9]*" autocomplete="off" placeholder="?">
     <div class="msg" id="elfMsg"></div>
-    <button class="btn green" id="elfOk">Verifică</button></div>`;
+    <button class="btn green" id="elfOk">Check</button></div>`;
   const inp = $("#elfAns");
   const go = () => {
     if (inp.value.trim() === "") { shake(inp); return; }
@@ -833,21 +835,21 @@ function elfEnd() {
     if (ok) {
       if (!forFun) { S.elf = true; save(); }
       confetti();
-      $("#elfBody").innerHTML = `<div class="card"><h3>CORECT! 🎉</h3><p>Rezultatul era <b>${answer}</b>.</p>
-        <p>Prima cifră a codului:</p><div class="big-digit">${CODE[0]}</div>
-        <p><button class="btn" id="elfHome">Înapoi la cadou</button></p></div>`;
+      $("#elfBody").innerHTML = `<div class="card"><h3>CORRECT! 🎉</h3><p>The answer was <b>${answer}</b>.</p>
+        <p>First digit of the code:</p><div class="big-digit">${CODE[0]}</div>
+        <p><button class="btn" id="elfHome">Back to the present</button></p></div>`;
       $("#elfHome").onclick = () => history.back();
     } else if (forFun) {
-      $("#elfBody").innerHTML = `<div class="card"><h3>Greșit 😅</h3><p>Era <b>${answer}</b>. Noroc că ai deja cifra.</p>
-        <button class="btn ghost" id="elfRe">Încă o dată</button></div>`;
+      $("#elfBody").innerHTML = `<div class="card"><h3>Wrong 😅</h3><p>It was <b>${answer}</b>. Lucky you already have the digit.</p>
+        <button class="btn ghost" id="elfRe">Again</button></div>`;
       $("#elfRe").onclick = () => elfIntro(true);
     } else {
       S.elfFails++; save();
-      $("#elfBody").innerHTML = `<div class="card shake"><h3>GREȘIT! ❌</h3>
-        <p>Răspunsul corect era <b>${answer}</b>.</p>
-        <p>Moș Crăciun te-a trecut pe <b>Lista Obraznicilor</b>.</p>
+      $("#elfBody").innerHTML = `<div class="card shake"><h3>WRONG! ❌</h3>
+        <p>The right answer was <b>${answer}</b>.</p>
+        <p>Santa has put you on <b>the Naughty List</b>.</p>
         ${naughtyHTML("???")}
-        <button class="btn" id="elfRe">Mai încerc o dată 😤</button></div>`;
+        <button class="btn" id="elfRe">Let me try again 😤</button></div>`;
       $("#elfRe").onclick = () => elfIntro(false);
     }
   };
@@ -890,20 +892,20 @@ renders.snow = () => {
   body.innerHTML = `
     <div class="snow-hud"><div class="bar"><div class="fill" id="snowFill"></div></div><span id="snowScore"></span></div>
     <div class="snow-area" id="snowArea">
-      <div class="snowman-wrap" id="snowman">${SNOWMAN_SVG}<div class="sm-sign" id="smSign">cifra ❷: ${CODE[1]}</div></div>
+      <div class="snowman-wrap" id="snowman">${SNOWMAN_SVG}<div class="sm-sign" id="smSign">digit ❷: ${CODE[1]}</div></div>
     </div>`;
   const goal = CONFIG.snow.goal;
   if (S.snow) {
     snowDraw(goal);
     $("#smSign").classList.add("show");
-    $("#snowArea").insertAdjacentHTML("beforeend", `<div class="overlay-card" style="background:none;align-items:flex-start"><div class="card"><h3>Omul de zăpadă e gata! ⛄</h3><p>A doua cifră a codului: <b style="font-size:24px">${CODE[1]}</b></p></div></div>`);
+    $("#snowArea").insertAdjacentHTML("beforeend", `<div class="overlay-card" style="background:none;align-items:flex-start"><div class="card"><h3>The snowman is done! ⛄</h3><p>Second digit of the code: <b style="font-size:24px">${CODE[1]}</b></p></div></div>`);
     return;
   }
   snowDraw(0);
   $("#snowArea").insertAdjacentHTML("beforeend", `<div class="overlay-card" id="snowIntro"><div class="card">
-    <h3>Construiește omul de zăpadă</h3>
-    <p>Prinde <b>${goal}</b> de fulgi ❄ ca să-l construiești.</p>
-    <p>✨ Fulgii <b style="color:#c48a00">aurii</b> valorează <b>+3</b>.<br>🔥 <b>Nu atinge focul</b> — topește 3!</p>
+    <h3>Build the snowman</h3>
+    <p>Catch <b>${goal}</b> snowflakes ❄ to build him.</p>
+    <p>✨ <b style="color:#c48a00">Gold</b> flakes are worth <b>+3</b>.<br>🔥 <b>Don't touch the fire</b> — it melts 3!</p>
     <button class="btn green" id="snowGo">Start!</button></div></div>`);
   $("#snowGo").onclick = () => { $("#snowIntro").remove(); snowStart(); };
 };
@@ -957,7 +959,7 @@ function snowWin() {
   confetti();
   setTimeout(() => {
     $("#smSign").classList.add("show");
-    $("#snowArea").insertAdjacentHTML("beforeend", `<div class="overlay-card" style="background:none;align-items:flex-start"><div class="card"><h3>BRAVO! ⛄</h3><p>A doua cifră a codului: <b style="font-size:24px">${CODE[1]}</b></p><button class="btn" onclick="history.back()">Înapoi la cadou</button></div></div>`);
+    $("#snowArea").insertAdjacentHTML("beforeend", `<div class="overlay-card" style="background:none;align-items:flex-start"><div class="card"><h3>BRAVO! ⛄</h3><p>Second digit of the code: <b style="font-size:24px">${CODE[1]}</b></p><button class="btn" onclick="history.back()">Back to the present</button></div></div>`);
   }, 500);
 }
 stoppers.snow = () => { if (SN) { clearInterval(SN.timer); SN = null; } };
@@ -1030,21 +1032,21 @@ renders.tree = () => {
   const body = $("#treeBody");
   $("#treeMoves").textContent = "";
   if (S.tree) {
-    body.innerHTML = `<p class="lead">Bradul e la locul lui! 🎄 Uită-te atent la cadouri...</p>
+    body.innerHTML = `<p class="lead">The tree is back together! 🎄 Take a good look at the presents...</p>
       <div class="puzzle solved"><div class="full" style="background-image:${svgURL(treeSVG(true))}"></div></div>
-      <button class="btn" id="toRiddle">Mergi la ghicitoare 📜</button>`;
+      <button class="btn" id="toRiddle">Go to the riddle 📜</button>`;
     $("#toRiddle").onclick = () => openPanel("riddle", true);
     return;
   }
   if (!T) treeNew();
-  body.innerHTML = `<p class="lead">Spiridușii au încurcat bradul! Atinge o piesă de lângă locul gol ca s-o muți.</p>
+  body.innerHTML = `<p class="lead">The elves messed up the tree! Tap a piece next to the empty spot to move it.</p>
     <div class="puzzle" id="puzzle">
       <div class="full peekimg" style="background-image:${svgURL(treeSVG(false))}"></div>
       <div class="full done" style="background-image:${svgURL(treeSVG(true))}"></div>
     </div>
     <div class="tree-tools">
-      <button class="pill" id="peek">👁 Ține apăsat: model</button>
-      <button class="pill" id="reshuffle">🔀 Amestecă din nou</button>
+      <button class="pill" id="peek">👁 Hold: show picture</button>
+      <button class="pill" id="reshuffle">🔀 Shuffle again</button>
     </div>`;
   const pz = $("#puzzle"), N = T.N, img = svgURL(treeSVG(false));
   for (let id = 0; id < N * N - 1; id++) {
@@ -1072,7 +1074,7 @@ function treeLayout() {
     t.style.top = Math.floor(pos / N) * (100 / N) + "%";
     t.classList.toggle("near", near.includes(pos));
   });
-  $("#treeMoves").textContent = `${T.moves} mutări`;
+  $("#treeMoves").textContent = `${T.moves} moves`;
 }
 function treeMove(id) {
   if (!T || S.tree) return;
@@ -1088,7 +1090,7 @@ function treeMove(id) {
       pz.classList.add("solved");
       $$("#puzzle .tile").forEach(t => t.style.opacity = 0);
       confetti();
-      $(".tree-tools").innerHTML = `<p class="lead">🎁 Cadourile au cifre! Ține minte culorile...</p><button class="btn" id="toRiddle">Mergi la ghicitoare 📜</button>`;
+      $(".tree-tools").innerHTML = `<p class="lead">🎁 The presents have numbers! Remember the colours...</p><button class="btn" id="toRiddle">Go to the riddle 📜</button>`;
       $("#toRiddle").onclick = () => openPanel("riddle", true);
     }, 250);
   }
@@ -1100,29 +1102,29 @@ function treeMove(id) {
 renders.riddle = () => {
   const body = $("#riddleBody");
   if (!S.tree) {
-    body.innerHTML = `<div class="card"><h3>🔒 Încuiat</h3><p>Ghicitoarea are nevoie de ce e <b>sub brad</b>.</p><p>Rezolvă mai întâi <b>Bradul Încurcat</b>.</p>
-      <button class="btn green" id="goTree">La brad 🎄</button></div>`;
+    body.innerHTML = `<div class="card"><h3>🔒 Locked</h3><p>The riddle needs what's <b>under the tree</b>.</p><p>Solve <b>The Tangled Tree</b> first.</p>
+      <button class="btn green" id="goTree">To the tree 🎄</button></div>`;
     $("#goTree").onclick = () => openPanel("tree", true);
     return;
   }
   const tree = `<div class="puzzle solved" style="width:min(60vw,220px);animation:none"><div class="full" style="background-image:${svgURL(treeSVG(true))}"></div></div>`;
   if (S.riddle) {
-    body.innerHTML = `${tree}<div class="card"><h3>Rezolvat! 🧠</h3><p>Ultimele două cifre ale codului:</p><div class="big-digit">${CODE.slice(2)}</div></div>`;
+    body.innerHTML = `${tree}<div class="card"><h3>Solved! 🧠</h3><p>The last two digits of the code:</p><div class="big-digit">${CODE.slice(2)}</div></div>`;
     return;
   }
-  body.innerHTML = `${tree}<div class="card"><h3>Ghicitoarea Moșului</h3><p>${CONFIG.riddle.text}</p>
-    <input class="big" id="rAns" autocomplete="off" placeholder="răspunsul tău">
+  body.innerHTML = `${tree}<div class="card"><h3>Santa's Riddle</h3><p>${CONFIG.riddle.text}</p>
+    <input class="big" id="rAns" autocomplete="off" placeholder="your answer">
     <div class="msg" id="rMsg"></div>
-    <button class="btn green" id="rOk">Verifică</button></div>`;
+    <button class="btn green" id="rOk">Check</button></div>`;
   const inp = $("#rAns");
   const go = () => {
     if (!inp.value.trim()) { shake(inp); return; }
     if (CONFIG.riddle.answers.some(a => norm(a) === norm(inp.value))) {
       S.riddle = true; save(); confetti(); renders.riddle();
-      $("#riddleBody .card").insertAdjacentHTML("beforeend", `<button class="btn" onclick="history.back()">Înapoi la cadou</button>`);
+      $("#riddleBody .card").insertAdjacentHTML("beforeend", `<button class="btn" onclick="history.back()">Back to the present</button>`);
     } else {
       S.riddleTries++; save(); shake(inp);
-      $("#rMsg").textContent = S.riddleTries >= CONFIG.riddle.hintAfterTries ? `Indiciu: ${CONFIG.riddle.hint}` : pick(["Nu. 🙂", "Mai gândește-te...", "Moșul clatină din cap.", "Aproape? Nu."]);
+      $("#rMsg").textContent = S.riddleTries >= CONFIG.riddle.hintAfterTries ? `Hint: ${CONFIG.riddle.hint}` : pick(["Nope. 🙂", "Think again...", "Santa shakes his head.", "Close? No."]);
     }
   };
   $("#rOk").onclick = go;
@@ -1136,13 +1138,13 @@ let dialVals = [0, 0, 0, 0];
 renders.lock = () => {
   const k = digitsKnown();
   $("#lockBody").innerHTML = `<div class="card" id="lockCard">
-    <h3>Introdu codul</h3>
+    <h3>Enter the code</h3>
     <div class="clues">
       <span class="clue">🧝 ❶ ${k[0]}</span><span class="clue">⛄ ❷ ${k[1]}</span><span class="clue">📜 ❸❹ ${k[2]}${k[3]}</span>
     </div>
     <div class="dials">${dialVals.map((v, i) => `<div class="dial"><button data-i="${i}" data-d="1">▲</button><div class="dv" id="dv${i}">${v}</div><button data-i="${i}" data-d="-1">▼</button></div>`).join("")}</div>
     <div class="msg" id="lockMsg"></div>
-    <button class="btn green" id="lockOpen">Deschide! 🔓</button></div>`;
+    <button class="btn green" id="lockOpen">Open! 🔓</button></div>`;
   $$("#lockBody .dial button").forEach(b => b.addEventListener("click", () => {
     const i = +b.dataset.i;
     dialVals[i] = (dialVals[i] + +b.dataset.d + 10) % 10;
@@ -1170,14 +1172,14 @@ renders.invite = () => {
   if (TOKEN && TOKEN.r) {
     santa = S.santaShown
       ? santaReveal()
-      : `<h4>🎅 Secret Santa</h4><p>Ești Moșul secret al cuiva. Ești gata să afli al cui?</p><button class="btn" id="santaGo">Dezvăluie 🎁</button>`;
+      : `<h4>🎅 Secret Santa</h4><p>You are someone's Secret Santa. Ready to find out whose?</p><button class="btn" id="santaGo">Reveal 🎁</button>`;
   } else if (CONFIG.secretSantaFallbackUrl) {
-    santa = `<h4>🎅 Secret Santa</h4><p>Află cui îi faci cadou:</p><a class="btn" href="${esc(CONFIG.secretSantaFallbackUrl)}" target="_blank" rel="noopener">Trage la sorți 🎲</a>`;
+    santa = `<h4>🎅 Secret Santa</h4><p>Find out who you're buying for:</p><a class="btn" href="${esc(CONFIG.secretSantaFallbackUrl)}" target="_blank" rel="noopener">Draw names 🎲</a>`;
   } else {
-    santa = `<h4>🎅 Secret Santa</h4><p>Linkul tău personal vine de la organizator. 🤫</p>`;
+    santa = `<h4>🎅 Secret Santa</h4><p>Your personal link comes from the organiser. 🤫</p>`;
   }
   $("#inviteBody").innerHTML = `<div class="card invite">
-    <div class="kicker">${TOKEN && TOKEN.n ? esc(TOKEN.n) + ", ești" : "Ești"} invitat(ă) la</div>
+    <div class="kicker">${TOKEN && TOKEN.n ? esc(TOKEN.n) + ", you're" : "You're"} invited to</div>
     <h3>${esc(P.title)}</h3>
     ${row("📅", esc(P.date), esc(P.time))}
     ${row("📍", place, esc(P.address))}
@@ -1196,20 +1198,20 @@ renders.invite = () => {
   if (!renders.invite.played) { renders.invite.played = true; confetti(220); }
 };
 function santaReveal() {
-  return `<h4>🎅 Tu îi faci cadou lui/ei:</h4><div class="who">${esc(TOKEN.r)}</div>
-    ${TOKEN.b ? `<p>💸 Buget: <b>${esc(TOKEN.b)}</b></p>` : ""}
+  return `<h4>🎅 You're buying a present for:</h4><div class="who">${esc(TOKEN.r)}</div>
+    ${TOKEN.b ? `<p>💸 Budget: <b>${esc(TOKEN.b)}</b></p>` : ""}
     ${TOKEN.m ? `<p>${esc(TOKEN.m)}</p>` : ""}
-    <p style="font-size:13px;opacity:.85">🤫 Nu spune nimănui!</p>`;
+    <p style="font-size:13px;opacity:.85">🤫 Don't tell anyone!</p>`;
 }
 
 /* ---------- dev mode: add ?dev to the URL ---------- */
 if (new URLSearchParams(location.search).has("dev")) {
   const d = $("#dev"); d.style.display = "flex";
   const btn = (t, f) => { const b = document.createElement("button"); b.textContent = t; b.onclick = () => { f(); save(); renderHub(); }; d.appendChild(b); };
-  btn("✓ spiriduși", () => S.elf = true);
-  btn("✓ om de zăpadă", () => S.snow = true);
-  btn("✓ brad", () => S.tree = true);
-  btn("✓ ghicitoare", () => S.riddle = true);
+  btn("✓ elves", () => S.elf = true);
+  btn("✓ snowman", () => S.snow = true);
+  btn("✓ tree", () => S.tree = true);
+  btn("✓ riddle", () => S.riddle = true);
   btn("↺ reset", () => { S = { ...defaultState, naughty: [] }; });
 }
 
