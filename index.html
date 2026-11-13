@@ -348,7 +348,7 @@
     <button class="station" data-go="geo"><span class="st-ico">🌍</span><span class="st-name">Where's Santa?</span><span class="st-status" id="st-geo"></span></button>
     <button class="station" data-go="riddle"><span class="st-ico">📜</span><span class="st-name">Santa's Riddle</span><span class="st-status" id="st-riddle"></span></button>
   </section>
-  <div id="foot">❄ tap anywhere ❄ · v3</div>
+  <div id="foot">❄ tap anywhere ❄ · v4</div>
 </main>
 
 <section class="panel" id="p-elf"><header class="ph"><button class="back">← Back</button><h2>🧝 Counting Elves</h2><span class="ph-extra" id="elfCount"></span></header><div class="pbody" id="elfBody"></div></section>
@@ -378,7 +378,7 @@ const CONFIG = {
     pano: "1F52NZaVtRDKv9iOQLFMEg",
     lat: 66.5438262, lng: 25.8474325,
     heading: 343.84, pitch: 3.87,
-    display: "LApLAnd",                        // how the answer is shown once solved
+    display: "lapland",                        // how the answer is shown once solved
     answers: ["lapland", "laponia", "lappi"],   // accepted answers (case/spaces ignored)
     nearMisses: ["rovaniemi", "finland", "santaclausvillage", "santasvillage", "arcticcircle", "northpole", "santaclaus", "santa"],
     hint: "Not the town, not the village… the whole snowy region 🦌",
@@ -387,16 +387,16 @@ const CONFIG = {
 
   riddle: {
     text: `Down the chimney, one by one,<br>
-three numbered presents fell — they're gone! 🎁<br>
-The jigsaw showed you which ones fell,<br>
-the place you saw will serve you well. 🌍<br><br>
+three little secrets fell — they're gone!<br>
+You caught the ones that slipped away,<br>
+the place you saw will light the way. 🌍<br><br>
 Spell out where Santa spends his days,<br>
 then count the letters, find their place.<br>
-Take the fallen numbers out —<br>
+Take the fallen ones out —<br>
 what's left is what the carols shout! 🎶<br><br>
 <i>Type it, and it's cookie time… 🍪</i>`,
     answers: ["lala"],                           // spaces, dashes, capitals ignored
-    hint: "LApLAnd: letters 3, 6, 7 fell down the chimney 😉",
+    hint: "lapland… and 367 fell down the chimney 😉",
     hintAfterTries: 3
   },
 
@@ -591,7 +591,7 @@ function renderHub() {
     el.parentElement.classList.toggle("locked", locked);
   };
   set("elf", S.elf, S.elf ? `✅ digit ❶: ${CODE[0]}${S.nerdy ? " 🤓" : ""}` : (S.elfFails ? "📜 on the Naughty List" : "quick maths"));
-  set("jig", S.jig, S.jig ? `✅ ${CONFIG.jigsawNumbers.join(" · ")}` : "catch & build");
+  set("jig", S.jig, S.jig ? `✅ ${CONFIG.jigsawNumbers.join("")}` : "catch & build");
   set("geo", S.geo, S.geo ? `✅ 📍 ${CONFIG.geo.display}` : "look around");
   const ready = S.jig && S.geo;
   set("riddle", S.riddle, S.riddle ? `✅ digits ❷❸❹: ${CODE.slice(1)}` : (ready ? "ready to solve" : "🔒 needs 🧩 + 🌍"), !ready && !S.riddle);
@@ -952,7 +952,7 @@ function jigDragify(p) {
 function jigDone(fresh) {
   $("#jigBody").innerHTML = `<div class="jframe solved" style="animation:${fresh ? "" : "none"}"><div class="full" style="background-image:${svgURL(sceneSVG(true))}"></div></div>
     <div class="card"><h3>${fresh ? "Picture complete! 🎄" : "Santa's picture 🎄"}</h3>
-    <p>The presents have numbers:</p><div class="big-digit">${CONFIG.jigsawNumbers.join(" ")}</div>
+    <p>The presents have numbers:</p><div class="big-digit">${CONFIG.jigsawNumbers.join("")}</div>
     <p><small>Hmm… what could they be for? 🤔</small></p>
     <button class="btn" onclick="history.back()">Back to the present</button></div>`;
 }
@@ -1045,13 +1045,12 @@ renders.riddle = () => {
     $("#goNext").onclick = () => openPanel(!S.jig ? "jig" : "geo", true);
     return;
   }
-  const clues = `<div class="clues" style="margin-bottom:6px"><span class="clue">🧩 ${CONFIG.jigsawNumbers.join(" · ")}</span><span class="clue">🌍 ${esc(CONFIG.geo.display)}</span></div>`;
   if (S.riddle) {
-    body.innerHTML = `<div class="card">${clues}<h3>Cookie time! 🍪</h3><p>The last three digits of the code:</p><div class="big-digit">${CODE.slice(1).split("").join(" ")}</div>
+    body.innerHTML = `<div class="card"><h3>Cookie time! 🍪</h3><p>The last three digits of the code:</p><div class="big-digit">${CODE.slice(1).split("").join(" ")}</div>
       <p><button class="btn" onclick="history.back()">Back to the present</button></p></div>`;
     return;
   }
-  body.innerHTML = `<div class="card">${clues}<h3>Santa's Riddle</h3><p style="font-family:'Comic Sans MS','Trebuchet MS',sans-serif">${CONFIG.riddle.text}</p>
+  body.innerHTML = `<div class="card"><h3>Santa's Riddle</h3><p style="font-family:'Comic Sans MS','Trebuchet MS',sans-serif">${CONFIG.riddle.text}</p>
     <input class="big" id="rAns" autocomplete="off" autocapitalize="characters" placeholder="your answer">
     <div class="msg" id="rMsg"></div><button class="btn green" id="rOk">Check</button></div>`;
   const inp = $("#rAns");
