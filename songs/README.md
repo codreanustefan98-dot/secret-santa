@@ -1,3 +1,3 @@
-Put the two Christmas songs here as:
-- song1.mp3 — plays when Santa's Riddle is solved
-- song2.mp3 — plays when the present opens
+Music files for the invite:
+- s1.mp3 — the Christmas song that loops all the time
+- m1.mp3, m2.mp3, m3.mp3 — "mistake" songs (one plays at random for ~5 seconds when someone messes up)

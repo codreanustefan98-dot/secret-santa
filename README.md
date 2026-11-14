@@ -2,7 +2,7 @@
 
 ## Files
 - `index.html` — the invite game (what guests open)
-- `santa.html` — your Secret Santa organiser page (don't send this one to guests)
+- `santa.html` — makes a personal invite link for each friend (don't send this one to guests)
 
 ## Put it on GitHub Pages
 1. Make a new repo (e.g. `craciun`) and upload both files.
@@ -15,16 +15,17 @@ Everything is in the `CONFIG` block at the top of the script in `index.html`:
 - `jigsawNumbers` — numbers on the presents in the jigsaw (a trap for the lock, a key for the riddle)
 - `geo` — Street View location, Google Maps key and accepted answers for "Where's Santa?"
 - `riddle` — riddle text + accepted answers
-- `songs` — the two mp3 files in the `songs/` folder
+- `music` — the looping song + 3 mistake songs in the `songs/` folder
+- `invite` — date, place, snacks line and the DrawNames link
 - `party` — date, place, dress code, RSVP…
 - `naughtySeed` — names already on the Naughty List (inside jokes)
 - `elf.onlyHitsCount` — `true`: missed elves don't count; `false`: all elves count
 - difficulty knobs: elf speed, jigsaw piece/fire chances
 
 ## Send it out
-1. Open `https://<you>.github.io/craciun/santa.html`
-2. Type the names, budget, any couples who shouldn't draw each other → **Trage la sorți**
-3. Press **WhatsApp** next to each name — everyone gets their own link. Their match is revealed only after they open the present.
+1. Open `https://<you>.github.io/secret-santa/santa.html`
+2. Press **WhatsApp** next to each name — everyone gets their own link.
+3. "I'm in!" sends them to the DrawNames pool; run the draw on DrawNames once everyone has replied.
 
 ## Testing tricks
 - `index.html?dev` — shows buttons to skip stations
